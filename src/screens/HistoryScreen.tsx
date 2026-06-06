@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, TouchableOpacity,
   Alert, SectionList,
 } from 'react-native';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { WorkSession } from '../types';
 import { getSessions, deleteSession } from '../utils/storage';
@@ -23,9 +23,7 @@ interface Section { title: string; data: WorkSession[]; totalMs: number }
 export default function HistoryScreen() {
   const [sections, setSections] = useState<Section[]>([]);
   const [filter, setFilter] = useState<'all' | 'work' | 'delegation'>('all');
-  const navigation = useNavigation<any>();
-
-  const loadSessions = useCallback(async () => {
+const loadSessions = useCallback(async () => {
     const all = await getSessions();
     const filtered = filter === 'all' ? all : all.filter(s => s.type === filter);
     const grouped = groupSessionsByDate(filtered);
@@ -136,13 +134,6 @@ export default function HistoryScreen() {
         />
       )}
 
-      <TouchableOpacity
-        style={styles.fab}
-        onPress={() => navigation.navigate('AddDelegation')}
-      >
-        <Ionicons name="airplane" size={22} color="#fff" />
-        <Text style={styles.fabText}>Delegacja</Text>
-      </TouchableOpacity>
     </View>
   );
 }
