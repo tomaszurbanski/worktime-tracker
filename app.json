@@ -39,7 +39,8 @@
           "locationAlwaysAndWhenInUsePermission": "Aplikacja używa GPS aby automatycznie wykryć wejście i wyjście z pracy.",
           "isAndroidBackgroundLocationEnabled": true
         }
-      ]
+      ],
+      "expo-mail-composer"
     ],
     "web": {
       "favicon": "./assets/favicon.png"

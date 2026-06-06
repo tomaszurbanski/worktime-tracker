@@ -12,7 +12,8 @@ const DEFAULT_SETTINGS: AppSettings = {
 
 export const getSessions = async (): Promise<WorkSession[]> => {
   const data = await AsyncStorage.getItem(SESSIONS_KEY);
-  return data ? JSON.parse(data) : [];
+  const sessions: WorkSession[] = data ? JSON.parse(data) : [];
+  return sessions.map(s => ({ type: 'work', ...s }));
 };
 
 export const saveSessions = async (sessions: WorkSession[]): Promise<void> => {
@@ -46,4 +47,19 @@ export const getSettings = async (): Promise<AppSettings> => {
 
 export const saveSettings = async (settings: AppSettings): Promise<void> => {
   await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+};
+
+export const getSessionsByMonth = async (year: number, month: number): Promise<WorkSession[]> => {
+  const sessions = await getSessions();
+  return sessions.filter(s => {
+    const d = new Date(s.startTime);
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+};
+
+export const getSessionsByWeek = async (weekStart: Date): Promise<WorkSession[]> => {
+  const start = weekStart.getTime();
+  const end = start + 7 * 24 * 60 * 60 * 1000;
+  const sessions = await getSessions();
+  return sessions.filter(s => s.startTime >= start && s.startTime < end);
 };

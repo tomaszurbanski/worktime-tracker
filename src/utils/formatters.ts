@@ -44,3 +44,18 @@ export const groupSessionsByDate = <T extends { startTime: number }>(
     return acc;
   }, {} as Record<string, T[]>);
 };
+
+export const getMonthName = (month: number): string => {
+  const names = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec',
+    'Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+  return names[month] ?? '';
+};
+
+export const getWeekStart = (date: Date): Date => {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = (day === 0 ? -6 : 1 - day);
+  d.setDate(d.getDate() + diff);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
