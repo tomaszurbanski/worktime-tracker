@@ -1,23 +1,46 @@
 {
   "expo": {
-    "name": "worktime-tracker",
+    "name": "WorkTime Tracker",
     "slug": "worktime-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.turbanski.worktimetracker",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Aplikacja używa GPS aby automatycznie wykryć wejście i wyjście z pracy.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Aplikacja używa GPS w tle aby automatycznie śledzić czas pracy.",
+        "NSLocationAlwaysUsageDescription": "Aplikacja używa GPS w tle aby automatycznie śledzić czas pracy."
+      }
     },
     "android": {
+      "package": "com.turbanski.worktimetracker",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#2563EB",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION"
+      ]
     },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Aplikacja używa GPS aby automatycznie wykryć wejście i wyjście z pracy.",
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     }
