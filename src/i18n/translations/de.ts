@@ -1,5 +1,5 @@
 export default {
-  common: { cancel: 'Abbrechen', delete: 'Löschen', save: 'Speichern', error: 'Fehler', ok: 'OK', now: 'jetzt', active: 'AKTIV' },
+  common: { cancel: 'Abbrechen', delete: 'Löschen', save: 'Speichern', error: 'Fehler', ok: 'OK', now: 'jetzt', active: 'AKTIV', hold: 'Halten' },
   tabs: { home: 'Arbeit', history: 'Verlauf', stats: 'Statistik', settings: 'Einstellungen' },
   home: {
     title: 'WorkTime',
@@ -103,6 +103,11 @@ export default {
     locationWork: 'Arbeit',
     radius: 'Radius',
     rtlRestart: 'Der Wechsel zu Arabisch erfordert einen App-Neustart.',
+    theme_section: 'ERSCHEINUNGSBILD',
+    theme: 'App-Design',
+    themeSystem: 'System',
+    themeLight: 'Hell',
+    themeDark: 'Dunkel',
   },
   login: {
     welcome: 'Willkommen! Geben Sie Ihre Daten ein, um zu beginnen.',

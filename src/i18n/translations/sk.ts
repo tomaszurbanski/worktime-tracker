@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Zrušiť', delete: 'Zmazať', save: 'Uložiť', error: 'Chyba', ok: 'OK', now: 'teraz', active: 'AKTÍVNA' },
+﻿export default {
+  common: { cancel: 'Zrušiť', delete: 'Zmazať', save: 'Uložiť', error: 'Chyba', ok: 'OK', now: 'teraz', active: 'AKTÍVNA', hold: 'Podržte' },
   tabs: { home: 'Práca', history: 'História', stats: 'Štatistiky', settings: 'Nastavenia' },
   home: {
     title: 'WorkTime', workTime: 'PRACOVNÝ ČAS', delegationTime: 'PRACOVNÁ CESTA',
@@ -31,7 +31,7 @@ export default {
     options: 'MOŽNOSTI', commuteTracking: 'Sledovanie dochádzky', commuteTrackingDesc: 'Merajte čas dochádzky do práce',
     ads: 'Reklamy (bezplatná verzia)', adsDesc: 'Vypnúť pre prechod na prémiovú verziu',
     language_section: 'JAZYK', language: 'Jazyk aplikácie', about: 'O APLIKÁCII', privacy: 'Zásady ochrany osobných údajov', privacyDesc: 'Ako chránime vaše údaje',
-    contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Práca', radius: 'polomer', rtlRestart: 'Prepnutie na arabčinu vyžaduje reštart aplikácie.',
+    contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Práca', radius: 'polomer', rtlRestart: 'Prepnutie na arabčinu vyžaduje reštart aplikácie.', theme_section: 'VZHĽAD', theme: 'Téma', themeSystem: 'Systémové', themeLight: 'Svetlé', themeDark: 'Tmavé',
   },
   login: { welcome: 'Vitajte! Zadajte svoje údaje pre začiatok.', namePlaceholder: 'napr. Ján Novák', nameRequired: 'Celé meno je povinné.', companyOptional: 'Firma (nepovinné)', companyPlaceholder: 'napr. Acme s.r.o.', hint: 'Vaše údaje sa zobrazia v exportovaných PDF prehľadoch. Dajú sa zmeniť v Nastaveniach.', start: 'Začať' },
   pdf: {

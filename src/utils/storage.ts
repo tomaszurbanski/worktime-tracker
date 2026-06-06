@@ -13,7 +13,7 @@ const DEFAULT_SETTINGS: AppSettings = {
 export const getSessions = async (): Promise<WorkSession[]> => {
   const data = await AsyncStorage.getItem(SESSIONS_KEY);
   const sessions: WorkSession[] = data ? JSON.parse(data) : [];
-  return sessions.map(s => ({ type: 'work', ...s }));
+  return sessions.map(s => ({ ...s, type: s.type ?? ('work' as const) }));
 };
 
 export const saveSessions = async (sessions: WorkSession[]): Promise<void> => {

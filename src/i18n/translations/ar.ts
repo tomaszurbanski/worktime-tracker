@@ -1,5 +1,5 @@
 export default {
-  common: { cancel: 'إلغاء', delete: 'حذف', save: 'حفظ', error: 'خطأ', ok: 'موافق', now: 'الآن', active: 'نشط' },
+  common: { cancel: 'إلغاء', delete: 'حذف', save: 'حفظ', error: 'خطأ', ok: 'موافق', now: 'الآن', active: 'نشط', hold: 'اضغط مطولاً' },
   tabs: { home: 'عمل', history: 'السجل', stats: 'إحصائيات', settings: 'الإعدادات' },
   home: {
     title: 'WorkTime',
@@ -103,6 +103,11 @@ export default {
     locationWork: 'عمل',
     radius: 'نطاق',
     rtlRestart: 'سيتطلب تغيير اللغة إلى العربية إعادة تشغيل التطبيق.',
+    theme_section: 'المظهر',
+    theme: 'مظهر التطبيق',
+    themeSystem: 'النظام',
+    themeLight: 'فاتح',
+    themeDark: 'داكن',
   },
   login: {
     welcome: 'مرحباً! أدخل بياناتك للبدء.',

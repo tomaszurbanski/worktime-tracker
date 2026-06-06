@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Avbryt', delete: 'Slett', save: 'Lagre', error: 'Feil', ok: 'OK', now: 'nå', active: 'AKTIV' },
+﻿export default {
+  common: { cancel: 'Avbryt', delete: 'Slett', save: 'Lagre', error: 'Feil', ok: 'OK', now: 'nå', active: 'AKTIV', hold: 'Hold' },
   tabs: { home: 'Arbeid', history: 'Historikk', stats: 'Statistikk', settings: 'Innstillinger' },
   home: {
     title: 'WorkTime', workTime: 'ARBEIDSTID', delegationTime: 'TJENESTEREISE',
@@ -31,7 +31,7 @@ export default {
     options: 'ALTERNATIVER', commuteTracking: 'Pendlingssporing', commuteTrackingDesc: 'Mål pendlingstid til jobben',
     ads: 'Annonser (gratisversjon)', adsDesc: 'Deaktiver for å oppgradere til premium',
     language_section: 'SPRÅK', language: 'Appspråk', about: 'OM APPEN', privacy: 'Personvernerklæring', privacyDesc: 'Hvordan vi beskytter dataene dine',
-    contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Arbeid', radius: 'radius', rtlRestart: 'Bytte til arabisk krever omstart av appen.',
+    contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Arbeid', radius: 'radius', rtlRestart: 'Bytte til arabisk krever omstart av appen.', theme_section: 'UTSEENDE', theme: 'Apptema', themeSystem: 'System', themeLight: 'Lyst', themeDark: 'Mørkt',
   },
   login: { welcome: 'Velkommen! Skriv inn opplysningene dine for å begynne.', namePlaceholder: 'f.eks. Ola Nordmann', nameRequired: 'Fullt navn er påkrevd.', companyOptional: 'Bedrift (valgfritt)', companyPlaceholder: 'f.eks. Acme AS', hint: 'Opplysningene dine vises i eksporterte PDF-rapporter. Kan endres i Innstillinger.', start: 'Kom i gang' },
   pdf: {

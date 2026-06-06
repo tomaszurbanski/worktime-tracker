@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Avbryt', delete: 'Ta bort', save: 'Spara', error: 'Fel', ok: 'OK', now: 'nu', active: 'AKTIV' },
+﻿export default {
+  common: { cancel: 'Avbryt', delete: 'Ta bort', save: 'Spara', error: 'Fel', ok: 'OK', now: 'nu', active: 'AKTIV', hold: 'Håll' },
   tabs: { home: 'Arbete', history: 'Historik', stats: 'Statistik', settings: 'Inställningar' },
   home: {
     title: 'WorkTime', workTime: 'ARBETSTID', delegationTime: 'TJÄNSTERESA',
@@ -31,7 +31,7 @@ export default {
     options: 'ALTERNATIV', commuteTracking: 'Pendlingsspårning', commuteTrackingDesc: 'Mät pendlingstiden till jobbet',
     ads: 'Annonser (gratisversion)', adsDesc: 'Inaktivera för att uppgradera till premium',
     language_section: 'SPRÅK', language: 'Appspråk', about: 'OM APPEN', privacy: 'Integritetspolicy', privacyDesc: 'Hur vi skyddar dina uppgifter',
-    contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Arbete', radius: 'radie', rtlRestart: 'Byte till arabiska kräver omstart av appen.',
+    contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Arbete', radius: 'radie', rtlRestart: 'Byte till arabiska kräver omstart av appen.', theme_section: 'UTSEENDE', theme: 'Apptema', themeSystem: 'System', themeLight: 'Ljust', themeDark: 'Mörkt',
   },
   login: { welcome: 'Välkommen! Ange dina uppgifter för att komma igång.', namePlaceholder: 't.ex. Anna Johansson', nameRequired: 'Fullständigt namn krävs.', companyOptional: 'Företag (valfritt)', companyPlaceholder: 't.ex. Acme AB', hint: 'Dina uppgifter visas i exporterade PDF-rapporter. Kan ändras i Inställningar.', start: 'Kom igång' },
   pdf: {

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, ActivityIndicator, TextInput } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,12 +8,8 @@ import { getSessions } from '../utils/storage';
 import { useSettings } from '../hooks/useSettings';
 import { formatShortDuration, getSessionDuration, getMonthName } from '../utils/formatters';
 import { exportToPDF } from '../utils/export';
-
-const COLORS = {
-  primary: '#2563EB', bg: '#F8FAFC', card: '#FFFFFF',
-  text: '#1E293B', muted: '#64748B', success: '#16A34A',
-  warning: '#D97706', border: '#E2E8F0', danger: '#DC2626',
-};
+import { useTheme } from '../theme/ThemeContext';
+import { Colors } from '../theme/colors';
 
 type Preset = 'week' | 'month' | 'lastMonth' | 'year' | 'custom';
 
@@ -55,8 +51,38 @@ const parseDate = (str: string): Date | null => {
   return isNaN(date.getTime()) ? null : date;
 };
 
+const makeStyles = (C: Colors) => StyleSheet.create({
+  container: { flex: 1, backgroundColor: C.bg },
+  content: { padding: 16, gap: 12 },
+  sectionLabel: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 1, paddingHorizontal: 2 },
+  presetRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  presetBtn: { paddingHorizontal: 14, paddingVertical: 9, borderRadius: 20, backgroundColor: C.card, borderWidth: 1, borderColor: C.border },
+  presetBtnActive: { backgroundColor: C.primary, borderColor: C.primary },
+  presetText: { fontSize: 13, fontWeight: '500', color: C.text },
+  presetTextActive: { color: '#fff' },
+  card: { backgroundColor: C.card, borderRadius: 16, padding: 16, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2 },
+  dateRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  dateField: { flex: 1 },
+  dateLabel: { fontSize: 11, color: C.muted, fontWeight: '600', marginBottom: 6 },
+  dateInput: { borderWidth: 1, borderColor: C.border, borderRadius: 8, padding: 10, fontSize: 14, color: C.text, backgroundColor: C.inputBg },
+  statsGrid: { flexDirection: 'row', justifyContent: 'space-around' },
+  statBox: { alignItems: 'center', flex: 1, paddingVertical: 8 },
+  statValue: { fontSize: 22, fontWeight: '700', color: C.primary },
+  statLabel: { fontSize: 11, color: C.muted, marginTop: 4, textAlign: 'center' },
+  statDivider: { width: 1, backgroundColor: C.border, marginVertical: 8 },
+  delegationRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: C.border },
+  delegationText: { fontSize: 13, color: C.warning, fontWeight: '500' },
+  exportBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, backgroundColor: C.primary, padding: 16, borderRadius: 14, shadowColor: C.primary, shadowOpacity: 0.25, shadowRadius: 8, elevation: 3 },
+  exportBtnDisabled: { backgroundColor: C.muted },
+  exportText: { color: '#fff', fontSize: 15, fontWeight: '600', flexShrink: 1 },
+  empty: { alignItems: 'center', paddingVertical: 32, gap: 8 },
+  emptyText: { fontSize: 15, color: C.muted },
+});
+
 export default function StatsScreen() {
   const { t } = useTranslation();
+  const { colors: C } = useTheme();
+  const styles = useMemo(() => makeStyles(C), [C]);
   const { settings } = useSettings();
   const [allSessions, setAllSessions] = useState<WorkSession[]>([]);
   const [preset, setPreset] = useState<Preset>('month');
@@ -127,12 +153,12 @@ export default function StatsScreen() {
           <View style={styles.dateRow}>
             <View style={styles.dateField}>
               <Text style={styles.dateLabel}>{t('stats.fromDate')}</Text>
-              <TextInput style={styles.dateInput} value={customFrom} onChangeText={setCustomFrom} placeholder="01.01.2025" placeholderTextColor={COLORS.muted} keyboardType="numeric" />
+              <TextInput style={styles.dateInput} value={customFrom} onChangeText={setCustomFrom} placeholder="01.01.2025" placeholderTextColor={C.muted} keyboardType="numeric" />
             </View>
-            <Ionicons name="arrow-forward" size={16} color={COLORS.muted} style={{ marginTop: 24 }} />
+            <Ionicons name="arrow-forward" size={16} color={C.muted} style={{ marginTop: 24 }} />
             <View style={styles.dateField}>
               <Text style={styles.dateLabel}>{t('stats.toDate')}</Text>
-              <TextInput style={styles.dateInput} value={customTo} onChangeText={setCustomTo} placeholder="31.01.2025" placeholderTextColor={COLORS.muted} keyboardType="numeric" />
+              <TextInput style={styles.dateInput} value={customTo} onChangeText={setCustomTo} placeholder="31.01.2025" placeholderTextColor={C.muted} keyboardType="numeric" />
             </View>
           </View>
         </View>
@@ -160,7 +186,7 @@ export default function StatsScreen() {
             </View>
             {delegationCount > 0 && (
               <View style={styles.delegationRow}>
-                <Ionicons name="airplane" size={16} color={COLORS.warning} />
+                <Ionicons name="airplane" size={16} color={C.warning} />
                 <Text style={styles.delegationText}>{t('stats.delegations', { count: delegationCount })}</Text>
               </View>
             )}
@@ -181,7 +207,7 @@ export default function StatsScreen() {
 
       {range && filtered.length === 0 && (
         <View style={styles.empty}>
-          <Ionicons name="calendar-outline" size={48} color={COLORS.muted} />
+          <Ionicons name="calendar-outline" size={48} color={C.muted} />
           <Text style={styles.emptyText}>{t('stats.empty')}</Text>
         </View>
       )}
@@ -189,31 +215,3 @@ export default function StatsScreen() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.bg },
-  content: { padding: 16, gap: 12 },
-  sectionLabel: { fontSize: 11, fontWeight: '700', color: COLORS.muted, letterSpacing: 1, paddingHorizontal: 2 },
-  presetRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  presetBtn: { paddingHorizontal: 14, paddingVertical: 9, borderRadius: 20, backgroundColor: COLORS.card, borderWidth: 1, borderColor: COLORS.border },
-  presetBtnActive: { backgroundColor: COLORS.primary, borderColor: COLORS.primary },
-  presetText: { fontSize: 13, fontWeight: '500', color: COLORS.text },
-  presetTextActive: { color: '#fff' },
-  card: { backgroundColor: COLORS.card, borderRadius: 16, padding: 16, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2 },
-  dateRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  dateField: { flex: 1 },
-  dateLabel: { fontSize: 11, color: COLORS.muted, fontWeight: '600', marginBottom: 6 },
-  dateInput: { borderWidth: 1, borderColor: COLORS.border, borderRadius: 8, padding: 10, fontSize: 14, color: COLORS.text, backgroundColor: COLORS.bg },
-  statsGrid: { flexDirection: 'row', justifyContent: 'space-around' },
-  statBox: { alignItems: 'center', flex: 1, paddingVertical: 8 },
-  statValue: { fontSize: 22, fontWeight: '700', color: COLORS.primary },
-  statLabel: { fontSize: 11, color: COLORS.muted, marginTop: 4, textAlign: 'center' },
-  statDivider: { width: 1, backgroundColor: COLORS.border, marginVertical: 8 },
-  delegationRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: COLORS.border },
-  delegationText: { fontSize: 13, color: COLORS.warning, fontWeight: '500' },
-  exportBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, backgroundColor: COLORS.primary, padding: 16, borderRadius: 14, shadowColor: COLORS.primary, shadowOpacity: 0.25, shadowRadius: 8, elevation: 3 },
-  exportBtnDisabled: { backgroundColor: COLORS.muted },
-  exportText: { color: '#fff', fontSize: 15, fontWeight: '600', flexShrink: 1 },
-  empty: { alignItems: 'center', paddingVertical: 32, gap: 8 },
-  emptyText: { fontSize: 15, color: COLORS.muted },
-});

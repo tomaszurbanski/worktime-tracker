@@ -1,5 +1,5 @@
 export default {
-  common: { cancel: 'Annuler', delete: 'Supprimer', save: 'Enregistrer', error: 'Erreur', ok: 'OK', now: 'maintenant', active: 'ACTIF' },
+  common: { cancel: 'Annuler', delete: 'Supprimer', save: 'Enregistrer', error: 'Erreur', ok: 'OK', now: 'maintenant', active: 'ACTIF', hold: 'Maintenir' },
   tabs: { home: 'Travail', history: 'Historique', stats: 'Statistiques', settings: 'Paramètres' },
   home: {
     title: 'WorkTime', workTime: 'TEMPS DE TRAVAIL', delegationTime: 'DÉPLACEMENT',
@@ -32,6 +32,7 @@ export default {
     ads: 'Publicités (version gratuite)', adsDesc: 'Désactiver pour passer à la version premium',
     language_section: 'LANGUE', language: 'Langue de l\'app', about: 'À PROPOS', privacy: 'Politique de confidentialité', privacyDesc: 'Comment nous protégeons vos données',
     contact: 'Contact', version: 'WorkTime Tracker v1.0.0', locationWork: 'Travail', radius: 'rayon', rtlRestart: 'Le passage à l\'arabe nécessite un redémarrage de l\'application.',
+    theme_section: 'APPARENCE', theme: 'Thème', themeSystem: 'Système', themeLight: 'Clair', themeDark: 'Sombre',
   },
   login: { welcome: 'Bienvenue ! Saisissez vos informations pour commencer.', namePlaceholder: 'ex. Jean Dupont', nameRequired: 'Le nom complet est obligatoire.', companyOptional: 'Entreprise (facultatif)', companyPlaceholder: 'ex. Acme SA', hint: 'Vos informations apparaîtront dans les rapports PDF exportés. Modifiables dans les Paramètres.', start: 'Commencer' },
   pdf: {

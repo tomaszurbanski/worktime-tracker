@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Cancelar', delete: 'Eliminar', save: 'Guardar', error: 'Error', ok: 'OK', now: 'ahora', active: 'ACTIVO' },
+﻿export default {
+  common: { cancel: 'Cancelar', delete: 'Eliminar', save: 'Guardar', error: 'Error', ok: 'OK', now: 'ahora', active: 'ACTIVO', hold: 'Mantener' },
   tabs: { home: 'Trabajo', history: 'Historial', stats: 'Estadísticas', settings: 'Configuración' },
   home: {
     title: 'WorkTime', workTime: 'TIEMPO DE TRABAJO', delegationTime: 'DESPLAZAMIENTO',
@@ -31,7 +31,7 @@ export default {
     options: 'OPCIONES', commuteTracking: 'Seguimiento del trayecto', commuteTrackingDesc: 'Mide el tiempo de trayecto al trabajo',
     ads: 'Anuncios (versión gratuita)', adsDesc: 'Desactivar para actualizar a premium',
     language_section: 'IDIOMA', language: 'Idioma de la app', about: 'ACERCA DE', privacy: 'Política de privacidad', privacyDesc: 'Cómo protegemos tus datos',
-    contact: 'Contacto', version: 'WorkTime Tracker v1.0.0', locationWork: 'Trabajo', radius: 'radio', rtlRestart: 'Cambiar al árabe requiere reiniciar la app.',
+    contact: 'Contacto', version: 'WorkTime Tracker v1.0.0', locationWork: 'Trabajo', radius: 'radio', rtlRestart: 'Cambiar al árabe requiere reiniciar la app.', theme_section: 'APARIENCIA', theme: 'Tema', themeSystem: 'Sistema', themeLight: 'Claro', themeDark: 'Oscuro',
   },
   login: { welcome: '¡Bienvenido! Introduce tus datos para empezar.', namePlaceholder: 'ej. Juan García', nameRequired: 'El nombre completo es obligatorio.', companyOptional: 'Empresa (opcional)', companyPlaceholder: 'ej. Acme S.L.', hint: 'Tus datos aparecerán en los informes PDF exportados. Puedes cambiarlos en Configuración.', start: 'Empezar' },
   pdf: {

@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Batal', delete: 'Hapus', save: 'Simpan', error: 'Kesalahan', ok: 'OK', now: 'sekarang', active: 'AKTIF' },
+﻿export default {
+  common: { cancel: 'Batal', delete: 'Hapus', save: 'Simpan', error: 'Kesalahan', ok: 'OK', now: 'sekarang', active: 'AKTIF', hold: 'Tahan' },
   tabs: { home: 'Kerja', history: 'Riwayat', stats: 'Statistik', settings: 'Pengaturan' },
   home: {
     title: 'WorkTime', workTime: 'WAKTU KERJA', delegationTime: 'PERJALANAN DINAS',
@@ -31,7 +31,7 @@ export default {
     options: 'OPSI', commuteTracking: 'Pelacakan komuter', commuteTrackingDesc: 'Ukur waktu komuter ke tempat kerja',
     ads: 'Iklan (versi gratis)', adsDesc: 'Nonaktifkan untuk upgrade ke premium',
     language_section: 'BAHASA', language: 'Bahasa aplikasi', about: 'TENTANG', privacy: 'Kebijakan privasi', privacyDesc: 'Cara kami melindungi data Anda',
-    contact: 'Kontak', version: 'WorkTime Tracker v1.0.0', locationWork: 'Kerja', radius: 'radius', rtlRestart: 'Beralih ke bahasa Arab memerlukan restart aplikasi.',
+    contact: 'Kontak', version: 'WorkTime Tracker v1.0.0', locationWork: 'Kerja', radius: 'radius', rtlRestart: 'Beralih ke bahasa Arab memerlukan restart aplikasi.', theme_section: 'TAMPILAN', theme: 'Tema', themeSystem: 'Sistem', themeLight: 'Terang', themeDark: 'Gelap',
   },
   login: { welcome: 'Selamat datang! Masukkan data Anda untuk memulai.', namePlaceholder: 'mis. Budi Santoso', nameRequired: 'Nama lengkap wajib diisi.', companyOptional: 'Perusahaan (opsional)', companyPlaceholder: 'mis. PT Contoh', hint: 'Data Anda akan muncul dalam laporan PDF yang diekspor. Dapat diubah di Pengaturan.', start: 'Mulai' },
   pdf: {

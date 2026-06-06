@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Anulare', delete: 'Șterge', save: 'Salvare', error: 'Eroare', ok: 'OK', now: 'acum', active: 'ACTIV' },
+﻿export default {
+  common: { cancel: 'Anulare', delete: 'Șterge', save: 'Salvare', error: 'Eroare', ok: 'OK', now: 'acum', active: 'ACTIV', hold: 'Țineți' },
   tabs: { home: 'Muncă', history: 'Istoric', stats: 'Statistici', settings: 'Setări' },
   home: {
     title: 'WorkTime', workTime: 'TIMP DE MUNCĂ', delegationTime: 'DEPLASARE',
@@ -31,7 +31,7 @@ export default {
     options: 'OPȚIUNI', commuteTracking: 'Urmărire navetă', commuteTrackingDesc: 'Măsurați timpul de navetă la muncă',
     ads: 'Reclame (versiune gratuită)', adsDesc: 'Dezactivați pentru versiunea premium',
     language_section: 'LIMBĂ', language: 'Limba aplicației', about: 'DESPRE', privacy: 'Politica de confidențialitate', privacyDesc: 'Cum vă protejăm datele',
-    contact: 'Contact', version: 'WorkTime Tracker v1.0.0', locationWork: 'Muncă', radius: 'rază', rtlRestart: 'Trecerea la arabă necesită repornirea aplicației.',
+    contact: 'Contact', version: 'WorkTime Tracker v1.0.0', locationWork: 'Muncă', radius: 'rază', rtlRestart: 'Trecerea la arabă necesită repornirea aplicației.', theme_section: 'ASPECT', theme: 'Temă', themeSystem: 'Sistem', themeLight: 'Deschis', themeDark: 'Întunecat',
   },
   login: { welcome: 'Bun venit! Introduceți datele pentru a începe.', namePlaceholder: 'ex. Ion Popescu', nameRequired: 'Numele complet este obligatoriu.', companyOptional: 'Companie (opțional)', companyPlaceholder: 'ex. Acme SRL', hint: 'Datele dvs. vor apărea în rapoartele PDF exportate. Pot fi modificate în Setări.', start: 'Începeți' },
   pdf: {

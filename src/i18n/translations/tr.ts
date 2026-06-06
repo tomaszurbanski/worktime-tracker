@@ -1,5 +1,5 @@
 export default {
-  common: { cancel: 'İptal', delete: 'Sil', save: 'Kaydet', error: 'Hata', ok: 'Tamam', now: 'şimdi', active: 'AKTİF' },
+  common: { cancel: 'İptal', delete: 'Sil', save: 'Kaydet', error: 'Hata', ok: 'Tamam', now: 'şimdi', active: 'AKTİF', hold: 'Basılı tut' },
   tabs: { home: 'Çalışma', history: 'Geçmiş', stats: 'İstatistik', settings: 'Ayarlar' },
   home: {
     title: 'WorkTime',
@@ -103,6 +103,11 @@ export default {
     locationWork: 'İş',
     radius: 'yarıçap',
     rtlRestart: 'Arapçaya geçiş için uygulamanın yeniden başlatılması gerekir.',
+    theme_section: 'GÖRÜNÜM',
+    theme: 'Uygulama teması',
+    themeSystem: 'Sistem',
+    themeLight: 'Açık',
+    themeDark: 'Koyu',
   },
   login: {
     welcome: 'Hoş geldiniz! Başlamak için bilgilerinizi girin.',

@@ -1,5 +1,5 @@
 export default {
-  common: { cancel: 'Anuluj', delete: 'Usuń', save: 'Zapisz', error: 'Błąd', ok: 'OK', now: 'teraz', active: 'AKTYWNA' },
+  common: { cancel: 'Anuluj', delete: 'Usuń', save: 'Zapisz', error: 'Błąd', ok: 'OK', now: 'teraz', active: 'AKTYWNA', hold: 'Przytrzymaj' },
   tabs: { home: 'Praca', history: 'Historia', stats: 'Statystyki', settings: 'Ustawienia' },
   home: {
     title: 'WorkTime',
@@ -103,6 +103,11 @@ export default {
     locationWork: 'Praca',
     radius: 'promień',
     rtlRestart: 'Zmiana na arabski wymaga restartu aplikacji.',
+    theme_section: 'MOTYW',
+    theme: 'Motyw aplikacji',
+    themeSystem: 'Systemowy',
+    themeLight: 'Jasny',
+    themeDark: 'Ciemny',
   },
   login: {
     welcome: 'Witaj! Uzupełnij swoje dane przed rozpoczęciem.',

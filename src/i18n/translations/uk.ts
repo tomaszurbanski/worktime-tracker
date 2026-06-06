@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Скасувати', delete: 'Видалити', save: 'Зберегти', error: 'Помилка', ok: 'ОК', now: 'зараз', active: 'АКТИВНА' },
+﻿export default {
+  common: { cancel: 'Скасувати', delete: 'Видалити', save: 'Зберегти', error: 'Помилка', ok: 'ОК', now: 'зараз', active: 'АКТИВНА', hold: 'Утримуйте' },
   tabs: { home: 'Робота', history: 'Історія', stats: 'Статистика', settings: 'Налаштування' },
   home: {
     title: 'WorkTime', workTime: 'РОБОЧИЙ ЧАС', delegationTime: 'ВІДРЯДЖЕННЯ',
@@ -31,7 +31,7 @@ export default {
     options: 'ПАРАМЕТРИ', commuteTracking: 'Відстеження дороги', commuteTrackingDesc: 'Вимірюйте час у дорозі на роботу',
     ads: 'Реклама (безкоштовна версія)', adsDesc: 'Вимкнути для переходу на преміум',
     language_section: 'МОВА', language: 'Мова застосунку', about: 'ПРО ЗАСТОСУНОК', privacy: 'Політика конфіденційності', privacyDesc: 'Як ми захищаємо ваші дані',
-    contact: 'Контакт', version: 'WorkTime Tracker v1.0.0', locationWork: 'Робота', radius: 'радіус', rtlRestart: 'Перехід на арабську потребує перезапуску застосунку.',
+    contact: 'Контакт', version: 'WorkTime Tracker v1.0.0', locationWork: 'Робота', radius: 'радіус', rtlRestart: 'Перехід на арабську потребує перезапуску застосунку.', theme_section: 'ОФОРМЛЕННЯ', theme: 'Тема', themeSystem: 'Системна', themeLight: 'Світла', themeDark: 'Темна',
   },
   login: { welcome: 'Ласкаво просимо! Введіть свої дані для початку роботи.', namePlaceholder: 'напр. Іван Петренко', nameRequired: 'Ім\'я та прізвище обов\'язкові.', companyOptional: 'Компанія (необов\'язково)', companyPlaceholder: 'напр. ТОВ «Компанія»', hint: 'Ваші дані з\'являться у PDF звітах. Змінити можна в Налаштуваннях.', start: 'Почати' },
   pdf: {

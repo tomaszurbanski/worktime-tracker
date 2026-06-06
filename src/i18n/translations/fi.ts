@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Peruuta', delete: 'Poista', save: 'Tallenna', error: 'Virhe', ok: 'OK', now: 'nyt', active: 'AKTIIVINEN' },
+﻿export default {
+  common: { cancel: 'Peruuta', delete: 'Poista', save: 'Tallenna', error: 'Virhe', ok: 'OK', now: 'nyt', active: 'AKTIIVINEN', hold: 'Pidä' },
   tabs: { home: 'Työ', history: 'Historia', stats: 'Tilastot', settings: 'Asetukset' },
   home: {
     title: 'WorkTime', workTime: 'TYÖAIKA', delegationTime: 'TYÖMATKUSTUS',
@@ -31,7 +31,7 @@ export default {
     options: 'VAIHTOEHDOT', commuteTracking: 'Pendelöinnin seuranta', commuteTrackingDesc: 'Mittaa pendelöintiaikaa töihin',
     ads: 'Mainokset (ilmainen versio)', adsDesc: 'Poista käytöstä päivittääksesi premiumiin',
     language_section: 'KIELI', language: 'Sovelluksen kieli', about: 'TIETOJA', privacy: 'Tietosuojakäytäntö', privacyDesc: 'Kuinka suojaamme tietojasi',
-    contact: 'Yhteystiedot', version: 'WorkTime Tracker v1.0.0', locationWork: 'Työ', radius: 'säde', rtlRestart: 'Arabiaksi vaihtaminen vaatii sovelluksen uudelleenkäynnistyksen.',
+    contact: 'Yhteystiedot', version: 'WorkTime Tracker v1.0.0', locationWork: 'Työ', radius: 'säde', rtlRestart: 'Arabiaksi vaihtaminen vaatii sovelluksen uudelleenkäynnistyksen.', theme_section: 'ULKOASU', theme: 'Teema', themeSystem: 'Järjestelmä', themeLight: 'Vaalea', themeDark: 'Tumma',
   },
   login: { welcome: 'Tervetuloa! Syötä tietosi aloittaaksesi.', namePlaceholder: 'esim. Matti Virtanen', nameRequired: 'Koko nimi on pakollinen.', companyOptional: 'Yritys (valinnainen)', companyPlaceholder: 'esim. Acme Oy', hint: 'Tietosi näkyvät viedyissä PDF-raporteissa. Voit muuttaa niitä Asetuksista.', start: 'Aloita' },
   pdf: {

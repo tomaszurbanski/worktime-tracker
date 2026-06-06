@@ -1,5 +1,5 @@
 export default {
-  common: { cancel: 'Отмена', delete: 'Удалить', save: 'Сохранить', error: 'Ошибка', ok: 'ОК', now: 'сейчас', active: 'АКТИВНА' },
+  common: { cancel: 'Отмена', delete: 'Удалить', save: 'Сохранить', error: 'Ошибка', ok: 'ОК', now: 'сейчас', active: 'АКТИВНА', hold: 'Удержите' },
   tabs: { home: 'Работа', history: 'История', stats: 'Статистика', settings: 'Настройки' },
   home: {
     title: 'WorkTime',
@@ -103,6 +103,11 @@ export default {
     locationWork: 'Работа',
     radius: 'радиус',
     rtlRestart: 'Переключение на арабский требует перезапуска приложения.',
+    theme_section: 'ОФОРМЛЕНИЕ',
+    theme: 'Тема приложения',
+    themeSystem: 'Системная',
+    themeLight: 'Светлая',
+    themeDark: 'Тёмная',
   },
   login: {
     welcome: 'Добро пожаловать! Введите ваши данные для начала работы.',

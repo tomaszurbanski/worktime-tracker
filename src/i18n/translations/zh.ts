@@ -1,5 +1,5 @@
 export default {
-  common: { cancel: '取消', delete: '删除', save: '保存', error: '错误', ok: '确定', now: '现在', active: '进行中' },
+  common: { cancel: '取消', delete: '删除', save: '保存', error: '错误', ok: '确定', now: '现在', active: '进行中', hold: '长按' },
   tabs: { home: '工作', history: '历史', stats: '统计', settings: '设置' },
   home: {
     title: 'WorkTime',
@@ -103,6 +103,11 @@ export default {
     locationWork: '工作',
     radius: '半径',
     rtlRestart: '切换到阿拉伯语需要重启应用。',
+    theme_section: '外观',
+    theme: '应用主题',
+    themeSystem: '跟随系统',
+    themeLight: '浅色',
+    themeDark: '深色',
   },
   login: {
     welcome: '欢迎！请输入您的信息以开始使用。',

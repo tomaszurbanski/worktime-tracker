@@ -16,20 +16,21 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import { getSettings } from './src/utils/storage';
 import { loadSavedLanguage } from './src/i18n';
+import { ThemeProvider, useTheme } from './src/theme/ThemeContext';
 
 const Tab = createBottomTabNavigator();
-const COLORS = { primary: '#2563EB', inactive: '#94A3B8', bg: '#FFFFFF' };
 
 function MainTabs() {
   const { t } = useTranslation();
+  const { colors: C } = useTheme();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerStyle: { backgroundColor: COLORS.bg, elevation: 0, shadowOpacity: 0 },
-        headerTitleStyle: { fontWeight: '700', fontSize: 18 },
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.inactive,
-        tabBarStyle: { borderTopWidth: 1, borderTopColor: '#E2E8F0', paddingBottom: 4 },
+        headerStyle: { backgroundColor: C.tabBar, elevation: 0, shadowOpacity: 0 },
+        headerTitleStyle: { fontWeight: '700', fontSize: 18, color: C.text },
+        tabBarActiveTintColor: C.primary,
+        tabBarInactiveTintColor: C.muted,
+        tabBarStyle: { backgroundColor: C.tabBar, borderTopWidth: 1, borderTopColor: C.tabBorder, paddingBottom: 4 },
         tabBarIcon: ({ color, size, focused }) => {
           const icons: Record<string, [keyof typeof Ionicons.glyphMap, keyof typeof Ionicons.glyphMap]> = {
             Home: ['timer', 'timer-outline'],
@@ -50,7 +51,8 @@ function MainTabs() {
   );
 }
 
-export default function App() {
+function AppInner() {
+  const { colors: C } = useTheme();
   const [ready, setReady] = useState(false);
   const [needsLogin, setNeedsLogin] = useState(false);
 
@@ -63,8 +65,8 @@ export default function App() {
 
   if (!ready) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#F8FAFC' }}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: C.bg }}>
+        <ActivityIndicator size="large" color={C.primary} />
       </View>
     );
   }
@@ -72,7 +74,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <StatusBar style="dark" />
+        <StatusBar style={C.statusBar} />
         {needsLogin ? (
           <LoginScreen onDone={() => setNeedsLogin(false)} />
         ) : (
@@ -82,5 +84,13 @@ export default function App() {
         )}
       </SafeAreaProvider>
     </GestureHandlerRootView>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
   );
 }

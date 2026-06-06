@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Отказ', delete: 'Изтрий', save: 'Запази', error: 'Грешка', ok: 'ОК', now: 'сега', active: 'АКТИВНА' },
+﻿export default {
+  common: { cancel: 'Отказ', delete: 'Изтрий', save: 'Запази', error: 'Грешка', ok: 'ОК', now: 'сега', active: 'АКТИВНА', hold: 'Задръжте' },
   tabs: { home: 'Работа', history: 'История', stats: 'Статистика', settings: 'Настройки' },
   home: {
     title: 'WorkTime', workTime: 'РАБОТНО ВРЕМЕ', delegationTime: 'КОМАНДИРОВКА',
@@ -31,7 +31,7 @@ export default {
     options: 'ОПЦИИ', commuteTracking: 'Проследяване на пътуването', commuteTrackingDesc: 'Измервайте времето за пътуване до работа',
     ads: 'Реклами (безплатна версия)', adsDesc: 'Деактивирайте за преминаване към премиум',
     language_section: 'ЕЗИК', language: 'Език на приложението', about: 'ЗА ПРИЛОЖЕНИЕТО', privacy: 'Политика за поверителност', privacyDesc: 'Как защитаваме вашите данни',
-    contact: 'Контакт', version: 'WorkTime Tracker v1.0.0', locationWork: 'Работа', radius: 'радиус', rtlRestart: 'Превключването на арабски изисква рестартиране на приложението.',
+    contact: 'Контакт', version: 'WorkTime Tracker v1.0.0', locationWork: 'Работа', radius: 'радиус', rtlRestart: 'Превключването на арабски изисква рестартиране на приложението.', theme_section: 'ОФОРМЛЕНИЕ', theme: 'Тема', themeSystem: 'Системна', themeLight: 'Светла', themeDark: 'Тъмна',
   },
   login: { welcome: 'Добре дошли! Въведете данните си за начало.', namePlaceholder: 'напр. Иван Петров', nameRequired: 'Пълното име е задължително.', companyOptional: 'Компания (по избор)', companyPlaceholder: 'напр. Акме ЕООД', hint: 'Данните ви ще се показват в PDF отчетите. Могат да се променят в Настройки.', start: 'Започни' },
   pdf: {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   View, Text, Switch, TouchableOpacity, StyleSheet,
   ScrollView, Alert, ActivityIndicator, TextInput, Linking, Modal, FlatList,
@@ -10,14 +10,45 @@ import { useLocation } from '../hooks/useLocation';
 import { LANGUAGES, getLang } from '../i18n/langs';
 import { saveLanguage } from '../i18n';
 import i18n from '../i18n';
+import { useTheme, ThemeMode } from '../theme/ThemeContext';
+import { Colors } from '../theme/colors';
 
 const PRIVACY_URL = 'https://tomaszurbanski.github.io/worktime-tracker/privacy';
 
-const C = {
-  primary: '#2563EB', bg: '#F8FAFC', card: '#FFFFFF',
-  text: '#1E293B', muted: '#64748B', danger: '#DC2626',
-  success: '#16A34A', border: '#E2E8F0',
-};
+const makeStyles = (C: Colors) => StyleSheet.create({
+  container: { flex: 1, backgroundColor: C.bg },
+  content: { padding: 16, gap: 8 },
+  sectionLabel: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 1, paddingHorizontal: 4, marginTop: 8, marginBottom: 4 },
+  card: { backgroundColor: C.card, borderRadius: 14, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2, overflow: 'hidden' },
+  divider: { height: 1, backgroundColor: C.border, marginLeft: 56 },
+  row: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 12 },
+  rowIcon: { width: 34, height: 34, borderRadius: 8, backgroundColor: C.primaryBg, alignItems: 'center', justifyContent: 'center' },
+  rowContent: { flex: 1 },
+  rowTitle: { fontSize: 15, fontWeight: '500', color: C.text },
+  rowSubtitle: { fontSize: 12, color: C.muted, marginTop: 2 },
+  inputGroup: { paddingHorizontal: 14, paddingVertical: 10 },
+  inputLabel: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 0.5, marginBottom: 4, textTransform: 'uppercase' },
+  textInput: { borderWidth: 1, borderColor: C.border, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 9, fontSize: 15, color: C.text, backgroundColor: C.inputBg },
+  saveBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 12, marginHorizontal: 14, marginBottom: 6, borderRadius: 8, backgroundColor: C.primaryBg },
+  saveBtnText: { fontSize: 14, fontWeight: '600', color: C.primary },
+  themePicker: { flexDirection: 'row', padding: 10, gap: 8 },
+  themeBtn: { flex: 1, alignItems: 'center', paddingVertical: 10, borderRadius: 10, borderWidth: 1.5, borderColor: C.border, gap: 4 },
+  themeBtnActive: { backgroundColor: C.primaryBg, borderColor: C.primary },
+  themeIcon: { fontSize: 20 },
+  themeBtnLabel: { fontSize: 12, fontWeight: '600', color: C.muted },
+  themeBtnLabelActive: { color: C.primary },
+  version: { textAlign: 'center', fontSize: 12, color: C.muted, marginTop: 16, marginBottom: 8 },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'flex-end' },
+  modalSheet: { backgroundColor: C.card, borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 16, paddingBottom: 32, maxHeight: '70%' },
+  modalHandle: { width: 40, height: 4, backgroundColor: C.border, borderRadius: 2, alignSelf: 'center', marginBottom: 16 },
+  modalTitle: { fontSize: 17, fontWeight: '700', color: C.text, textAlign: 'center', marginBottom: 12 },
+  langRow: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 10, gap: 12 },
+  langRowActive: { backgroundColor: C.primaryBg },
+  langFlag: { fontSize: 28 },
+  langTexts: { flex: 1 },
+  langNative: { fontSize: 16, fontWeight: '600', color: C.text },
+  langName: { fontSize: 12, color: C.muted },
+});
 
 interface RowProps {
   icon: keyof typeof Ionicons.glyphMap;
@@ -27,21 +58,27 @@ interface RowProps {
   onPress?: () => void;
 }
 
-const Row = ({ icon, title, subtitle, right, onPress }: RowProps) => (
-  <TouchableOpacity style={styles.row} onPress={onPress} disabled={!onPress} activeOpacity={0.7}>
-    <View style={styles.rowIcon}>
-      <Ionicons name={icon} size={20} color={C.primary} />
-    </View>
-    <View style={styles.rowContent}>
-      <Text style={styles.rowTitle}>{title}</Text>
-      {subtitle ? <Text style={styles.rowSubtitle}>{subtitle}</Text> : null}
-    </View>
-    {right}
-  </TouchableOpacity>
-);
+const Row = ({ icon, title, subtitle, right, onPress }: RowProps) => {
+  const { colors: C } = useTheme();
+  const styles = useMemo(() => makeStyles(C), [C]);
+  return (
+    <TouchableOpacity style={styles.row} onPress={onPress} disabled={!onPress} activeOpacity={0.7}>
+      <View style={styles.rowIcon}>
+        <Ionicons name={icon} size={20} color={C.primary} />
+      </View>
+      <View style={styles.rowContent}>
+        <Text style={styles.rowTitle}>{title}</Text>
+        {subtitle ? <Text style={styles.rowSubtitle}>{subtitle}</Text> : null}
+      </View>
+      {right}
+    </TouchableOpacity>
+  );
+};
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
+  const { colors: C, mode, setMode } = useTheme();
+  const styles = useMemo(() => makeStyles(C), [C]);
   const { settings, updateSettings } = useSettings();
   const { hasPermission, getCurrentLocation } = useLocation();
   const [savingLocation, setSavingLocation] = useState(false);
@@ -92,6 +129,12 @@ export default function SettingsScreen() {
     }
   };
 
+  const themeOptions: { m: ThemeMode; icon: string; label: string }[] = [
+    { m: 'system', icon: '📱', label: t('settings.themeSystem') },
+    { m: 'light', icon: '☀️', label: t('settings.themeLight') },
+    { m: 'dark', icon: '🌙', label: t('settings.themeDark') },
+  ];
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
 
@@ -126,6 +169,23 @@ export default function SettingsScreen() {
         />
       </View>
 
+      {/* Theme */}
+      <Text style={styles.sectionLabel}>{t('settings.theme_section')}</Text>
+      <View style={styles.card}>
+        <View style={styles.themePicker}>
+          {themeOptions.map(opt => (
+            <TouchableOpacity
+              key={opt.m}
+              style={[styles.themeBtn, mode === opt.m && styles.themeBtnActive]}
+              onPress={() => setMode(opt.m)}
+            >
+              <Text style={styles.themeIcon}>{opt.icon}</Text>
+              <Text style={[styles.themeBtnLabel, mode === opt.m && styles.themeBtnLabelActive]}>{opt.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+
       {/* Tracking mode */}
       <Text style={styles.sectionLabel}>{t('settings.trackingMode')}</Text>
       <View style={styles.card}>
@@ -133,14 +193,14 @@ export default function SettingsScreen() {
           icon="hand-left"
           title={t('settings.manualMode')}
           subtitle={t('settings.manualModeDesc')}
-          right={<Switch value={settings.mode === 'manual'} onValueChange={() => settings.mode !== 'manual' && toggleMode()} trackColor={{ true: C.primary }} />}
+          right={<Switch value={settings.mode === 'manual'} onValueChange={() => { if (settings.mode !== 'manual') toggleMode(); }} trackColor={{ true: C.primary }} />}
         />
         <View style={styles.divider} />
         <Row
           icon="location"
           title={t('settings.autoMode')}
           subtitle={t('settings.autoModeDesc')}
-          right={<Switch value={settings.mode === 'auto'} onValueChange={() => settings.mode !== 'auto' && toggleMode()} trackColor={{ true: C.primary }} />}
+          right={<Switch value={settings.mode === 'auto'} onValueChange={() => { if (settings.mode !== 'auto') toggleMode(); }} trackColor={{ true: C.primary }} />}
         />
       </View>
 
@@ -219,32 +279,3 @@ export default function SettingsScreen() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: C.bg },
-  content: { padding: 16, gap: 8 },
-  sectionLabel: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 1, paddingHorizontal: 4, marginTop: 8, marginBottom: 4 },
-  card: { backgroundColor: C.card, borderRadius: 14, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2, overflow: 'hidden' },
-  divider: { height: 1, backgroundColor: C.border, marginLeft: 56 },
-  row: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 12 },
-  rowIcon: { width: 34, height: 34, borderRadius: 8, backgroundColor: '#EFF6FF', alignItems: 'center', justifyContent: 'center' },
-  rowContent: { flex: 1 },
-  rowTitle: { fontSize: 15, fontWeight: '500', color: C.text },
-  rowSubtitle: { fontSize: 12, color: C.muted, marginTop: 2 },
-  inputGroup: { paddingHorizontal: 14, paddingVertical: 10 },
-  inputLabel: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 0.5, marginBottom: 4, textTransform: 'uppercase' },
-  textInput: { borderWidth: 1, borderColor: C.border, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 9, fontSize: 15, color: C.text, backgroundColor: C.bg },
-  saveBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 12, marginHorizontal: 14, marginBottom: 6, borderRadius: 8, backgroundColor: '#EFF6FF' },
-  saveBtnText: { fontSize: 14, fontWeight: '600', color: C.primary },
-  version: { textAlign: 'center', fontSize: 12, color: C.muted, marginTop: 16, marginBottom: 8 },
-  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'flex-end' },
-  modalSheet: { backgroundColor: C.card, borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 16, paddingBottom: 32, maxHeight: '70%' },
-  modalHandle: { width: 40, height: 4, backgroundColor: C.border, borderRadius: 2, alignSelf: 'center', marginBottom: 16 },
-  modalTitle: { fontSize: 17, fontWeight: '700', color: C.text, textAlign: 'center', marginBottom: 12 },
-  langRow: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 10, gap: 12 },
-  langRowActive: { backgroundColor: '#EFF6FF' },
-  langFlag: { fontSize: 28 },
-  langTexts: { flex: 1 },
-  langNative: { fontSize: 16, fontWeight: '600', color: C.text },
-  langName: { fontSize: 12, color: C.muted },
-});

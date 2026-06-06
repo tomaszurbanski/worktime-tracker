@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'Mégsem', delete: 'Törlés', save: 'Mentés', error: 'Hiba', ok: 'OK', now: 'most', active: 'AKTÍV' },
+﻿export default {
+  common: { cancel: 'Mégsem', delete: 'Törlés', save: 'Mentés', error: 'Hiba', ok: 'OK', now: 'most', active: 'AKTÍV', hold: 'Tartsa' },
   tabs: { home: 'Munka', history: 'Előzmények', stats: 'Statisztika', settings: 'Beállítások' },
   home: {
     title: 'WorkTime', workTime: 'MUNKAIDŐ', delegationTime: 'KIKÜLDETÉS',
@@ -31,7 +31,7 @@ export default {
     options: 'LEHETŐSÉGEK', commuteTracking: 'Ingázáskövetés', commuteTrackingDesc: 'Mérje a munkába ingázás idejét',
     ads: 'Hirdetések (ingyenes verzió)', adsDesc: 'Kapcsolja ki a prémium verzióra való váltáshoz',
     language_section: 'NYELV', language: 'Az app nyelve', about: 'AZ APPRÓL', privacy: 'Adatvédelmi irányelvek', privacyDesc: 'Hogyan védjük adatait',
-    contact: 'Kapcsolat', version: 'WorkTime Tracker v1.0.0', locationWork: 'Munka', radius: 'sugár', rtlRestart: 'Az arabra váltáshoz az app újraindítása szükséges.',
+    contact: 'Kapcsolat', version: 'WorkTime Tracker v1.0.0', locationWork: 'Munka', radius: 'sugár', rtlRestart: 'Az arabra váltáshoz az app újraindítása szükséges.', theme_section: 'MEGJELENÉS', theme: 'Téma', themeSystem: 'Rendszer', themeLight: 'Világos', themeDark: 'Sötét',
   },
   login: { welcome: 'Üdvözöljük! Adja meg adatait a kezdéshez.', namePlaceholder: 'pl. Kovács János', nameRequired: 'A teljes név kötelező.', companyOptional: 'Cég (nem kötelező)', companyPlaceholder: 'pl. Acme Kft.', hint: 'Adatai megjelennek az exportált PDF-jelentésekben. A Beállításokban módosíthatók.', start: 'Kezdés' },
   pdf: {

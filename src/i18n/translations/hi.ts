@@ -1,5 +1,5 @@
-export default {
-  common: { cancel: 'रद्द करें', delete: 'हटाएं', save: 'सहेजें', error: 'त्रुटि', ok: 'ठीक है', now: 'अभी', active: 'सक्रिय' },
+﻿export default {
+  common: { cancel: 'रद्द करें', delete: 'हटाएं', save: 'सहेजें', error: 'त्रुटि', ok: 'ठीक है', now: 'अभी', active: 'सक्रिय', hold: 'दबाए रखें' },
   tabs: { home: 'काम', history: 'इतिहास', stats: 'आँकड़े', settings: 'सेटिंग्स' },
   home: {
     title: 'WorkTime', workTime: 'कार्य समय', delegationTime: 'यात्रा समय',
@@ -31,7 +31,7 @@ export default {
     options: 'विकल्प', commuteTracking: 'आवागमन ट्रैकिंग', commuteTrackingDesc: 'काम पर आने-जाने का समय मापें',
     ads: 'विज्ञापन (मुफ़्त संस्करण)', adsDesc: 'प्रीमियम पर अपग्रेड करने के लिए अक्षम करें',
     language_section: 'भाषा', language: 'ऐप की भाषा', about: 'ऐप के बारे में', privacy: 'गोपनीयता नीति', privacyDesc: 'हम आपका डेटा कैसे सुरक्षित रखते हैं',
-    contact: 'संपर्क', version: 'WorkTime Tracker v1.0.0', locationWork: 'काम', radius: 'दायरा', rtlRestart: 'अरबी में बदलने के लिए ऐप को पुनः आरंभ करना होगा।',
+    contact: 'संपर्क', version: 'WorkTime Tracker v1.0.0', locationWork: 'काम', radius: 'दायरा', rtlRestart: 'अरबी में बदलने के लिए ऐप को पुनः आरंभ करना होगा।', theme_section: 'स्वरूप', theme: 'थीम', themeSystem: 'सिस्टम', themeLight: 'हल्का', themeDark: 'गहरा',
   },
   login: { welcome: 'स्वागत है! शुरू करने के लिए अपना विवरण दर्ज करें।', namePlaceholder: 'जैसे राजेश कुमार', nameRequired: 'पूरा नाम आवश्यक है।', companyOptional: 'कंपनी (वैकल्पिक)', companyPlaceholder: 'जैसे एक्मे प्राइवेट लिमिटेड', hint: 'आपका विवरण निर्यात की गई PDF रिपोर्ट में दिखाई देगा। सेटिंग्स में बाद में बदला जा सकता है।', start: 'शुरू करें' },
   pdf: {

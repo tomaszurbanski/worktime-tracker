@@ -15,7 +15,7 @@ const sessionRow = (s: WorkSession, cls: string, label: string, indent = false):
   const total = getSessionDuration(s.startTime, s.endTime);
   const commute = commuteDuration(s);
   const netWork = commute > 0 ? total - commute : 0;
-  const timeRange = `${formatTime(s.startTime)} &ndash; ${s.endTime ? formatTime(s.endTime) : 'trwa'}`;
+  const timeRange = `${formatTime(s.startTime)} &ndash; ${s.endTime ? formatTime(s.endTime) : p('ongoing')}`;
   const indentStyle = indent ? 'padding-left:24px' : '';
 
   let html = `
@@ -38,10 +38,10 @@ const sessionRow = (s: WorkSession, cls: string, label: string, indent = false):
       <td style="text-align:right;color:#0369A1;font-weight:600">${formatShortDuration(commute)}</td>
     </tr>
     <tr class="commute-sub-row">
-      <td style="padding-left:${indent ? 36 : 20}px;color:#16A34A">&#9679; ${p('onSite')}</td>
-      <td style="color:#16A34A;font-size:10px"></td>
+      <td style="padding-left:${indent ? 36 : 20}px;color:#15803D">&#9679; ${p('onSite')}</td>
+      <td style="color:#15803D;font-size:10px"></td>
       <td></td>
-      <td style="text-align:right;color:#16A34A;font-weight:600">${formatShortDuration(netWork)}</td>
+      <td style="text-align:right;color:#15803D;font-weight:600">${formatShortDuration(netWork)}</td>
     </tr>`;
   }
 
@@ -49,9 +49,11 @@ const sessionRow = (s: WorkSession, cls: string, label: string, indent = false):
 };
 
 const buildHtml = (sessions: WorkSession[], rangeLabel: string, settings: AppSettings): string => {
+  const lang = i18n.language;
+
   const byDay: Record<string, WorkSession[]> = {};
   sessions.forEach(s => {
-    const key = new Date(s.startTime).toLocaleDateString('pl-PL');
+    const key = new Date(s.startTime).toISOString().split('T')[0];
     if (!byDay[key]) byDay[key] = [];
     byDay[key].push(s);
   });
@@ -64,13 +66,13 @@ const buildHtml = (sessions: WorkSession[], rangeLabel: string, settings: AppSet
 
   let rows = '';
   Object.entries(byDay)
-    .sort(([a], [b]) => new Date(b.split('.').reverse().join('-')).getTime() - new Date(a.split('.').reverse().join('-')).getTime())
+    .sort(([a], [b]) => b.localeCompare(a))
     .forEach(([, daySessions]) => {
       const dayDate = formatDateFull(daySessions[0].startTime);
       const dayTotal = daySessions.reduce((sum, s) => sum + getSessionDuration(s.startTime, s.endTime), 0);
       const dayCommute = daySessions.reduce((sum, s) => sum + commuteDuration(s), 0);
       const daySubtitle = dayCommute > 0
-        ? ` &nbsp;<span style="font-size:10px;font-weight:500;color:#1E40AF">(praca: ${formatShortDuration(dayTotal - dayCommute)}, dojazd: ${formatShortDuration(dayCommute)})</span>`
+        ? ` &nbsp;<span style="font-size:10px;font-weight:500;color:#1E40AF">(${p('work').toLowerCase()}: ${formatShortDuration(dayTotal - dayCommute)}, ${p('commute').toLowerCase()}: ${formatShortDuration(dayCommute)})</span>`
         : '';
 
       rows += `
@@ -84,25 +86,25 @@ const buildHtml = (sessions: WorkSession[], rangeLabel: string, settings: AppSet
       const regularWork = daySessions.filter(s => !s.delegationId && !s.delegation?.isTrip);
 
       trips.forEach(trip => {
-        rows += sessionRow(trip, 'delegation-trip-row', '&#9992; DELEGACJA');
+        rows += sessionRow(trip, 'delegation-trip-row', `&#9992; ${p('delegation')}`);
         linkedWork.filter(w => w.delegationId === trip.id).forEach(w => {
-          rows += sessionRow(w, 'delegation-work-row', '&#8627; Praca', true);
+          rows += sessionRow(w, 'delegation-work-row', `&#8627; ${p('work')}`, true);
         });
       });
 
       regularWork.forEach(s => {
-        rows += sessionRow(s, 'work-row', 'Praca');
+        rows += sessionRow(s, 'work-row', p('work'));
       });
     });
 
-  const userName = settings.userFullName || 'Pracownik';
+  const userName = settings.userFullName || p('employee');
   const company = settings.companyName || '';
-  const generatedDate = new Date().toLocaleDateString('pl-PL');
-  const generatedFull = new Date().toLocaleString('pl-PL');
+  const generatedDate = new Date().toLocaleDateString(lang);
+  const generatedFull = new Date().toLocaleString(lang);
   const hasCommute = totalCommuteMs > 0;
 
   return `<!DOCTYPE html>
-<html lang="pl">
+<html lang="${lang}">
 <head>
   <meta charset="UTF-8">
   <style>
@@ -120,7 +122,7 @@ const buildHtml = (sessions: WorkSession[], rangeLabel: string, settings: AppSet
     .summary-box { flex: 1; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; text-align: center; }
     .summary-box .val { font-size: 20px; font-weight: 700; color: #2563EB; }
     .summary-box .val-commute { color: #0369A1; }
-    .summary-box .val-net { color: #16A34A; }
+    .summary-box .val-net { color: #15803D; }
     .summary-box .lbl { font-size: 10px; color: #64748B; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
     .commute-note { background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 6px; padding: 8px 12px; margin-top: 10px; font-size: 11px; color: #0369A1; }
     table { width: 100%; border-collapse: collapse; font-size: 11px; }
@@ -133,70 +135,69 @@ const buildHtml = (sessions: WorkSession[], rangeLabel: string, settings: AppSet
     .delegation-trip-row td { background: #FAF5FF; color: #7C3AED; }
     .delegation-work-row td { background: #FEFBFF; color: #4C1D95; }
     .commute-sub-row td { background: #F8FFFE; border-bottom: 1px solid #E0F2FE; font-size: 10px; }
-    .work-row td { }
     .session-type { font-weight: 600; width: 110px; }
     .footer { padding: 16px 32px; border-top: 1px solid #E2E8F0; text-align: center; font-size: 10px; color: #94A3B8; margin-top: 24px; }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>Raport czasu pracy</h1>
+    <h1>${p('title')}</h1>
     <div class="subtitle">${userName}${company ? ' &middot; ' + company : ''}</div>
   </div>
 
   <div class="section">
     <div class="info-grid">
-      <div><div class="info-label">Pracownik</div><div class="info-value">${userName}</div></div>
-      ${company ? `<div><div class="info-label">Firma</div><div class="info-value">${company}</div></div>` : ''}
-      <div><div class="info-label">Okres</div><div class="info-value">${rangeLabel}</div></div>
-      <div><div class="info-label">Wygenerowano</div><div class="info-value">${generatedDate}</div></div>
+      <div><div class="info-label">${p('employee')}</div><div class="info-value">${userName}</div></div>
+      ${company ? `<div><div class="info-label">${p('company')}</div><div class="info-value">${company}</div></div>` : ''}
+      <div><div class="info-label">${p('period')}</div><div class="info-value">${rangeLabel}</div></div>
+      <div><div class="info-label">${p('generated')}</div><div class="info-value">${generatedDate}</div></div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">Podsumowanie</div>
+    <div class="section-title">${p('summary')}</div>
     <div class="summary-grid">
       <div class="summary-box">
         <div class="val">${formatShortDuration(totalMs)}</div>
-        <div class="lbl">Łącznie</div>
+        <div class="lbl">${p('total')}</div>
       </div>
       ${hasCommute ? `
       <div class="summary-box">
         <div class="val val-net">${formatShortDuration(netWorkMs)}</div>
-        <div class="lbl">Praca (netto)</div>
+        <div class="lbl">${p('netWork')}</div>
       </div>
       <div class="summary-box">
         <div class="val val-commute">${formatShortDuration(totalCommuteMs)}</div>
-        <div class="lbl">Dojazd</div>
+        <div class="lbl">${p('commute')}</div>
       </div>` : `
       <div class="summary-box">
         <div class="val">${workSessions.length}</div>
-        <div class="lbl">Sesje pracy</div>
+        <div class="lbl">${p('workSessions')}</div>
       </div>`}
       <div class="summary-box">
         <div class="val">${delegationTrips.length}</div>
-        <div class="lbl">Delegacje</div>
+        <div class="lbl">${p('delegations')}</div>
       </div>
     </div>
-    ${hasCommute ? `<div class="commute-note">&#8505; Raport zawiera czas dojazdu — wykazany osobno jako inna stawka rozliczeniowa.</div>` : ''}
+    ${hasCommute ? `<div class="commute-note">&#8505; ${p('commuteNote')}</div>` : ''}
   </div>
 
   <div class="section">
-    <div class="section-title">Szczegółowe wpisy</div>
+    <div class="section-title">${p('details')}</div>
     <table>
       <thead>
         <tr>
-          <th>Typ</th>
-          <th>Godziny</th>
-          <th>Dojazd</th>
-          <th>Czas</th>
+          <th>${p('type')}</th>
+          <th>${p('hours')}</th>
+          <th>${p('commute')}</th>
+          <th>${p('time')}</th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>
   </div>
 
-  <div class="footer">Raport wygenerowany przez WorkTime Tracker &middot; ${generatedFull}</div>
+  <div class="footer">${p('footer')} &middot; ${generatedFull}</div>
 </body>
 </html>`;
 };
@@ -208,7 +209,7 @@ export const exportToPDF = async (sessions: WorkSession[], rangeLabel: string, s
   if (canShare) {
     await Sharing.shareAsync(uri, {
       mimeType: 'application/pdf',
-      dialogTitle: 'Eksportuj raport PDF',
+      dialogTitle: i18n.t('stats.exportPdf'),
       UTI: 'com.adobe.pdf',
     });
   } else {
