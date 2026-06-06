@@ -45,6 +45,24 @@ export const formatDate = (timestamp: number): string => {
   });
 };
 
+export const formatDateFull = (timestamp: number): string => {
+  return new Date(timestamp).toLocaleDateString('pl-PL', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
+export const formatDateShort = (timestamp: number): string => {
+  return new Date(timestamp).toLocaleDateString('pl-PL', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: '2-digit',
+  });
+};
+
 export const formatTime = (timestamp: number): string => {
   return new Date(timestamp).toLocaleTimeString('pl-PL', {
     hour: '2-digit',

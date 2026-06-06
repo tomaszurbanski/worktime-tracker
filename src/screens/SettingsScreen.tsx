@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   View, Text, Switch, TouchableOpacity, StyleSheet,
-  ScrollView, Alert, ActivityIndicator,
+  ScrollView, Alert, ActivityIndicator, TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSettings } from '../hooks/useSettings';
@@ -40,6 +40,8 @@ export default function SettingsScreen() {
   const { settings, updateSettings } = useSettings();
   const { hasPermission, getCurrentLocation } = useLocation();
   const [savingLocation, setSavingLocation] = useState(false);
+  const [name, setName] = useState(settings.userFullName ?? '');
+  const [company, setCompany] = useState(settings.companyName ?? '');
 
   const toggleMode = () => {
     if (settings.mode === 'auto' && !hasPermission) {
@@ -74,8 +76,45 @@ export default function SettingsScreen() {
     ]);
   };
 
+  const saveProfile = () => {
+    updateSettings({ userFullName: name.trim(), companyName: company.trim() });
+    Alert.alert('Zapisano', 'Dane profilu zostały zaktualizowane.');
+  };
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <Text style={styles.sectionLabel}>DANE UŻYTKOWNIKA</Text>
+      <View style={styles.card}>
+        <View style={styles.inputGroup}>
+          <Text style={styles.inputLabel}>Imię i nazwisko</Text>
+          <TextInput
+            style={styles.textInput}
+            value={name}
+            onChangeText={setName}
+            placeholder="Jan Kowalski"
+            placeholderTextColor={COLORS.muted}
+            autoCapitalize="words"
+          />
+        </View>
+        <View style={styles.divider} />
+        <View style={styles.inputGroup}>
+          <Text style={styles.inputLabel}>Firma</Text>
+          <TextInput
+            style={styles.textInput}
+            value={company}
+            onChangeText={setCompany}
+            placeholder="Acme Sp. z o.o."
+            placeholderTextColor={COLORS.muted}
+            autoCapitalize="words"
+          />
+        </View>
+        <View style={styles.divider} />
+        <TouchableOpacity style={styles.saveBtn} onPress={saveProfile}>
+          <Ionicons name="save-outline" size={16} color={COLORS.primary} />
+          <Text style={styles.saveBtnText}>Zapisz dane</Text>
+        </TouchableOpacity>
+      </View>
+
       <Text style={styles.sectionLabel}>TRYB ŚLEDZENIA</Text>
       <View style={styles.card}>
         <Row
@@ -203,4 +242,17 @@ const styles = StyleSheet.create({
   rowTitle: { fontSize: 15, fontWeight: '500', color: COLORS.text },
   rowSubtitle: { fontSize: 12, color: COLORS.muted, marginTop: 2 },
   version: { textAlign: 'center', fontSize: 12, color: COLORS.muted, marginTop: 16, marginBottom: 8 },
+  inputGroup: { paddingHorizontal: 14, paddingVertical: 10 },
+  inputLabel: { fontSize: 11, fontWeight: '700', color: COLORS.muted, letterSpacing: 0.5, marginBottom: 4, textTransform: 'uppercase' },
+  textInput: {
+    borderWidth: 1, borderColor: COLORS.border, borderRadius: 8,
+    paddingHorizontal: 12, paddingVertical: 9, fontSize: 15, color: COLORS.text,
+    backgroundColor: COLORS.bg,
+  },
+  saveBtn: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
+    paddingVertical: 12, marginHorizontal: 14, marginBottom: 6,
+    borderRadius: 8, backgroundColor: '#EFF6FF',
+  },
+  saveBtnText: { fontSize: 14, fontWeight: '600', color: COLORS.primary },
 });

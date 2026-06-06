@@ -8,7 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { WorkSession } from '../types';
 import { getSessions } from '../utils/storage';
 import { formatShortDuration, getSessionDuration, getMonthName } from '../utils/formatters';
-import { exportToCSV } from '../utils/export';
+import { exportToPDF } from '../utils/export';
+import { useSettings } from '../hooks/useSettings';
 
 const COLORS = {
   primary: '#2563EB', bg: '#F8FAFC', card: '#FFFFFF',
@@ -65,6 +66,7 @@ const PRESETS: { key: Preset; label: string }[] = [
 ];
 
 export default function StatsScreen() {
+  const { settings } = useSettings();
   const [allSessions, setAllSessions] = useState<WorkSession[]>([]);
   const [preset, setPreset] = useState<Preset>('month');
   const [customFrom, setCustomFrom] = useState('');
@@ -109,9 +111,9 @@ export default function StatsScreen() {
     }
     setExporting(true);
     try {
-      await exportToCSV(filtered, range.label);
+      await exportToPDF(filtered, range.label, settings);
     } catch {
-      Alert.alert('Błąd', 'Nie udało się wygenerować raportu.');
+      Alert.alert('Błąd', 'Nie udało się wygenerować raportu PDF.');
     } finally {
       setExporting(false);
     }
@@ -210,7 +212,7 @@ export default function StatsScreen() {
               : <Ionicons name="share-outline" size={20} color="#fff" />
             }
             <Text style={styles.exportText}>
-              {exporting ? 'Generowanie...' : `Eksportuj raport CSV (${filtered.length} wpisów)`}
+              {exporting ? 'Generowanie PDF...' : `Eksportuj raport PDF (${filtered.length} wpisów)`}
             </Text>
           </TouchableOpacity>
         </>

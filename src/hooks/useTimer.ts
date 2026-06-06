@@ -1,17 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { WorkSession } from '../types';
-import { addSession, updateSession } from '../utils/storage';
+import { TimerState, WorkSession } from '../types';
+import { addSession, updateSession, getSessions } from '../utils/storage';
 
 const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-export interface TimerState {
-  isWorking: boolean;
-  workStart: number | null;
-  workElapsed: number;
-  isDelegating: boolean;
-  delegationStart: number | null;
-  delegationElapsed: number;
-}
+export { TimerState };
 
 export const useTimer = () => {
   const [state, setState] = useState<TimerState>({
@@ -21,6 +14,8 @@ export const useTimer = () => {
     isDelegating: false,
     delegationStart: null,
     delegationElapsed: 0,
+    isCommuting: false,
+    commuteStart: null,
   });
 
   const workSessionId = useRef<string | null>(null);
@@ -28,8 +23,7 @@ export const useTimer = () => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    const anyRunning = state.isWorking || state.isDelegating;
-    if (anyRunning) {
+    if (state.isWorking || state.isDelegating) {
       intervalRef.current = setInterval(() => {
         setState(prev => ({
           ...prev,
@@ -43,30 +37,49 @@ export const useTimer = () => {
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [state.isWorking, state.isDelegating]);
 
+  const forceCloseAnyActive = useCallback(async () => {
+    const all = await getSessions();
+    const active = all.filter(s => !s.endTime);
+    for (const s of active) {
+      await updateSession(s.id, { endTime: Date.now() });
+    }
+    workSessionId.current = null;
+  }, []);
+
   const startWork = useCallback(async (mode: 'manual' | 'auto') => {
     if (state.isWorking) return;
+    await forceCloseAnyActive();
     const now = Date.now();
     const id = generateId();
     const session: WorkSession = {
       id,
       startTime: now,
       mode,
-      type: state.isDelegating ? 'delegation' : 'work',
+      type: 'work',
       ...(state.isDelegating && delegationSessionId.current
-        ? { delegation: { destination: 'Delegacja', purpose: '' } }
+        ? { delegationId: delegationSessionId.current }
         : {}),
     };
     await addSession(session);
     workSessionId.current = id;
     setState(prev => ({ ...prev, isWorking: true, workStart: now, workElapsed: 0 }));
-  }, [state.isWorking, state.isDelegating]);
+  }, [state.isWorking, state.isDelegating, forceCloseAnyActive]);
 
   const stopWork = useCallback(async () => {
     if (!state.isWorking || !workSessionId.current) return;
-    await updateSession(workSessionId.current, { endTime: Date.now() });
+    const now = Date.now();
+    if (state.isCommuting) {
+      await updateSession(workSessionId.current, {
+        endTime: now,
+        commuteStartTime: state.commuteStart ?? undefined,
+        commuteEndTime: now,
+      });
+    } else {
+      await updateSession(workSessionId.current, { endTime: now });
+    }
     workSessionId.current = null;
-    setState(prev => ({ ...prev, isWorking: false, workStart: null }));
-  }, [state.isWorking]);
+    setState(prev => ({ ...prev, isWorking: false, workStart: null, isCommuting: false, commuteStart: null }));
+  }, [state.isWorking, state.isCommuting, state.commuteStart]);
 
   const startDelegation = useCallback(async () => {
     if (state.isDelegating) return;
@@ -77,7 +90,7 @@ export const useTimer = () => {
       startTime: now,
       mode: 'manual',
       type: 'delegation',
-      delegation: { destination: 'Delegacja', purpose: '' },
+      delegation: { destination: 'Delegacja', isTrip: true },
     };
     await addSession(session);
     delegationSessionId.current = id;
@@ -98,5 +111,19 @@ export const useTimer = () => {
     }));
   }, [state.isDelegating, state.isWorking, stopWork]);
 
-  return { state, startWork, stopWork, startDelegation, stopDelegation };
+  const startCommute = useCallback(async () => {
+    if (state.isCommuting || !state.isWorking || !workSessionId.current) return;
+    const now = Date.now();
+    await updateSession(workSessionId.current, { commuteStartTime: now });
+    setState(prev => ({ ...prev, isCommuting: true, commuteStart: now }));
+  }, [state.isCommuting, state.isWorking]);
+
+  const stopCommute = useCallback(async () => {
+    if (!state.isCommuting || !workSessionId.current) return;
+    const now = Date.now();
+    await updateSession(workSessionId.current, { commuteEndTime: now });
+    setState(prev => ({ ...prev, isCommuting: false }));
+  }, [state.isCommuting]);
+
+  return { state, startWork, stopWork, startDelegation, stopDelegation, startCommute, stopCommute };
 };
