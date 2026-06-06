@@ -4,6 +4,7 @@ import {
   StyleSheet, KeyboardAvoidingView, Platform, ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { saveSettings, getSettings } from '../utils/storage';
 
 const C = {
@@ -16,13 +17,14 @@ interface Props {
 }
 
 export default function LoginScreen({ onDone }: Props) {
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [error, setError] = useState('');
 
   const handleSave = async () => {
     if (!name.trim()) {
-      setError('Imię i nazwisko jest wymagane.');
+      setError(t('login.nameRequired'));
       return;
     }
     const settings = await getSettings();
@@ -31,56 +33,48 @@ export default function LoginScreen({ onDone }: Props) {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.flex}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
+    <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
 
-        {/* Logo */}
         <View style={styles.logoBox}>
           <View style={styles.logoCircle}>
             <Ionicons name="timer" size={40} color={C.primary} />
           </View>
           <Text style={styles.appName}>WorkTime Tracker</Text>
-          <Text style={styles.appSub}>Witaj! Uzupełnij swoje dane przed rozpoczęciem.</Text>
+          <Text style={styles.appSub}>{t('login.welcome')}</Text>
         </View>
 
-        {/* Form */}
         <View style={styles.card}>
-          <Text style={styles.fieldLabel}>Imię i nazwisko *</Text>
+          <Text style={styles.fieldLabel}>{t('settings.fullName')} *</Text>
           <TextInput
             style={[styles.input, error ? styles.inputError : null]}
             value={name}
             onChangeText={v => { setName(v); setError(''); }}
-            placeholder="np. Jan Kowalski"
+            placeholder={t('login.namePlaceholder')}
             placeholderTextColor={C.muted}
             autoCapitalize="words"
             returnKeyType="next"
           />
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-          <Text style={[styles.fieldLabel, { marginTop: 16 }]}>Firma (opcjonalnie)</Text>
+          <Text style={[styles.fieldLabel, { marginTop: 16 }]}>{t('login.companyOptional')}</Text>
           <TextInput
             style={styles.input}
             value={company}
             onChangeText={setCompany}
-            placeholder="np. Acme Sp. z o.o."
+            placeholder={t('login.companyPlaceholder')}
             placeholderTextColor={C.muted}
             autoCapitalize="words"
             returnKeyType="done"
             onSubmitEditing={handleSave}
           />
 
-          <Text style={styles.hint}>
-            Twoje dane pojawią się w eksportowanych raportach PDF.
-            Możesz je później zmienić w Ustawieniach.
-          </Text>
+          <Text style={styles.hint}>{t('login.hint')}</Text>
         </View>
 
         <TouchableOpacity style={styles.btn} onPress={handleSave} activeOpacity={0.85}>
           <Ionicons name="checkmark-circle" size={20} color="#fff" />
-          <Text style={styles.btnText}>Rozpocznij</Text>
+          <Text style={styles.btnText}>{t('login.start')}</Text>
         </TouchableOpacity>
 
       </ScrollView>

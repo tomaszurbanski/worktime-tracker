@@ -2,6 +2,9 @@ import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { WorkSession, AppSettings } from '../types';
 import { formatDateFull, formatTime, formatShortDuration, getSessionDuration } from './formatters';
+import i18n from '../i18n';
+
+const p = (key: string) => i18n.t(`pdf.${key}`);
 
 const commuteDuration = (s: WorkSession): number => {
   if (!s.commuteStartTime) return 0;
@@ -25,17 +28,17 @@ const sessionRow = (s: WorkSession, cls: string, label: string, indent = false):
 
   if (commute > 0) {
     const commuteRange = s.commuteStartTime
-      ? `${formatTime(s.commuteStartTime)} &ndash; ${s.commuteEndTime ? formatTime(s.commuteEndTime) : 'trwa'}`
+      ? `${formatTime(s.commuteStartTime)} &ndash; ${s.commuteEndTime ? formatTime(s.commuteEndTime) : p('ongoing')}`
       : '';
     html += `
     <tr class="commute-sub-row">
-      <td style="padding-left:${indent ? 36 : 20}px;color:#0369A1">&#128663; Dojazd</td>
+      <td style="padding-left:${indent ? 36 : 20}px;color:#0369A1">&#128663; ${p('commute')}</td>
       <td style="color:#0369A1;font-size:10px">${commuteRange}</td>
       <td style="color:#0369A1;font-weight:600">${formatShortDuration(commute)}</td>
       <td style="text-align:right;color:#0369A1;font-weight:600">${formatShortDuration(commute)}</td>
     </tr>
     <tr class="commute-sub-row">
-      <td style="padding-left:${indent ? 36 : 20}px;color:#16A34A">&#9679; Na miejscu</td>
+      <td style="padding-left:${indent ? 36 : 20}px;color:#16A34A">&#9679; ${p('onSite')}</td>
       <td style="color:#16A34A;font-size:10px"></td>
       <td></td>
       <td style="text-align:right;color:#16A34A;font-weight:600">${formatShortDuration(netWork)}</td>

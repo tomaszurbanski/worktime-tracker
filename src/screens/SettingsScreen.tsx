@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import {
   View, Text, Switch, TouchableOpacity, StyleSheet,
-  ScrollView, Alert, ActivityIndicator, TextInput, Linking,
+  ScrollView, Alert, ActivityIndicator, TextInput, Linking, Modal, FlatList,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { useSettings } from '../hooks/useSettings';
 import { useLocation } from '../hooks/useLocation';
+import { LANGUAGES, getLang } from '../i18n/langs';
+import { saveLanguage } from '../i18n';
+import i18n from '../i18n';
 
 const PRIVACY_URL = 'https://tomaszurbanski.github.io/worktime-tracker/privacy';
 
-const COLORS = {
+const C = {
   primary: '#2563EB', bg: '#F8FAFC', card: '#FFFFFF',
   text: '#1E293B', muted: '#64748B', danger: '#DC2626',
   success: '#16A34A', border: '#E2E8F0',
@@ -24,30 +28,31 @@ interface RowProps {
 }
 
 const Row = ({ icon, title, subtitle, right, onPress }: RowProps) => (
-  <TouchableOpacity
-    style={styles.row} onPress={onPress} disabled={!onPress} activeOpacity={0.7}
-  >
+  <TouchableOpacity style={styles.row} onPress={onPress} disabled={!onPress} activeOpacity={0.7}>
     <View style={styles.rowIcon}>
-      <Ionicons name={icon} size={20} color={COLORS.primary} />
+      <Ionicons name={icon} size={20} color={C.primary} />
     </View>
     <View style={styles.rowContent}>
       <Text style={styles.rowTitle}>{title}</Text>
-      {subtitle && <Text style={styles.rowSubtitle}>{subtitle}</Text>}
+      {subtitle ? <Text style={styles.rowSubtitle}>{subtitle}</Text> : null}
     </View>
     {right}
   </TouchableOpacity>
 );
 
 export default function SettingsScreen() {
+  const { t } = useTranslation();
   const { settings, updateSettings } = useSettings();
   const { hasPermission, getCurrentLocation } = useLocation();
   const [savingLocation, setSavingLocation] = useState(false);
   const [name, setName] = useState(settings.userFullName ?? '');
   const [company, setCompany] = useState(settings.companyName ?? '');
+  const [langModal, setLangModal] = useState(false);
+  const currentLang = getLang(i18n.language);
 
   const toggleMode = () => {
     if (settings.mode === 'auto' && !hasPermission) {
-      Alert.alert('Brak uprawnień', 'Aplikacja potrzebuje dostępu do lokalizacji.');
+      Alert.alert(t('settings.noPermission'), t('settings.noPermissionDesc'));
       return;
     }
     updateSettings({ mode: settings.mode === 'manual' ? 'auto' : 'manual' });
@@ -57,223 +62,189 @@ export default function SettingsScreen() {
     setSavingLocation(true);
     const loc = await getCurrentLocation();
     setSavingLocation(false);
-    if (!loc) {
-      Alert.alert('Błąd', 'Nie można pobrać lokalizacji. Sprawdź uprawnienia.');
-      return;
-    }
-    await updateSettings({
-      workLocation: {
-        ...loc,
-        radius: 150,
-        name: 'Praca',
-      },
-    });
-    Alert.alert('Zapisano', 'Lokalizacja pracy została ustawiona na Twoje obecne położenie.');
+    if (!loc) { Alert.alert(t('common.error'), t('settings.locationError')); return; }
+    await updateSettings({ workLocation: { ...loc, radius: 150, name: t('settings.locationWork') } });
+    Alert.alert(t('settings.saved'), t('settings.locationSaved'));
   };
 
   const clearLocation = () => {
-    Alert.alert('Usuń lokalizację', 'Czy na pewno chcesz usunąć lokalizację pracy?', [
-      { text: 'Anuluj', style: 'cancel' },
-      { text: 'Usuń', style: 'destructive', onPress: () => updateSettings({ workLocation: undefined }) },
+    Alert.alert(t('settings.deleteLocationTitle'), t('settings.deleteLocationConfirm'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      { text: t('common.delete'), style: 'destructive', onPress: () => updateSettings({ workLocation: undefined }) },
     ]);
   };
 
   const saveProfile = () => {
     updateSettings({ userFullName: name.trim(), companyName: company.trim() });
-    Alert.alert('Zapisano', 'Dane profilu zostały zaktualizowane.');
+    Alert.alert(t('settings.saved'), t('settings.profileSaved'));
+  };
+
+  const selectLanguage = async (code: string) => {
+    setLangModal(false);
+    const lang = getLang(code);
+    if (lang.rtl) {
+      Alert.alert('Arabic / عربية', t('settings.rtlRestart'), [
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('common.ok'), onPress: () => saveLanguage(code) },
+      ]);
+    } else {
+      await saveLanguage(code);
+    }
   };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.sectionLabel}>DANE UŻYTKOWNIKA</Text>
+
+      {/* Profile */}
+      <Text style={styles.sectionLabel}>{t('settings.profile')}</Text>
       <View style={styles.card}>
         <View style={styles.inputGroup}>
-          <Text style={styles.inputLabel}>Imię i nazwisko</Text>
-          <TextInput
-            style={styles.textInput}
-            value={name}
-            onChangeText={setName}
-            placeholder="Jan Kowalski"
-            placeholderTextColor={COLORS.muted}
-            autoCapitalize="words"
-          />
+          <Text style={styles.inputLabel}>{t('settings.fullName')}</Text>
+          <TextInput style={styles.textInput} value={name} onChangeText={setName} placeholder="Jan Kowalski" placeholderTextColor={C.muted} autoCapitalize="words" />
         </View>
         <View style={styles.divider} />
         <View style={styles.inputGroup}>
-          <Text style={styles.inputLabel}>Firma</Text>
-          <TextInput
-            style={styles.textInput}
-            value={company}
-            onChangeText={setCompany}
-            placeholder="Acme Sp. z o.o."
-            placeholderTextColor={COLORS.muted}
-            autoCapitalize="words"
-          />
+          <Text style={styles.inputLabel}>{t('settings.company')}</Text>
+          <TextInput style={styles.textInput} value={company} onChangeText={setCompany} placeholder="Acme Sp. z o.o." placeholderTextColor={C.muted} autoCapitalize="words" />
         </View>
         <View style={styles.divider} />
         <TouchableOpacity style={styles.saveBtn} onPress={saveProfile}>
-          <Ionicons name="save-outline" size={16} color={COLORS.primary} />
-          <Text style={styles.saveBtnText}>Zapisz dane</Text>
+          <Ionicons name="save-outline" size={16} color={C.primary} />
+          <Text style={styles.saveBtnText}>{t('settings.saveProfile')}</Text>
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.sectionLabel}>TRYB ŚLEDZENIA</Text>
+      {/* Language */}
+      <Text style={styles.sectionLabel}>{t('settings.language_section')}</Text>
+      <View style={styles.card}>
+        <Row
+          icon="language"
+          title={t('settings.language')}
+          subtitle={`${currentLang.flag} ${currentLang.native}`}
+          onPress={() => setLangModal(true)}
+          right={<Ionicons name="chevron-forward" size={16} color={C.muted} />}
+        />
+      </View>
+
+      {/* Tracking mode */}
+      <Text style={styles.sectionLabel}>{t('settings.trackingMode')}</Text>
       <View style={styles.card}>
         <Row
           icon="hand-left"
-          title="Tryb ręczny"
-          subtitle="Sam klikasz Start i Stop"
-          right={
-            <Switch
-              value={settings.mode === 'manual'}
-              onValueChange={() => settings.mode !== 'manual' && toggleMode()}
-              trackColor={{ true: COLORS.primary }}
-            />
-          }
+          title={t('settings.manualMode')}
+          subtitle={t('settings.manualModeDesc')}
+          right={<Switch value={settings.mode === 'manual'} onValueChange={() => settings.mode !== 'manual' && toggleMode()} trackColor={{ true: C.primary }} />}
         />
         <View style={styles.divider} />
         <Row
           icon="location"
-          title="Tryb GPS (auto)"
-          subtitle="Aplikacja wykrywa wejście/wyjście z pracy"
-          right={
-            <Switch
-              value={settings.mode === 'auto'}
-              onValueChange={() => settings.mode !== 'auto' && toggleMode()}
-              trackColor={{ true: COLORS.primary }}
-            />
-          }
+          title={t('settings.autoMode')}
+          subtitle={t('settings.autoModeDesc')}
+          right={<Switch value={settings.mode === 'auto'} onValueChange={() => settings.mode !== 'auto' && toggleMode()} trackColor={{ true: C.primary }} />}
         />
       </View>
 
-      <Text style={styles.sectionLabel}>LOKALIZACJA PRACY</Text>
+      {/* Work location */}
+      <Text style={styles.sectionLabel}>{t('settings.workLocation')}</Text>
       <View style={styles.card}>
         {settings.workLocation ? (
           <>
             <Row
               icon="checkmark-circle"
               title={settings.workLocation.name}
-              subtitle={`${settings.workLocation.latitude.toFixed(5)}, ${settings.workLocation.longitude.toFixed(5)}  •  promień ${settings.workLocation.radius}m`}
+              subtitle={`${settings.workLocation.latitude.toFixed(5)}, ${settings.workLocation.longitude.toFixed(5)}  •  ${t('settings.radius')} ${settings.workLocation.radius}m`}
             />
             <View style={styles.divider} />
-            <Row
-              icon="refresh"
-              title="Ustaw bieżącą lokalizację"
-              subtitle="Zapisze Twoje obecne położenie jako pracę"
-              onPress={saveCurrentLocation}
-              right={savingLocation ? <ActivityIndicator size="small" /> : <Ionicons name="chevron-forward" size={16} color={COLORS.muted} />}
-            />
+            <Row icon="refresh" title={t('settings.setCurrentLocation')} subtitle={t('settings.setCurrentLocationDesc')} onPress={saveCurrentLocation} right={savingLocation ? <ActivityIndicator size="small" /> : <Ionicons name="chevron-forward" size={16} color={C.muted} />} />
             <View style={styles.divider} />
-            <Row
-              icon="trash"
-              title="Usuń lokalizację"
-              onPress={clearLocation}
-              right={<Ionicons name="chevron-forward" size={16} color={COLORS.muted} />}
-            />
+            <Row icon="trash" title={t('settings.deleteLocation')} onPress={clearLocation} right={<Ionicons name="chevron-forward" size={16} color={C.muted} />} />
           </>
         ) : (
-          <Row
-            icon="add-circle"
-            title="Ustaw lokalizację pracy"
-            subtitle="Przejdź do pracy i kliknij aby zapisać"
-            onPress={saveCurrentLocation}
-            right={
-              savingLocation
-                ? <ActivityIndicator size="small" />
-                : <Ionicons name="chevron-forward" size={16} color={COLORS.muted} />
-            }
-          />
+          <Row icon="add-circle" title={t('settings.addLocation')} subtitle={t('settings.addLocationDesc')} onPress={saveCurrentLocation} right={savingLocation ? <ActivityIndicator size="small" /> : <Ionicons name="chevron-forward" size={16} color={C.muted} />} />
         )}
       </View>
 
-      <Text style={styles.sectionLabel}>OPCJE</Text>
+      {/* Options */}
+      <Text style={styles.sectionLabel}>{t('settings.options')}</Text>
       <View style={styles.card}>
         <Row
           icon="car"
-          title="Śledzenie dojazdu"
-          subtitle="Mierz czas dojazdu do pracy"
-          right={
-            <Switch
-              value={settings.commuteTracking}
-              onValueChange={v => updateSettings({ commuteTracking: v })}
-              trackColor={{ true: COLORS.primary }}
-            />
-          }
+          title={t('settings.commuteTracking')}
+          subtitle={t('settings.commuteTrackingDesc')}
+          right={<Switch value={settings.commuteTracking} onValueChange={v => updateSettings({ commuteTracking: v })} trackColor={{ true: C.primary }} />}
         />
         <View style={styles.divider} />
         <Row
           icon="megaphone"
-          title="Reklamy (darmowa wersja)"
-          subtitle="Wyłącz aby przejść na wersję premium"
-          right={
-            <Switch
-              value={settings.showAds}
-              onValueChange={v => updateSettings({ showAds: v })}
-              trackColor={{ true: COLORS.primary }}
-            />
-          }
+          title={t('settings.ads')}
+          subtitle={t('settings.adsDesc')}
+          right={<Switch value={settings.showAds} onValueChange={v => updateSettings({ showAds: v })} trackColor={{ true: C.primary }} />}
         />
       </View>
 
-      <Text style={styles.sectionLabel}>O APLIKACJI</Text>
+      {/* About */}
+      <Text style={styles.sectionLabel}>{t('settings.about')}</Text>
       <View style={styles.card}>
-        <Row
-          icon="shield-checkmark"
-          title="Polityka prywatności"
-          subtitle="Jak chronimy Twoje dane"
-          onPress={() => Linking.openURL(PRIVACY_URL)}
-          right={<Ionicons name="open-outline" size={16} color={COLORS.muted} />}
-        />
+        <Row icon="shield-checkmark" title={t('settings.privacy')} subtitle={t('settings.privacyDesc')} onPress={() => Linking.openURL(PRIVACY_URL)} right={<Ionicons name="open-outline" size={16} color={C.muted} />} />
         <View style={styles.divider} />
-        <Row
-          icon="mail-outline"
-          title="Kontakt"
-          subtitle="turbanski824@gmail.com"
-          onPress={() => Linking.openURL('mailto:turbanski824@gmail.com')}
-          right={<Ionicons name="chevron-forward" size={16} color={COLORS.muted} />}
-        />
+        <Row icon="mail-outline" title={t('settings.contact')} subtitle="turbanski824@gmail.com" onPress={() => Linking.openURL('mailto:turbanski824@gmail.com')} right={<Ionicons name="chevron-forward" size={16} color={C.muted} />} />
       </View>
 
-      <Text style={styles.version}>WorkTime Tracker v1.0.0</Text>
+      <Text style={styles.version}>{t('settings.version')}</Text>
+
+      {/* Language picker modal */}
+      <Modal visible={langModal} transparent animationType="slide" onRequestClose={() => setLangModal(false)}>
+        <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPress={() => setLangModal(false)}>
+          <View style={styles.modalSheet}>
+            <View style={styles.modalHandle} />
+            <Text style={styles.modalTitle}>{t('settings.language')}</Text>
+            <FlatList
+              data={LANGUAGES}
+              keyExtractor={l => l.code}
+              renderItem={({ item }) => (
+                <TouchableOpacity style={[styles.langRow, i18n.language === item.code && styles.langRowActive]} onPress={() => selectLanguage(item.code)}>
+                  <Text style={styles.langFlag}>{item.flag}</Text>
+                  <View style={styles.langTexts}>
+                    <Text style={styles.langNative}>{item.native}</Text>
+                    <Text style={styles.langName}>{item.name}</Text>
+                  </View>
+                  {i18n.language === item.code && <Ionicons name="checkmark-circle" size={20} color={C.primary} />}
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.bg },
+  container: { flex: 1, backgroundColor: C.bg },
   content: { padding: 16, gap: 8 },
-  sectionLabel: {
-    fontSize: 11, fontWeight: '700', color: COLORS.muted,
-    letterSpacing: 1, paddingHorizontal: 4, marginTop: 8, marginBottom: 4,
-  },
-  card: {
-    backgroundColor: COLORS.card, borderRadius: 14,
-    shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2,
-    overflow: 'hidden',
-  },
-  divider: { height: 1, backgroundColor: COLORS.border, marginLeft: 56 },
-  row: {
-    flexDirection: 'row', alignItems: 'center', padding: 14, gap: 12,
-  },
-  rowIcon: {
-    width: 34, height: 34, borderRadius: 8, backgroundColor: '#EFF6FF',
-    alignItems: 'center', justifyContent: 'center',
-  },
+  sectionLabel: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 1, paddingHorizontal: 4, marginTop: 8, marginBottom: 4 },
+  card: { backgroundColor: C.card, borderRadius: 14, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2, overflow: 'hidden' },
+  divider: { height: 1, backgroundColor: C.border, marginLeft: 56 },
+  row: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 12 },
+  rowIcon: { width: 34, height: 34, borderRadius: 8, backgroundColor: '#EFF6FF', alignItems: 'center', justifyContent: 'center' },
   rowContent: { flex: 1 },
-  rowTitle: { fontSize: 15, fontWeight: '500', color: COLORS.text },
-  rowSubtitle: { fontSize: 12, color: COLORS.muted, marginTop: 2 },
-  version: { textAlign: 'center', fontSize: 12, color: COLORS.muted, marginTop: 16, marginBottom: 8 },
+  rowTitle: { fontSize: 15, fontWeight: '500', color: C.text },
+  rowSubtitle: { fontSize: 12, color: C.muted, marginTop: 2 },
   inputGroup: { paddingHorizontal: 14, paddingVertical: 10 },
-  inputLabel: { fontSize: 11, fontWeight: '700', color: COLORS.muted, letterSpacing: 0.5, marginBottom: 4, textTransform: 'uppercase' },
-  textInput: {
-    borderWidth: 1, borderColor: COLORS.border, borderRadius: 8,
-    paddingHorizontal: 12, paddingVertical: 9, fontSize: 15, color: COLORS.text,
-    backgroundColor: COLORS.bg,
-  },
-  saveBtn: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-    paddingVertical: 12, marginHorizontal: 14, marginBottom: 6,
-    borderRadius: 8, backgroundColor: '#EFF6FF',
-  },
-  saveBtnText: { fontSize: 14, fontWeight: '600', color: COLORS.primary },
+  inputLabel: { fontSize: 11, fontWeight: '700', color: C.muted, letterSpacing: 0.5, marginBottom: 4, textTransform: 'uppercase' },
+  textInput: { borderWidth: 1, borderColor: C.border, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 9, fontSize: 15, color: C.text, backgroundColor: C.bg },
+  saveBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 12, marginHorizontal: 14, marginBottom: 6, borderRadius: 8, backgroundColor: '#EFF6FF' },
+  saveBtnText: { fontSize: 14, fontWeight: '600', color: C.primary },
+  version: { textAlign: 'center', fontSize: 12, color: C.muted, marginTop: 16, marginBottom: 8 },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'flex-end' },
+  modalSheet: { backgroundColor: C.card, borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 16, paddingBottom: 32, maxHeight: '70%' },
+  modalHandle: { width: 40, height: 4, backgroundColor: C.border, borderRadius: 2, alignSelf: 'center', marginBottom: 16 },
+  modalTitle: { fontSize: 17, fontWeight: '700', color: C.text, textAlign: 'center', marginBottom: 12 },
+  langRow: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 10, gap: 12 },
+  langRowActive: { backgroundColor: '#EFF6FF' },
+  langFlag: { fontSize: 28 },
+  langTexts: { flex: 1 },
+  langNative: { fontSize: 16, fontWeight: '600', color: C.text },
+  langName: { fontSize: 12, color: C.muted },
 });

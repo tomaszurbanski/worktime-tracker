@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { useTimer } from '../hooks/useTimer';
 import { useLocation } from '../hooks/useLocation';
 import { useSettings } from '../hooks/useSettings';
@@ -16,6 +17,7 @@ const C = {
 };
 
 export default function HomeScreen() {
+  const { t } = useTranslation();
   const { settings } = useSettings();
   const { state, startWork, stopWork, startDelegation, stopDelegation, startCommute, stopCommute } = useTimer();
   const { isAtWork } = useLocation(settings.workLocation, settings.mode === 'auto');
@@ -29,17 +31,19 @@ export default function HomeScreen() {
   }, [isAtWork, settings.mode]);
 
   const statusLabel = state.isDelegating
-    ? (state.isWorking ? (state.isCommuting ? 'Delegacja – dojazd' : 'Delegacja – w pracy') : 'Delegacja – poza pracą')
-    : (state.isWorking ? (state.isCommuting ? 'W drodze do pracy' : 'W pracy') : 'Poza pracą');
+    ? (state.isWorking
+      ? (state.isCommuting ? t('home.status.delegationCommute') : t('home.status.delegationWork'))
+      : t('home.status.delegationOutside'))
+    : (state.isWorking
+      ? (state.isCommuting ? t('home.status.commuting') : t('home.status.atWork'))
+      : t('home.status.outsideWork'));
 
   const statusColor = state.isCommuting ? C.commute : state.isWorking ? C.work : state.isDelegating ? C.delegation : C.muted;
-
   const delDuration = formatDelegationDuration(state.delegationElapsed);
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
 
-      {/* Status */}
       <View style={styles.statusRow}>
         <View style={[styles.dot, { backgroundColor: statusColor }]} />
         <Text style={[styles.statusText, { color: statusColor }]}>{statusLabel}</Text>
@@ -51,58 +55,52 @@ export default function HomeScreen() {
         )}
       </View>
 
-      {/* Work timer */}
       <View style={styles.timerCard}>
-        <Text style={styles.timerLabel}>CZAS PRACY</Text>
+        <Text style={styles.timerLabel}>{t('home.workTime')}</Text>
         <Text style={[styles.timerValue, { color: state.isWorking ? C.work : C.muted }]}>
           {formatDuration(state.workElapsed)}
         </Text>
       </View>
 
-      {/* Delegation timer */}
       {state.isDelegating && (
         <View style={[styles.timerCard, { borderColor: C.delegation + '50', borderWidth: 2 }]}>
-          <Text style={styles.timerLabel}>CZAS DELEGACJI</Text>
+          <Text style={styles.timerLabel}>{t('home.delegationTime')}</Text>
           <Text style={[styles.timerValueDel, { color: C.delegation }]}>{delDuration.main}</Text>
           <Text style={styles.timerSub}>{delDuration.sub}</Text>
         </View>
       )}
 
-      {/* Main buttons row */}
       <View style={styles.buttonsRow}>
         {!state.isWorking ? (
-          <HoldButton icon="play-circle" label="ROZPOCZNIJ" color={C.work} onActivate={() => startWork('manual')} />
+          <HoldButton icon="play-circle" label={t('home.start')} color={C.work} onActivate={() => startWork('manual')} />
         ) : (
-          <HoldButton icon="stop-circle" label="ZAKOŃCZ" color={C.workStop} onActivate={stopWork} />
+          <HoldButton icon="stop-circle" label={t('home.stop')} color={C.workStop} onActivate={stopWork} />
         )}
-
         {!state.isDelegating ? (
-          <HoldButton icon="airplane" label="DELEGACJA" color={C.delegation} onActivate={startDelegation} />
+          <HoldButton icon="airplane" label={t('home.delegation')} color={C.delegation} onActivate={startDelegation} />
         ) : (
-          <HoldButton icon="airplane-outline" label="KONIEC DEL." color={C.delegationStop} onActivate={stopDelegation} />
+          <HoldButton icon="airplane-outline" label={t('home.stopDelegation')} color={C.delegationStop} onActivate={stopDelegation} />
         )}
       </View>
 
-      {/* Commute button - only visible when work is active */}
       {state.isWorking && (
         <View style={styles.commuteRow}>
           {!state.isCommuting ? (
-            <HoldButton icon="car" label="DOJAZD" color={C.commute} onActivate={startCommute} holdMs={1000} />
+            <HoldButton icon="car" label={t('home.commute')} color={C.commute} onActivate={startCommute} holdMs={1000} />
           ) : (
-            <HoldButton icon="car-outline" label="KONIEC DOJAZDU" color={C.commuteStop} onActivate={stopCommute} holdMs={1000} />
+            <HoldButton icon="car-outline" label={t('home.stopCommute')} color={C.commuteStop} onActivate={stopCommute} holdMs={1000} />
           )}
         </View>
       )}
 
-      {/* Hint */}
       <View style={styles.hintBox}>
         <Ionicons name="information-circle-outline" size={15} color={C.muted} />
         <Text style={styles.hintText}>
           {state.isDelegating
-            ? 'Delegacja aktywna — sesje pracy przypisane do delegacji automatycznie.'
+            ? t('home.hint.delegation')
             : state.isWorking
-            ? 'Przycisk Dojazd pojawia się podczas aktywnej pracy.'
-            : 'Przytrzymaj przycisk 1 sekundę aby aktywować.'}
+            ? t('home.hint.commute')
+            : t('home.hint.default')}
         </Text>
       </View>
 
@@ -134,13 +132,8 @@ const styles = StyleSheet.create({
   timerValue: { fontSize: 54, fontWeight: '700', letterSpacing: 2 },
   timerValueDel: { fontSize: 30, fontWeight: '700', textAlign: 'center' },
   timerSub: { fontSize: 13, color: C.delegation, fontWeight: '500', marginTop: 4, opacity: 0.85 },
-  buttonsRow: {
-    flexDirection: 'row', justifyContent: 'space-around',
-    width: '100%', paddingVertical: 8,
-  },
-  commuteRow: {
-    width: '100%', alignItems: 'center', paddingVertical: 4,
-  },
+  buttonsRow: { flexDirection: 'row', justifyContent: 'space-around', width: '100%', paddingVertical: 8 },
+  commuteRow: { width: '100%', alignItems: 'center', paddingVertical: 4 },
   hintBox: {
     flexDirection: 'row', alignItems: 'flex-start', gap: 8,
     backgroundColor: C.card, padding: 12, borderRadius: 12, width: '100%',
