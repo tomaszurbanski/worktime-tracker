@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTimer } from '../hooks/useTimer';
 import { useLocation } from '../hooks/useLocation';
 import { useSettings } from '../hooks/useSettings';
-import { formatDuration } from '../utils/formatters';
+import { formatDuration, formatDelegationDuration } from '../utils/formatters';
 import HoldButton from '../components/HoldButton';
 
 const COLORS = {
@@ -66,14 +66,16 @@ export default function HomeScreen() {
       </View>
 
       {/* Delegation timer (visible only when delegating) */}
-      {state.isDelegating && (
-        <View style={[styles.timerCard, styles.timerCardDel]}>
-          <Text style={styles.timerLabel}>Czas delegacji</Text>
-          <Text style={[styles.timerValue, { color: COLORS.delegation }]}>
-            {formatDuration(state.delegationElapsed)}
-          </Text>
-        </View>
-      )}
+      {state.isDelegating && (() => {
+        const { main, sub } = formatDelegationDuration(state.delegationElapsed);
+        return (
+          <View style={[styles.timerCard, styles.timerCardDel]}>
+            <Text style={styles.timerLabel}>CZAS DELEGACJI</Text>
+            <Text style={[styles.timerValueDel, { color: COLORS.delegation }]}>{main}</Text>
+            <Text style={styles.timerSub}>{sub}</Text>
+          </View>
+        );
+      })()}
 
       {/* Buttons */}
       <View style={styles.buttonsRow}>
@@ -151,6 +153,8 @@ const styles = StyleSheet.create({
   timerCardDel: { borderWidth: 2, borderColor: COLORS.delegation + '40' },
   timerLabel: { fontSize: 12, color: COLORS.muted, fontWeight: '500', marginBottom: 6, letterSpacing: 1 },
   timerValue: { fontSize: 56, fontWeight: '700', letterSpacing: 2 },
+  timerValueDel: { fontSize: 32, fontWeight: '700', letterSpacing: 1, textAlign: 'center' },
+  timerSub: { fontSize: 13, color: '#D97706', fontWeight: '500', marginTop: 4, opacity: 0.8 },
   buttonsRow: {
     flexDirection: 'row', justifyContent: 'space-around',
     width: '100%', paddingVertical: 16,

@@ -6,6 +6,28 @@ export const formatDuration = (ms: number): string => {
   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
+export const formatDelegationDuration = (ms: number): { main: string; sub: string } => {
+  const totalMinutes = Math.floor(ms / 60000);
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const minutes = totalMinutes % 60;
+
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const todayMs = Math.min(ms, Date.now() - todayStart);
+  const todayMin = Math.floor(todayMs / 60000);
+  const todayH = Math.floor(todayMin / 60);
+  const todayM = todayMin % 60;
+
+  const dayLabel = days === 1 ? '1 dzień' : days > 1 ? `${days} dni` : '';
+  const main = days > 0
+    ? `${dayLabel}  ${hours}h ${String(minutes).padStart(2, '0')}m`
+    : `${hours}h ${String(minutes).padStart(2, '0')}m`;
+
+  const sub = `Dziś: ${todayH}h ${String(todayM).padStart(2, '0')}m`;
+  return { main, sub };
+};
+
 export const formatShortDuration = (ms: number): string => {
   const totalMinutes = Math.floor(ms / 60000);
   const hours = Math.floor(totalMinutes / 60);
