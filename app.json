@@ -5,14 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.turbanski.worktimetracker",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Aplikacja używa GPS aby automatycznie wykryć wejście i wyjście z pracy.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Aplikacja używa GPS w tle aby automatycznie śledzić czas pracy.",
-        "NSLocationAlwaysUsageDescription": "Aplikacja używa GPS w tle aby automatycznie śledzić czas pracy."
+        "NSLocationWhenInUseUsageDescription": "WorkTime Tracker uses GPS to automatically detect when you arrive at or leave work.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "WorkTime Tracker uses GPS in the background to automatically track your work time.",
+        "NSLocationAlwaysUsageDescription": "WorkTime Tracker uses GPS in the background to automatically track your work time."
       }
     },
     "android": {
@@ -36,7 +36,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Aplikacja używa GPS aby automatycznie wykryć wejście i wyjście z pracy.",
+          "locationAlwaysAndWhenInUsePermission": "WorkTime Tracker uses GPS to automatically detect when you arrive at or leave work.",
           "isAndroidBackgroundLocationEnabled": true
         }
       ],
