@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy – WorkTime Tracker</title>
+  <style>
+    :root {
+      --primary: #2563EB;
+      --text: #1E293B;
+      --muted: #64748B;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --border: #E2E8F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    header { background: var(--primary); color: #fff; padding: 40px 24px 32px; text-align: center; }
+    header h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+    header p { opacity: 0.85; font-size: 15px; }
+    .lang-switch { display: flex; gap: 8px; justify-content: center; margin-top: 18px; }
+    .lang-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: #fff; padding: 6px 18px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: background 0.2s; }
+    .lang-btn.active, .lang-btn:hover { background: rgba(255,255,255,0.4); }
+    main { max-width: 720px; margin: 0 auto; padding: 32px 24px 64px; }
+    .section { background: var(--card); border-radius: 14px; padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); }
+    h2 { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    p { font-size: 14px; color: var(--text); margin-bottom: 10px; }
+    p:last-child { margin-bottom: 0; }
+    ul { padding-left: 20px; margin-bottom: 10px; }
+    li { font-size: 14px; margin-bottom: 6px; }
+    .badge { display: inline-block; background: #D1FAE5; color: #065F46; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+    .badge-warn { background: #FEF3C7; color: #92400E; }
+    .updated { text-align: center; font-size: 12px; color: var(--muted); margin-top: 32px; }
+    a { color: var(--primary); }
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>WorkTime Tracker</h1>
+  <p>Privacy Policy / Polityka Prywatności</p>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('pl')">Polski</button>
+    <button class="lang-btn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== POLISH ===== -->
+  <div data-lang="pl" class="visible">
+
+    <div class="section">
+      <span class="badge">Dane przechowywane lokalnie</span>
+      <h2>Informacje ogólne</h2>
+      <p>WorkTime Tracker to aplikacja mobilna służąca do rejestrowania czasu pracy. Twoje dane <strong>nigdy nie opuszczają Twojego urządzenia</strong> — nie są wysyłane na żadne serwery ani udostępniane osobom trzecim.</p>
+      <p>Deweloper: <strong>Tomasz Urbański</strong><br>Kontakt: <a href="mailto:turbanski824@gmail.com">turbanski824@gmail.com</a></p>
+    </div>
+
+    <div class="section">
+      <h2>Jakie dane zbieramy</h2>
+      <ul>
+        <li><strong>Imię i nazwisko oraz nazwa firmy</strong> — podawane dobrowolnie przez użytkownika, widoczne wyłącznie w generowanych raportach PDF. Nie są wysyłane nigdzie.</li>
+        <li><strong>Godziny pracy</strong> — czas rozpoczęcia i zakończenia sesji pracy, delegacji i dojazdów. Przechowywane lokalnie na urządzeniu.</li>
+        <li><strong>Lokalizacja GPS</strong> — <em>wyłącznie w trybie automatycznym (GPS)</em>. Lokalizacja używana jest jedynie do wykrycia, czy użytkownik jest w pobliżu miejsca pracy (geofencing). Precyzyjne współrzędne nie są zapisywane ani przesyłane.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Czego NIE robimy</h2>
+      <ul>
+        <li>Nie wysyłamy danych na serwery</li>
+        <li>Nie udostępniamy danych firmom trzecim</li>
+        <li>Nie prowadzimy analityki zachowania użytkownika</li>
+        <li>Nie wymagamy rejestracji ani konta online</li>
+        <li>Nie śledzimmy lokalizacji w tle poza trybem GPS</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Gdzie przechowywane są dane</h2>
+      <p>Wszystkie dane przechowywane są wyłącznie lokalnie na urządzeniu użytkownika, w zaszyfrowanej pamięci aplikacji (AsyncStorage / Expo SecureStore). Usunięcie aplikacji usuwa wszystkie dane.</p>
+    </div>
+
+    <div class="section">
+      <h2>Uprawnienia aplikacji</h2>
+      <ul>
+        <li><strong>Lokalizacja (kiedy aplikacja jest aktywna)</strong> — tylko w trybie GPS, do wykrywania wejścia/wyjścia z obszaru pracy.</li>
+        <li><strong>Lokalizacja w tle</strong> — opcjonalnie, jeśli użytkownik włączy tryb GPS i wyrazi zgodę.</li>
+        <li><strong>Plik i udostępnianie</strong> — do eksportu raportu PDF przez systemowy share sheet.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Prawa użytkownika</h2>
+      <p>Ponieważ dane przechowywane są wyłącznie lokalnie, masz pełną kontrolę:</p>
+      <ul>
+        <li>Edytujesz dane w Ustawieniach aplikacji</li>
+        <li>Usuwasz wpisy z Historii</li>
+        <li>Usuwasz wszystkie dane odinstalowując aplikację</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Dzieci</h2>
+      <p>Aplikacja nie jest przeznaczona dla dzieci poniżej 13. roku życia i nie zbiera świadomie danych od takich osób.</p>
+    </div>
+
+    <div class="section">
+      <h2>Zmiany polityki</h2>
+      <p>O istotnych zmianach informujemy przez aktualizację tej strony. Data ostatniej aktualizacji widoczna jest na dole.</p>
+    </div>
+
+  </div>
+
+  <!-- ===== ENGLISH ===== -->
+  <div data-lang="en">
+
+    <div class="section">
+      <span class="badge">Data stored locally only</span>
+      <h2>Overview</h2>
+      <p>WorkTime Tracker is a mobile application for recording work hours. Your data <strong>never leaves your device</strong> — it is not sent to any servers or shared with third parties.</p>
+      <p>Developer: <strong>Tomasz Urbański</strong><br>Contact: <a href="mailto:turbanski824@gmail.com">turbanski824@gmail.com</a></p>
+    </div>
+
+    <div class="section">
+      <h2>What data we collect</h2>
+      <ul>
+        <li><strong>Full name and company name</strong> — entered voluntarily by the user, visible only in exported PDF reports. Never transmitted anywhere.</li>
+        <li><strong>Work hours</strong> — start and end times of work sessions, business trips, and commutes. Stored locally on the device.</li>
+        <li><strong>GPS location</strong> — <em>only in automatic (GPS) mode</em>. Location is used solely to detect whether the user is near their workplace (geofencing). Precise coordinates are not stored or transmitted.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>What we do NOT do</h2>
+      <ul>
+        <li>We do not send data to servers</li>
+        <li>We do not share data with third parties</li>
+        <li>We do not track user behaviour or analytics</li>
+        <li>We do not require registration or an online account</li>
+        <li>We do not track location in the background outside GPS mode</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Data storage</h2>
+      <p>All data is stored exclusively on the user's device in the application's local storage (AsyncStorage). Uninstalling the app permanently deletes all data.</p>
+    </div>
+
+    <div class="section">
+      <h2>Permissions used</h2>
+      <ul>
+        <li><strong>Location (while app is in use)</strong> — GPS mode only, to detect entry/exit from the work area.</li>
+        <li><strong>Background location</strong> — optional, only if the user enables GPS mode and grants permission.</li>
+        <li><strong>File access / sharing</strong> — to export PDF reports via the system share sheet.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Your rights</h2>
+      <p>Since all data is stored locally, you have full control:</p>
+      <ul>
+        <li>Edit your data in the app Settings</li>
+        <li>Delete individual entries from History</li>
+        <li>Delete all data by uninstalling the app</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Children</h2>
+      <p>This app is not directed at children under 13 and does not knowingly collect data from such individuals.</p>
+    </div>
+
+    <div class="section">
+      <h2>Changes to this policy</h2>
+      <p>We will notify users of significant changes by updating this page. The last updated date appears below.</p>
+    </div>
+
+  </div>
+
+  <p class="updated">Last updated / Ostatnia aktualizacja: 6 czerwca 2025</p>
+
+</main>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('visible', el.dataset.lang === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', (i === 0 && lang === 'pl') || (i === 1 && lang === 'en'));
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import {
   View, Text, Switch, TouchableOpacity, StyleSheet,
-  ScrollView, Alert, ActivityIndicator, TextInput,
+  ScrollView, Alert, ActivityIndicator, TextInput, Linking,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSettings } from '../hooks/useSettings';
 import { useLocation } from '../hooks/useLocation';
+
+const PRIVACY_URL = 'https://tomaszurbanski.github.io/worktime-tracker/privacy';
 
 const COLORS = {
   primary: '#2563EB', bg: '#F8FAFC', card: '#FFFFFF',
@@ -210,6 +212,25 @@ export default function SettingsScreen() {
               trackColor={{ true: COLORS.primary }}
             />
           }
+        />
+      </View>
+
+      <Text style={styles.sectionLabel}>O APLIKACJI</Text>
+      <View style={styles.card}>
+        <Row
+          icon="shield-checkmark"
+          title="Polityka prywatności"
+          subtitle="Jak chronimy Twoje dane"
+          onPress={() => Linking.openURL(PRIVACY_URL)}
+          right={<Ionicons name="open-outline" size={16} color={COLORS.muted} />}
+        />
+        <View style={styles.divider} />
+        <Row
+          icon="mail-outline"
+          title="Kontakt"
+          subtitle="turbanski824@gmail.com"
+          onPress={() => Linking.openURL('mailto:turbanski824@gmail.com')}
+          right={<Ionicons name="chevron-forward" size={16} color={COLORS.muted} />}
         />
       </View>
 
