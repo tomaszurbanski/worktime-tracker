@@ -40,7 +40,6 @@
           "isAndroidBackgroundLocationEnabled": true
         }
       ],
-      "expo-mail-composer"
     ],
     "web": {
       "favicon": "./assets/favicon.png"
