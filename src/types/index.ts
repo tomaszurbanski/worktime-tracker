@@ -36,6 +36,8 @@ export interface AppSettings {
   showAds: boolean;
   userFullName?: string;
   companyName?: string;
+  notificationsEnabled: boolean;
+  workReminderTime?: string;  // "HH:MM" — daily reminder time, undefined = disabled
 }
 
 export interface TimerState {

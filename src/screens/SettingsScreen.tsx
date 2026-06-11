@@ -12,6 +12,11 @@ import { saveLanguage } from '../i18n';
 import i18n from '../i18n';
 import { useTheme, ThemeMode } from '../theme/ThemeContext';
 import { Colors } from '../theme/colors';
+import {
+  requestNotificationPermission,
+  scheduleWorkReminder,
+  cancelWorkReminder,
+} from '../hooks/useNotifications';
 
 const PRIVACY_URL = 'https://tomaszurbanski.github.io/worktime-tracker/privacy';
 
@@ -85,6 +90,7 @@ export default function SettingsScreen() {
   const [name, setName] = useState(settings.userFullName ?? '');
   const [company, setCompany] = useState(settings.companyName ?? '');
   const [langModal, setLangModal] = useState(false);
+  const [reminderTime, setReminderTime] = useState(settings.workReminderTime ?? '08:00');
   const currentLang = getLang(i18n.language);
 
   const toggleMode = () => {
@@ -114,6 +120,30 @@ export default function SettingsScreen() {
   const saveProfile = () => {
     updateSettings({ userFullName: name.trim(), companyName: company.trim() });
     Alert.alert(t('settings.saved'), t('settings.profileSaved'));
+  };
+
+  const toggleNotifications = async (value: boolean) => {
+    if (value) {
+      const ok = await requestNotificationPermission();
+      if (!ok) {
+        Alert.alert(t('settings.noPermission'), t('notifications.noPermission'));
+        return;
+      }
+    }
+    await updateSettings({ notificationsEnabled: value });
+    if (!value) await cancelWorkReminder();
+  };
+
+  const saveReminder = async () => {
+    const ok = await requestNotificationPermission();
+    if (!ok) { Alert.alert(t('settings.noPermission'), t('notifications.noPermission')); return; }
+    if (!/^\d{1,2}:\d{2}$/.test(reminderTime)) {
+      Alert.alert(t('common.error'), t('notifications.invalidTime'));
+      return;
+    }
+    await updateSettings({ workReminderTime: reminderTime });
+    await scheduleWorkReminder(reminderTime);
+    Alert.alert(t('settings.saved'), t('notifications.reminderSaved', { time: reminderTime }));
   };
 
   const selectLanguage = async (code: string) => {
@@ -240,6 +270,38 @@ export default function SettingsScreen() {
           subtitle={t('settings.adsDesc')}
           right={<Switch value={settings.showAds} onValueChange={v => updateSettings({ showAds: v })} trackColor={{ true: C.primary }} />}
         />
+      </View>
+
+      {/* Notifications */}
+      <Text style={styles.sectionLabel}>{t('notifications.section')}</Text>
+      <View style={styles.card}>
+        <Row
+          icon="notifications"
+          title={t('notifications.enable')}
+          subtitle={t('notifications.enableDesc')}
+          right={<Switch value={!!settings.notificationsEnabled} onValueChange={toggleNotifications} trackColor={{ true: C.primary }} />}
+        />
+        {settings.notificationsEnabled && (
+          <>
+            <View style={styles.divider} />
+            <View style={styles.inputGroup}>
+              <Text style={styles.inputLabel}>{t('notifications.reminderTime')}</Text>
+              <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+                <TextInput
+                  style={[styles.textInput, { flex: 1 }]}
+                  value={reminderTime}
+                  onChangeText={setReminderTime}
+                  placeholder="08:00"
+                  placeholderTextColor={C.muted}
+                  keyboardType="numeric"
+                />
+                <TouchableOpacity style={[styles.saveBtn, { flex: 0, paddingHorizontal: 16 }]} onPress={saveReminder}>
+                  <Text style={styles.saveBtnText}>{t('common.save')}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </>
+        )}
       </View>
 
       {/* About */}

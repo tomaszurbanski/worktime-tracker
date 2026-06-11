@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -14,11 +15,18 @@ import HistoryScreen from './src/screens/HistoryScreen';
 import StatsScreen from './src/screens/StatsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import LoginScreen from './src/screens/LoginScreen';
+import AddDelegationScreen from './src/screens/AddDelegationScreen';
 import { getSettings } from './src/utils/storage';
 import { loadSavedLanguage } from './src/i18n';
 import { ThemeProvider, useTheme } from './src/theme/ThemeContext';
 
+export type RootStackParamList = {
+  MainTabs: undefined;
+  AddDelegation: undefined;
+};
+
 const Tab = createBottomTabNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 function MainTabs() {
   const { t } = useTranslation();
@@ -53,6 +61,7 @@ function MainTabs() {
 
 function AppInner() {
   const { colors: C } = useTheme();
+  const { t } = useTranslation();
   const [ready, setReady] = useState(false);
   const [needsLogin, setNeedsLogin] = useState(false);
 
@@ -79,7 +88,21 @@ function AppInner() {
           <LoginScreen onDone={() => setNeedsLogin(false)} />
         ) : (
           <NavigationContainer>
-            <MainTabs />
+            <RootStack.Navigator screenOptions={{ headerShown: false }}>
+              <RootStack.Screen name="MainTabs" component={MainTabs} />
+              <RootStack.Screen
+                name="AddDelegation"
+                component={AddDelegationScreen}
+                options={{
+                  presentation: 'modal',
+                  headerShown: true,
+                  headerStyle: { backgroundColor: C.tabBar },
+                  headerTitleStyle: { fontWeight: '700', fontSize: 18, color: C.text },
+                  headerTintColor: C.primary,
+                  title: t('history.addDelegation'),
+                }}
+              />
+            </RootStack.Navigator>
           </NavigationContainer>
         )}
       </SafeAreaProvider>

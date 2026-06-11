@@ -1,12 +1,17 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { TimerState, WorkSession } from '../types';
-import { addSession, updateSession, getSessions } from '../utils/storage';
+import { addSession, updateSession, getSessions, getSettings } from '../utils/storage';
+import { useNotifications } from './useNotifications';
 
 const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 export { TimerState };
 
 export const useTimer = () => {
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  useEffect(() => { getSettings().then(s => setNotificationsEnabled(!!s.notificationsEnabled)); }, []);
+  const { notifyWorkStarted, notifyWorkStopped } = useNotifications(notificationsEnabled);
+
   const [state, setState] = useState<TimerState>({
     isWorking: false,
     workStart: null,
@@ -63,7 +68,8 @@ export const useTimer = () => {
     await addSession(session);
     workSessionId.current = id;
     setState(prev => ({ ...prev, isWorking: true, workStart: now, workElapsed: 0 }));
-  }, [state.isWorking, state.isDelegating, forceCloseAnyActive]);
+    notifyWorkStarted();
+  }, [state.isWorking, state.isDelegating, forceCloseAnyActive, notifyWorkStarted]);
 
   const stopWork = useCallback(async () => {
     if (!state.isWorking || !workSessionId.current) return;
@@ -78,8 +84,10 @@ export const useTimer = () => {
       await updateSession(workSessionId.current, { endTime: now });
     }
     workSessionId.current = null;
+    const elapsed = state.workStart ? Date.now() - state.workStart : 0;
     setState(prev => ({ ...prev, isWorking: false, workStart: null, isCommuting: false, commuteStart: null }));
-  }, [state.isWorking, state.isCommuting, state.commuteStart]);
+    notifyWorkStopped(elapsed);
+  }, [state.isWorking, state.isCommuting, state.commuteStart, state.workStart, notifyWorkStopped]);
 
   const startDelegation = useCallback(async () => {
     if (state.isDelegating) return;

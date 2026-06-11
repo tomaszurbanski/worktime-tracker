@@ -8,6 +8,7 @@ const DEFAULT_SETTINGS: AppSettings = {
   mode: 'manual',
   commuteTracking: false,
   showAds: true,
+  notificationsEnabled: false,
 };
 
 export const getSessions = async (): Promise<WorkSession[]> => {

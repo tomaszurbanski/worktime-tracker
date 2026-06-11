@@ -45,6 +45,15 @@
           "isAndroidBackgroundLocationEnabled": true
         }
       ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#2563EB",
+          "sounds": []
+        }
+      ],
+      "expo-localization"
     ],
     "web": {
       "favicon": "./assets/favicon.png"

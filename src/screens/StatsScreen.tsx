@@ -7,7 +7,8 @@ import { WorkSession } from '../types';
 import { getSessions } from '../utils/storage';
 import { useSettings } from '../hooks/useSettings';
 import { formatShortDuration, getSessionDuration, getMonthName } from '../utils/formatters';
-import { exportToPDF } from '../utils/export';
+import { exportToPDF, exportToCSV } from '../utils/export';
+import DailyBarChart from '../components/DailyBarChart';
 import { useTheme } from '../theme/ThemeContext';
 import { Colors } from '../theme/colors';
 
@@ -73,8 +74,12 @@ const makeStyles = (C: Colors) => StyleSheet.create({
   delegationRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: C.border },
   delegationText: { fontSize: 13, color: C.warning, fontWeight: '500' },
   exportBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, backgroundColor: C.primary, padding: 16, borderRadius: 14, shadowColor: C.primary, shadowOpacity: 0.25, shadowRadius: 8, elevation: 3 },
-  exportBtnDisabled: { backgroundColor: C.muted },
+  exportBtnCsv: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, backgroundColor: C.card, padding: 16, borderRadius: 14, borderWidth: 1, borderColor: C.primary },
+  exportBtnDisabled: { backgroundColor: C.muted, borderColor: C.muted },
   exportText: { color: '#fff', fontSize: 15, fontWeight: '600', flexShrink: 1 },
+  exportTextCsv: { color: C.primary, fontSize: 15, fontWeight: '600', flexShrink: 1 },
+  exportRow: { flexDirection: 'row', gap: 10 },
+  chartCard: { backgroundColor: C.card, borderRadius: 16, padding: 16, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2 },
   empty: { alignItems: 'center', paddingVertical: 32, gap: 8 },
   emptyText: { fontSize: 15, color: C.muted },
 });
@@ -89,6 +94,7 @@ export default function StatsScreen() {
   const [customFrom, setCustomFrom] = useState('');
   const [customTo, setCustomTo] = useState('');
   const [exporting, setExporting] = useState(false);
+  const [exportingCsv, setExportingCsv] = useState(false);
 
   useFocusEffect(useCallback(() => { getSessions().then(setAllSessions); }, []));
 
@@ -131,6 +137,20 @@ export default function StatsScreen() {
       Alert.alert(t('common.error'), t('stats.exportError'));
     } finally {
       setExporting(false);
+    }
+  };
+
+  const handleExportCsv = async () => {
+    const range = getRange();
+    if (!range) { Alert.alert(t('common.error'), t('stats.invalidDates')); return; }
+    if (filtered.length === 0) { Alert.alert(t('stats.noData'), t('stats.noEntries')); return; }
+    setExportingCsv(true);
+    try {
+      await exportToCSV(filtered, range.label, settings);
+    } catch {
+      Alert.alert(t('common.error'), t('stats.exportCsvError'));
+    } finally {
+      setExportingCsv(false);
     }
   };
 
@@ -192,16 +212,37 @@ export default function StatsScreen() {
             )}
           </View>
 
-          <TouchableOpacity
-            style={[styles.exportBtn, filtered.length === 0 && styles.exportBtnDisabled]}
-            onPress={handleExport}
-            disabled={exporting || filtered.length === 0}
-          >
-            {exporting ? <ActivityIndicator color="#fff" /> : <Ionicons name="document-text-outline" size={20} color="#fff" />}
-            <Text style={styles.exportText}>
-              {exporting ? t('stats.generating') : `${t('stats.exportPdf')} (${t('stats.entries', { count: filtered.length })})`}
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.sectionLabel}>{t('stats.chartTitle')}</Text>
+          <View style={styles.chartCard}>
+            <DailyBarChart sessions={filtered} from={range.from} to={range.to} />
+          </View>
+
+          <Text style={styles.sectionLabel}>{t('stats.export')}</Text>
+          <View style={styles.exportRow}>
+            <TouchableOpacity
+              style={[styles.exportBtn, { flex: 1 }, (filtered.length === 0) && styles.exportBtnDisabled]}
+              onPress={handleExport}
+              disabled={exporting || filtered.length === 0}
+            >
+              {exporting ? <ActivityIndicator color="#fff" /> : <Ionicons name="document-text-outline" size={20} color="#fff" />}
+              <Text style={styles.exportText} numberOfLines={1}>
+                {exporting ? t('stats.generating') : 'PDF'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.exportBtnCsv, { flex: 1 }, (filtered.length === 0) && styles.exportBtnDisabled]}
+              onPress={handleExportCsv}
+              disabled={exportingCsv || filtered.length === 0}
+            >
+              {exportingCsv ? <ActivityIndicator color={C.primary} /> : <Ionicons name="grid-outline" size={20} color={filtered.length === 0 ? '#fff' : C.primary} />}
+              <Text style={[styles.exportTextCsv, filtered.length === 0 && { color: '#fff' }]} numberOfLines={1}>
+                {exportingCsv ? t('stats.generatingCsv') : 'CSV'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={[styles.sectionLabel, { textAlign: 'center', marginTop: -4 }]}>
+            {t('stats.entries', { count: filtered.length })}
+          </Text>
         </>
       )}
 

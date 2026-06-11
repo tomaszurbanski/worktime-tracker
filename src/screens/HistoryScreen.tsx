@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { WorkSession } from '../types';
@@ -8,6 +9,7 @@ import { getSessions, deleteSession, updateSession } from '../utils/storage';
 import { formatDateShort, formatTime, formatShortDuration, getSessionDuration } from '../utils/formatters';
 import { useTheme } from '../theme/ThemeContext';
 import { Colors } from '../theme/colors';
+import { RootStackParamList } from '../../App';
 
 type Filter = 'all' | 'work' | 'delegation';
 
@@ -53,7 +55,8 @@ const buildGroups = (sessions: WorkSession[], filter: Filter): DayGroup[] => {
 
 const makeStyles = (C: Colors) => StyleSheet.create({
   container: { flex: 1, backgroundColor: C.bg },
-  filterRow: { flexDirection: 'row', padding: 10, gap: 8, backgroundColor: C.card, borderBottomWidth: 1, borderBottomColor: C.border },
+  filterRow: { flexDirection: 'row', padding: 10, gap: 8, paddingRight: 60, backgroundColor: C.card, borderBottomWidth: 1, borderBottomColor: C.border },
+  fab: { position: 'absolute', top: 8, right: 10, width: 40, height: 40, borderRadius: 20, backgroundColor: C.primary, alignItems: 'center', justifyContent: 'center', shadowColor: C.primary, shadowOpacity: 0.4, shadowRadius: 8, elevation: 4 },
   filterBtn: { flex: 1, paddingVertical: 8, borderRadius: 8, backgroundColor: C.bg, alignItems: 'center', borderWidth: 1, borderColor: C.border },
   filterBtnActive: { backgroundColor: C.primary, borderColor: C.primary },
   filterText: { fontSize: 13, fontWeight: '500', color: C.text },
@@ -169,6 +172,7 @@ export default function HistoryScreen() {
   const { t } = useTranslation();
   const { colors: C } = useTheme();
   const styles = useMemo(() => makeStyles(C), [C]);
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [groups, setGroups] = useState<DayGroup[]>([]);
   const [filter, setFilter] = useState<Filter>('all');
 
@@ -205,6 +209,9 @@ export default function HistoryScreen() {
             <Text style={[styles.filterText, filter === f.key && styles.filterTextActive]}>{f.label}</Text>
           </TouchableOpacity>
         ))}
+        <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate('AddDelegation')}>
+          <Ionicons name="add" size={22} color="#fff" />
+        </TouchableOpacity>
       </View>
 
       {groups.length === 0 ? (

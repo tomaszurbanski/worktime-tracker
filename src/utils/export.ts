@@ -1,5 +1,6 @@
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
+import * as FileSystem from 'expo-file-system/legacy';
 import { WorkSession, AppSettings } from '../types';
 import { formatDateFull, formatTime, formatShortDuration, getSessionDuration } from './formatters';
 import i18n from '../i18n';
@@ -200,6 +201,64 @@ const buildHtml = (sessions: WorkSession[], rangeLabel: string, settings: AppSet
   <div class="footer">${p('footer')} &middot; ${generatedFull}</div>
 </body>
 </html>`;
+};
+
+export const exportToCSV = async (sessions: WorkSession[], rangeLabel: string, settings: AppSettings): Promise<void> => {
+  const lang = i18n.language;
+  const userName = settings.userFullName || '';
+  const company = settings.companyName || '';
+
+  const escapeCSV = (val: string | number | undefined): string => {
+    if (val === undefined || val === null) return '';
+    const s = String(val);
+    if (s.includes(',') || s.includes('"') || s.includes('\n')) return `"${s.replace(/"/g, '""')}"`;
+    return s;
+  };
+
+  const header = ['Date', 'Start', 'End', 'Duration (min)', 'Type', 'Mode', 'Commute (min)', 'Destination', 'Purpose', 'Distance (km)', 'Note'].join(',');
+
+  const rows = [...sessions]
+    .sort((a, b) => a.startTime - b.startTime)
+    .map(s => {
+      const date = new Date(s.startTime).toLocaleDateString(lang);
+      const start = formatTime(s.startTime);
+      const end = s.endTime ? formatTime(s.endTime) : '';
+      const durationMin = Math.floor(getSessionDuration(s.startTime, s.endTime) / 60000);
+      const type = s.delegation?.isTrip ? 'delegation' : s.type;
+      const mode = s.mode;
+      const commuteMin = s.commuteStartTime
+        ? Math.floor(getSessionDuration(s.commuteStartTime, s.commuteEndTime) / 60000)
+        : 0;
+      const dest = s.delegation?.destination ?? '';
+      const purpose = s.delegation?.purpose ?? '';
+      const dist = s.delegation?.distance ?? '';
+      const note = s.note ?? '';
+      return [date, start, end, durationMin, type, mode, commuteMin, dest, purpose, dist, note]
+        .map(escapeCSV).join(',');
+    });
+
+  const metaLines = [
+    `# WorkTime Tracker — Export`,
+    `# ${i18n.t('pdf.employee')}: ${userName}${company ? ' / ' + company : ''}`,
+    `# ${i18n.t('pdf.period')}: ${rangeLabel}`,
+    `# ${i18n.t('pdf.generated')}: ${new Date().toLocaleString(lang)}`,
+    '',
+  ].join('\n');
+
+  const csv = metaLines + header + '\n' + rows.join('\n');
+  const fileName = `worktime_${rangeLabel.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
+  const fileUri = `${FileSystem.cacheDirectory}${fileName}`;
+
+  await FileSystem.writeAsStringAsync(fileUri, csv, { encoding: FileSystem.EncodingType.UTF8 });
+
+  const canShare = await Sharing.isAvailableAsync();
+  if (canShare) {
+    await Sharing.shareAsync(fileUri, {
+      mimeType: 'text/csv',
+      dialogTitle: i18n.t('stats.exportCsv'),
+      UTI: 'public.comma-separated-values-text',
+    });
+  }
 };
 
 export const exportToPDF = async (sessions: WorkSession[], rangeLabel: string, settings: AppSettings): Promise<void> => {

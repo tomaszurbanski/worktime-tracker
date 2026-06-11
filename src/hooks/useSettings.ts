@@ -7,6 +7,7 @@ export const useSettings = () => {
     mode: 'manual',
     commuteTracking: false,
     showAds: true,
+    notificationsEnabled: false,
   });
   const [loading, setLoading] = useState(true);
 
