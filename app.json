@@ -8,6 +8,7 @@
     "userInterfaceStyle": "automatic",
     "primaryColor": "#2563EB",
     "privacyPolicyUrl": "https://tuautomation.de/privacy-worktimer.html",
+    "description": "Track your work hours with one hold. GPS auto-starts when you arrive at work. Separate timers for business trips and commutes. Export PDF & CSV reports instantly.",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -16,12 +17,14 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.turbanski.worktimetracker",
+      "buildNumber": "1",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "WorkTime Tracker uses your location to detect when you arrive at or leave your workplace and to log work sessions."
       }
     },
     "android": {
       "package": "com.turbanski.worktimetracker",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#2563EB",
         "foregroundImage": "./assets/android-icon-foreground.png",
