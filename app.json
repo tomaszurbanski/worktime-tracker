@@ -6,6 +6,8 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
+    "primaryColor": "#2563EB",
+    "privacyPolicyUrl": "https://tuautomation.de/privacy-worktimer.html",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -15,9 +17,7 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.turbanski.worktimetracker",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "WorkTime Tracker uses GPS to automatically detect when you arrive at or leave work.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "WorkTime Tracker uses GPS in the background to automatically track your work time.",
-        "NSLocationAlwaysUsageDescription": "WorkTime Tracker uses GPS in the background to automatically track your work time."
+        "NSLocationWhenInUseUsageDescription": "WorkTime Tracker uses your location to detect when you arrive at or leave your workplace and to log work sessions."
       }
     },
     "android": {
@@ -31,18 +31,14 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_BACKGROUND_LOCATION",
-        "FOREGROUND_SERVICE",
-        "FOREGROUND_SERVICE_LOCATION"
+        "ACCESS_COARSE_LOCATION"
       ]
     },
     "plugins": [
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "WorkTime Tracker uses GPS to automatically detect when you arrive at or leave work.",
-          "isAndroidBackgroundLocationEnabled": true
+          "locationWhenInUsePermission": "WorkTime Tracker uses your location to detect when you arrive at or leave your workplace and to log work sessions."
         }
       ],
       [
