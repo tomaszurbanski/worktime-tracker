@@ -9,14 +9,14 @@
     hint: { delegation: 'Командировката е активна — сесиите се свързват автоматично.', commute: 'Бутонът Пътуване се появява при активна работа.', default: 'Задръжте бутона 1 секунда за активиране.' },
   },
   history: {
-    title: 'История', all: 'Всички', work: 'Работа', delegations: 'Командировки', empty: 'Няма записи',
+    title: 'История', addDelegation: 'Нова командировка', all: 'Всички', work: 'Работа', delegations: 'Командировки', empty: 'Няма записи',
     inDelegation: 'в командировка', withCommute: 'с пътуване', delegation: 'КОМАНДИРОВКА', workLabel: 'Работа:',
     deleteTitle: 'Изтрий запис', deleteConfirm: 'Сигурни ли сте, че искате да изтриете този запис?', endingNow: '– сега',
   },
   stats: {
     title: 'Статистика', timeRange: 'ПЕРИОД', thisWeek: 'Тази седмица', thisMonth: 'Този месец', lastMonth: 'Миналия месец', thisYear: 'Тази година', custom: 'Персонализиран',
     summary: 'ОБОБЩЕНИЕ', total: 'Общо', workDays: 'Работни дни', avgPerDay: 'Средно / ден',
-    delegations: '{{count}} командировки за периода', exportPdf: 'Експорт PDF отчет', generating: 'Генериране на PDF...', entries: '{{count}} записа',
+    delegations: '{{count}} командировки за периода', exportPdf: 'Експорт PDF отчет', generating: 'Генериране на PDF...', exportCsv: 'Експорт CSV', generatingCsv: 'Генериране на CSV...', exportCsvError: 'Неуспешно генериране на CSV файл.', chartTitle: 'ДНЕВНА ДИАГРАМА', export: 'ЕКСПОРТ', entries: '{{count}} записа',
     empty: 'Няма записи за периода', fromDate: 'От (ДД.ММ.ГГГГ)', toDate: 'До (ДД.ММ.ГГГГ)',
     invalidDates: 'Въведете валидни дати (ДД.ММ.ГГГГ).', noData: 'Няма данни', noEntries: 'Няма записи за избрания период.', exportError: 'Неуспешно генериране на PDF отчет.',
   },
@@ -33,6 +33,8 @@
     language_section: 'ЕЗИК', language: 'Език на приложението', about: 'ЗА ПРИЛОЖЕНИЕТО', privacy: 'Политика за поверителност', privacyDesc: 'Как защитаваме вашите данни',
     contact: 'Контакт', version: 'WorkTime Tracker v1.0.0', locationWork: 'Работа', radius: 'радиус', rtlRestart: 'Превключването на арабски изисква рестартиране на приложението.', theme_section: 'ОФОРМЛЕНИЕ', theme: 'Тема', themeSystem: 'Системна', themeLight: 'Светла', themeDark: 'Тъмна',
   },
+  delegation: { basicData: 'ОСНОВНИ ДАННИ', destination: 'Дестинация', destinationRequired: 'Моля въведете дестинация.', purpose: 'Цел / задача', time: 'ВРЕМЕ', date: 'Дата (ДД.ММ.ГГГГ)', startTime: 'Начален час', endTime: 'Краен час', details: 'ДЕТАЙЛИ', location: 'Местоположение', locationPlaceholder: 'Адрес или GPS координати', distance: 'Разстояние (км)', note: 'Бележка', notePlaceholder: 'Допълнителна информация...', save: 'ЗАПАЗИ КОМАНДИРОВКА', saved: 'Командировката е запазена.', invalidDate: 'Невалиден формат на дата (ДД.ММ.ГГГГ).', endBeforeStart: 'Крайният час трябва да е след началния час.' },
+  notifications: { section: 'ИЗВЕСТИЯ', enable: 'Известия', enableDesc: 'Сигнали за начало и край на работа', noPermission: 'Приложението се нуждае от разрешение за известия.', reminderTime: 'Дневно напомняне (HH:MM)', reminderSaved: 'Напомнянето е зададено за {{time}}.', invalidTime: 'Въведете час в HH:MM формат.', reminderTitle: 'Работно време! ⏰', reminderBody: 'Не забравяйте да стартирате таймера.', startedTitle: 'Работата е започната ✅', startedBody: 'Таймерът работи. Успех!', stoppedTitle: 'Работата е приключена 🏁', stoppedBody: 'Работихте {{duration}} днес. Браво!' },
   login: { welcome: 'Добре дошли! Въведете данните си за начало.', namePlaceholder: 'напр. Иван Петров', nameRequired: 'Пълното име е задължително.', companyOptional: 'Компания (по избор)', companyPlaceholder: 'напр. Акме ЕООД', hint: 'Данните ви ще се показват в PDF отчетите. Могат да се променят в Настройки.', start: 'Започни' },
   pdf: {
     title: 'Отчет за работно време', employee: 'Служител', company: 'Компания', period: 'Период', generated: 'Генериран на',

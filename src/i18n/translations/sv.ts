@@ -9,14 +9,14 @@
     hint: { delegation: 'Tjänsteresa aktiv — sessioner länkas automatiskt.', commute: 'Pendlingsknappen visas under aktiv arbetstid.', default: 'Håll knappen intryckt i 1 sekund för att aktivera.' },
   },
   history: {
-    title: 'Historik', all: 'Alla', work: 'Arbete', delegations: 'Tjänsteresor', empty: 'Inga poster',
+    title: 'Historik', addDelegation: 'Ny tjänsteresa', all: 'Alla', work: 'Arbete', delegations: 'Tjänsteresor', empty: 'Inga poster',
     inDelegation: 'på tjänsteresa', withCommute: 'med pendling', delegation: 'TJÄNSTERESA', workLabel: 'Arbete:',
     deleteTitle: 'Ta bort post', deleteConfirm: 'Vill du verkligen ta bort den här posten?', endingNow: '– nu',
   },
   stats: {
     title: 'Statistik', timeRange: 'TIDSPERIOD', thisWeek: 'Den här veckan', thisMonth: 'Den här månaden', lastMonth: 'Förra månaden', thisYear: 'Det här året', custom: 'Anpassad',
     summary: 'SAMMANFATTNING', total: 'Totalt', workDays: 'Arbetsdagar', avgPerDay: 'Medel / dag',
-    delegations: '{{count}} tjänsteresor under perioden', exportPdf: 'Exportera PDF-rapport', generating: 'Genererar PDF...', entries: '{{count}} poster',
+    delegations: '{{count}} tjänsteresor under perioden', exportPdf: 'Exportera PDF-rapport', generating: 'Genererar PDF...', exportCsv: 'Exportera CSV', generatingCsv: 'Genererar CSV...', exportCsvError: 'Det gick inte att skapa CSV-filen.', chartTitle: 'DAGLIGT DIAGRAM', export: 'EXPORTERA', entries: '{{count}} poster',
     empty: 'Inga poster under den här perioden', fromDate: 'Från (DD.MM.ÅÅÅÅ)', toDate: 'Till (DD.MM.ÅÅÅÅ)',
     invalidDates: 'Ange giltiga datum (DD.MM.ÅÅÅÅ).', noData: 'Inga data', noEntries: 'Inga poster för den valda perioden.', exportError: 'Det gick inte att generera PDF-rapporten.',
   },
@@ -33,6 +33,8 @@
     language_section: 'SPRÅK', language: 'Appspråk', about: 'OM APPEN', privacy: 'Integritetspolicy', privacyDesc: 'Hur vi skyddar dina uppgifter',
     contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Arbete', radius: 'radie', rtlRestart: 'Byte till arabiska kräver omstart av appen.', theme_section: 'UTSEENDE', theme: 'Apptema', themeSystem: 'System', themeLight: 'Ljust', themeDark: 'Mörkt',
   },
+  delegation: { basicData: 'GRUNDUPPGIFTER', destination: 'Destination', destinationRequired: 'Ange en destination.', purpose: 'Syfte / uppgift', time: 'TID', date: 'Datum (DD.MM.ÅÅÅÅ)', startTime: 'Starttid', endTime: 'Sluttid', details: 'DETALJER', location: 'Plats', locationPlaceholder: 'Adress eller GPS-koordinater', distance: 'Avstånd (km)', note: 'Anteckning', notePlaceholder: 'Ytterligare information...', save: 'SPARA TJÄNSTERESA', saved: 'Tjänsteresa sparad.', invalidDate: 'Ogiltigt datumformat (DD.MM.ÅÅÅÅ).', endBeforeStart: 'Sluttiden måste vara efter starttiden.' },
+  notifications: { section: 'AVISERINGAR', enable: 'Aviseringar', enableDesc: 'Varningar för arbetsstart och -stopp', noPermission: 'Appen behöver aviserings­behörighet.', reminderTime: 'Daglig påminnelse (HH:MM)', reminderSaved: 'Påminnelse inställd på {{time}}.', invalidTime: 'Ange tid i HH:MM-format.', reminderTitle: 'Dags att jobba! ⏰', reminderBody: 'Kom ihåg att starta timern.', startedTitle: 'Arbete startat ✅', startedBody: 'Timern körs. Lycka till!', stoppedTitle: 'Arbete avslutat 🏁', stoppedBody: 'Du jobbade {{duration}} idag. Bra jobbat!' },
   login: { welcome: 'Välkommen! Ange dina uppgifter för att komma igång.', namePlaceholder: 't.ex. Anna Johansson', nameRequired: 'Fullständigt namn krävs.', companyOptional: 'Företag (valfritt)', companyPlaceholder: 't.ex. Acme AB', hint: 'Dina uppgifter visas i exporterade PDF-rapporter. Kan ändras i Inställningar.', start: 'Kom igång' },
   pdf: {
     title: 'Arbetstidsrapport', employee: 'Anställd', company: 'Företag', period: 'Period', generated: 'Genererad',

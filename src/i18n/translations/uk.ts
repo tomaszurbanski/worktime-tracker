@@ -9,14 +9,14 @@
     hint: { delegation: 'Відрядження активне — сесії прив\'язані автоматично.', commute: 'Кнопка «Дорога» з\'являється під час активної роботи.', default: 'Утримуйте кнопку 1 секунду для активації.' },
   },
   history: {
-    title: 'Історія', all: 'Всі', work: 'Робота', delegations: 'Відрядження', empty: 'Немає записів',
+    title: 'Історія', addDelegation: 'Нове відрядження', all: 'Всі', work: 'Робота', delegations: 'Відрядження', empty: 'Немає записів',
     inDelegation: 'у відрядженні', withCommute: 'з дорогою', delegation: 'ВІДРЯДЖЕННЯ', workLabel: 'Робота:',
     deleteTitle: 'Видалити запис', deleteConfirm: 'Ви впевнені, що хочете видалити цей запис?', endingNow: '– зараз',
   },
   stats: {
     title: 'Статистика', timeRange: 'ПЕРІОД', thisWeek: 'Цей тиждень', thisMonth: 'Цей місяць', lastMonth: 'Минулий місяць', thisYear: 'Цей рік', custom: 'Довільний',
     summary: 'ПІДСУМОК', total: 'Всього', workDays: 'Робочих днів', avgPerDay: 'Середнє / день',
-    delegations: '{{count}} відрядження за період', exportPdf: 'Експорт PDF звіту', generating: 'Створення PDF...', entries: '{{count}} записів',
+    delegations: '{{count}} відрядження за період', exportPdf: 'Експорт PDF звіту', generating: 'Створення PDF...', exportCsv: 'Експорт CSV', generatingCsv: 'Створення CSV...', exportCsvError: 'Не вдалося створити CSV файл.', chartTitle: 'ДЕННА ДІАГРАМА', export: 'ЕКСПОРТ', entries: '{{count}} записів',
     empty: 'Немає записів за цей період', fromDate: 'Від (ДД.ММ.РРРР)', toDate: 'До (ДД.ММ.РРРР)',
     invalidDates: 'Введіть коректні дати (ДД.ММ.РРРР).', noData: 'Немає даних', noEntries: 'Немає записів за обраний період.', exportError: 'Не вдалося створити PDF звіт.',
   },
@@ -33,6 +33,8 @@
     language_section: 'МОВА', language: 'Мова застосунку', about: 'ПРО ЗАСТОСУНОК', privacy: 'Політика конфіденційності', privacyDesc: 'Як ми захищаємо ваші дані',
     contact: 'Контакт', version: 'WorkTime Tracker v1.0.0', locationWork: 'Робота', radius: 'радіус', rtlRestart: 'Перехід на арабську потребує перезапуску застосунку.', theme_section: 'ОФОРМЛЕННЯ', theme: 'Тема', themeSystem: 'Системна', themeLight: 'Світла', themeDark: 'Темна',
   },
+  delegation: { basicData: 'ОСНОВНІ ДАНІ', destination: 'Пункт призначення', destinationRequired: 'Вкажіть пункт призначення.', purpose: 'Мета / завдання', time: 'ЧАС', date: 'Дата (ДД.ММ.РРРР)', startTime: 'Час початку', endTime: 'Час завершення', details: 'ДЕТАЛІ', location: 'Місце', locationPlaceholder: 'Адреса або координати GPS', distance: 'Відстань (км)', note: 'Примітка', notePlaceholder: 'Додаткова інформація...', save: 'ЗБЕРЕГТИ ВІДРЯДЖЕННЯ', saved: 'Відрядження збережено.', invalidDate: 'Невірний формат дати (ДД.ММ.РРРР).', endBeforeStart: 'Час завершення має бути після часу початку.' },
+  notifications: { section: 'СПОВІЩЕННЯ', enable: 'Сповіщення', enableDesc: 'Сповіщення про початок і кінець роботи', noPermission: 'Додатку потрібен дозвіл на сповіщення.', reminderTime: 'Щоденне нагадування (ГГ:ХХ)', reminderSaved: 'Нагадування встановлено на {{time}}.', invalidTime: 'Введіть час у форматі ГГ:ХХ.', reminderTitle: 'Час працювати! ⏰', reminderBody: 'Не забудьте запустити таймер.', startedTitle: 'Роботу розпочато ✅', startedBody: 'Таймер запущено. Успіхів!', stoppedTitle: 'Роботу завершено 🏁', stoppedBody: 'Сьогодні ви працювали {{duration}}. Чудова робота!' },
   login: { welcome: 'Ласкаво просимо! Введіть свої дані для початку роботи.', namePlaceholder: 'напр. Іван Петренко', nameRequired: 'Ім\'я та прізвище обов\'язкові.', companyOptional: 'Компанія (необов\'язково)', companyPlaceholder: 'напр. ТОВ «Компанія»', hint: 'Ваші дані з\'являться у PDF звітах. Змінити можна в Налаштуваннях.', start: 'Почати' },
   pdf: {
     title: 'Звіт робочого часу', employee: 'Співробітник', company: 'Компанія', period: 'Період', generated: 'Створено',

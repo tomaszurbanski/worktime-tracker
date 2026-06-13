@@ -9,14 +9,14 @@
     hint: { delegation: 'Perjalanan dinas aktif — sesi kerja terhubung otomatis.', commute: 'Tombol Komuter muncul saat kerja aktif.', default: 'Tahan tombol 1 detik untuk mengaktifkan.' },
   },
   history: {
-    title: 'Riwayat', all: 'Semua', work: 'Kerja', delegations: 'Perjalanan Dinas', empty: 'Tidak ada entri',
+    title: 'Riwayat', addDelegation: 'Perjalanan dinas baru', all: 'Semua', work: 'Kerja', delegations: 'Perjalanan Dinas', empty: 'Tidak ada entri',
     inDelegation: 'dalam perjalanan dinas', withCommute: 'dengan komuter', delegation: 'PERJALANAN DINAS', workLabel: 'Kerja:',
     deleteTitle: 'Hapus entri', deleteConfirm: 'Yakin ingin menghapus entri ini?', endingNow: '– sekarang',
   },
   stats: {
     title: 'Statistik', timeRange: 'RENTANG WAKTU', thisWeek: 'Minggu ini', thisMonth: 'Bulan ini', lastMonth: 'Bulan lalu', thisYear: 'Tahun ini', custom: 'Kustom',
     summary: 'RINGKASAN', total: 'Total', workDays: 'Hari kerja', avgPerDay: 'Rata-rata / hari',
-    delegations: '{{count}} perjalanan dinas dalam periode ini', exportPdf: 'Ekspor laporan PDF', generating: 'Membuat PDF...', entries: '{{count}} entri',
+    delegations: '{{count}} perjalanan dinas dalam periode ini', exportPdf: 'Ekspor laporan PDF', generating: 'Membuat PDF...', exportCsv: 'Ekspor CSV', generatingCsv: 'Membuat CSV...', exportCsvError: 'Gagal membuat file CSV.', chartTitle: 'GRAFIK HARIAN', export: 'EKSPOR', entries: '{{count}} entri',
     empty: 'Tidak ada entri dalam periode ini', fromDate: 'Dari (DD.MM.YYYY)', toDate: 'Hingga (DD.MM.YYYY)',
     invalidDates: 'Masukkan tanggal yang valid.', noData: 'Tidak ada data', noEntries: 'Tidak ada entri dalam periode yang dipilih.', exportError: 'Gagal membuat laporan PDF.',
   },
@@ -33,6 +33,8 @@
     language_section: 'BAHASA', language: 'Bahasa aplikasi', about: 'TENTANG', privacy: 'Kebijakan privasi', privacyDesc: 'Cara kami melindungi data Anda',
     contact: 'Kontak', version: 'WorkTime Tracker v1.0.0', locationWork: 'Kerja', radius: 'radius', rtlRestart: 'Beralih ke bahasa Arab memerlukan restart aplikasi.', theme_section: 'TAMPILAN', theme: 'Tema', themeSystem: 'Sistem', themeLight: 'Terang', themeDark: 'Gelap',
   },
+  delegation: { basicData: 'DATA DASAR', destination: 'Tujuan', destinationRequired: 'Harap masukkan tujuan.', purpose: 'Tujuan / tugas', time: 'WAKTU', date: 'Tanggal (DD.MM.YYYY)', startTime: 'Waktu mulai', endTime: 'Waktu selesai', details: 'DETAIL', location: 'Lokasi', locationPlaceholder: 'Alamat atau koordinat GPS', distance: 'Jarak (km)', note: 'Catatan', notePlaceholder: 'Informasi tambahan...', save: 'SIMPAN PERJALANAN', saved: 'Perjalanan telah disimpan.', invalidDate: 'Format tanggal tidak valid (DD.MM.YYYY).', endBeforeStart: 'Waktu selesai harus setelah waktu mulai.' },
+  notifications: { section: 'NOTIFIKASI', enable: 'Notifikasi', enableDesc: 'Peringatan mulai dan selesai kerja', noPermission: 'Aplikasi membutuhkan izin notifikasi.', reminderTime: 'Pengingat harian (HH:MM)', reminderSaved: 'Pengingat diatur untuk {{time}}.', invalidTime: 'Masukkan waktu dalam format HH:MM.', reminderTitle: 'Waktunya bekerja! ⏰', reminderBody: 'Jangan lupa mulai timer Anda.', startedTitle: 'Kerja dimulai ✅', startedBody: 'Timer berjalan. Semangat!', stoppedTitle: 'Kerja selesai 🏁', stoppedBody: 'Anda bekerja {{duration}} hari ini. Kerja bagus!' },
   login: { welcome: 'Selamat datang! Masukkan data Anda untuk memulai.', namePlaceholder: 'mis. Budi Santoso', nameRequired: 'Nama lengkap wajib diisi.', companyOptional: 'Perusahaan (opsional)', companyPlaceholder: 'mis. PT Contoh', hint: 'Data Anda akan muncul dalam laporan PDF yang diekspor. Dapat diubah di Pengaturan.', start: 'Mulai' },
   pdf: {
     title: 'Laporan Waktu Kerja', employee: 'Karyawan', company: 'Perusahaan', period: 'Periode', generated: 'Dibuat pada',

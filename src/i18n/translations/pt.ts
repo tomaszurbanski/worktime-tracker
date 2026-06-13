@@ -9,14 +9,14 @@
     hint: { delegation: 'Deslocamento ativo — sessões vinculadas automaticamente.', commute: 'O botão Trajeto aparece durante o trabalho ativo.', default: 'Mantenha o botão por 1 segundo para ativar.' },
   },
   history: {
-    title: 'Histórico', all: 'Todos', work: 'Trabalho', delegations: 'Deslocamentos', empty: 'Sem entradas',
+    title: 'Histórico', addDelegation: 'Nova viagem', all: 'Todos', work: 'Trabalho', delegations: 'Deslocamentos', empty: 'Sem entradas',
     inDelegation: 'em deslocamento', withCommute: 'com trajeto', delegation: 'DESLOCAMENTO', workLabel: 'Trabalho:',
     deleteTitle: 'Excluir entrada', deleteConfirm: 'Tem certeza que deseja excluir esta entrada?', endingNow: '– agora',
   },
   stats: {
     title: 'Estatísticas', timeRange: 'PERÍODO', thisWeek: 'Esta semana', thisMonth: 'Este mês', lastMonth: 'Mês passado', thisYear: 'Este ano', custom: 'Personalizado',
     summary: 'RESUMO', total: 'Total', workDays: 'Dias trabalhados', avgPerDay: 'Méd. / dia',
-    delegations: '{{count}} deslocamentos neste período', exportPdf: 'Exportar relatório PDF', generating: 'Gerando PDF...', entries: '{{count}} entradas',
+    delegations: '{{count}} deslocamentos neste período', exportPdf: 'Exportar relatório PDF', generating: 'Gerando PDF...', exportCsv: 'Exportar CSV', generatingCsv: 'Gerando CSV...', exportCsvError: 'Falha ao gerar o arquivo CSV.', chartTitle: 'GRÁFICO DIÁRIO', export: 'EXPORTAR', entries: '{{count}} entradas',
     empty: 'Sem entradas neste período', fromDate: 'De (DD.MM.AAAA)', toDate: 'Até (DD.MM.AAAA)',
     invalidDates: 'Insira datas válidas (DD.MM.AAAA).', noData: 'Sem dados', noEntries: 'Sem entradas no período selecionado.', exportError: 'Falha ao gerar o relatório PDF.',
   },
@@ -33,6 +33,8 @@
     language_section: 'IDIOMA', language: 'Idioma do app', about: 'SOBRE', privacy: 'Política de privacidade', privacyDesc: 'Como protegemos seus dados',
     contact: 'Contato', version: 'WorkTime Tracker v1.0.0', locationWork: 'Trabalho', radius: 'raio', rtlRestart: 'Mudar para árabe requer reiniciar o app.', theme_section: 'APARÊNCIA', theme: 'Tema', themeSystem: 'Sistema', themeLight: 'Claro', themeDark: 'Escuro',
   },
+  delegation: { basicData: 'DADOS BÁSICOS', destination: 'Destino', destinationRequired: 'Por favor insira um destino.', purpose: 'Propósito / tarefa', time: 'HORÁRIO', date: 'Data (DD.MM.AAAA)', startTime: 'Hora de início', endTime: 'Hora de fim', details: 'DETALHES', location: 'Localização', locationPlaceholder: 'Endereço ou coordenadas GPS', distance: 'Distância (km)', note: 'Nota', notePlaceholder: 'Informações adicionais...', save: 'SALVAR VIAGEM', saved: 'Viagem salva.', invalidDate: 'Formato de data inválido (DD.MM.AAAA).', endBeforeStart: 'A hora de fim deve ser após a hora de início.' },
+  notifications: { section: 'NOTIFICAÇÕES', enable: 'Notificações', enableDesc: 'Alertas de início e fim de trabalho', noPermission: 'O app precisa de permissão de notificação.', reminderTime: 'Lembrete diário (HH:MM)', reminderSaved: 'Lembrete definido para {{time}}.', invalidTime: 'Insira a hora no formato HH:MM.', reminderTitle: 'Hora de trabalhar! ⏰', reminderBody: 'Lembre-se de iniciar seu cronômetro.', startedTitle: 'Trabalho iniciado ✅', startedBody: 'Cronômetro rodando. Boa sorte!', stoppedTitle: 'Trabalho concluído 🏁', stoppedBody: 'Você trabalhou {{duration}} hoje. Ótimo trabalho!' },
   login: { welcome: 'Bem-vindo! Insira seus dados para começar.', namePlaceholder: 'ex. João Silva', nameRequired: 'O nome completo é obrigatório.', companyOptional: 'Empresa (opcional)', companyPlaceholder: 'ex. Acme Ltda.', hint: 'Seus dados aparecerão nos relatórios PDF exportados. Você pode alterá-los nas Configurações.', start: 'Começar' },
   pdf: {
     title: 'Relatório de Tempo de Trabalho', employee: 'Funcionário', company: 'Empresa', period: 'Período', generated: 'Gerado em',

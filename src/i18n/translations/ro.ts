@@ -9,14 +9,14 @@
     hint: { delegation: 'Deplasare activă — sesiunile sunt legate automat.', commute: 'Butonul Navetă apare în timpul muncii active.', default: 'Țineți butonul 1 secundă pentru a activa.' },
   },
   history: {
-    title: 'Istoric', all: 'Toate', work: 'Muncă', delegations: 'Deplasări', empty: 'Nicio înregistrare',
+    title: 'Istoric', addDelegation: 'Deplasare nouă', all: 'Toate', work: 'Muncă', delegations: 'Deplasări', empty: 'Nicio înregistrare',
     inDelegation: 'în deplasare', withCommute: 'cu navetă', delegation: 'DEPLASARE', workLabel: 'Muncă:',
     deleteTitle: 'Șterge înregistrarea', deleteConfirm: 'Sigur doriți să ștergeți această înregistrare?', endingNow: '– acum',
   },
   stats: {
     title: 'Statistici', timeRange: 'INTERVAL', thisWeek: 'Săptămâna aceasta', thisMonth: 'Luna aceasta', lastMonth: 'Luna trecută', thisYear: 'Anul acesta', custom: 'Personalizat',
     summary: 'REZUMAT', total: 'Total', workDays: 'Zile de muncă', avgPerDay: 'Med. / zi',
-    delegations: '{{count}} deplasări în această perioadă', exportPdf: 'Export raport PDF', generating: 'Se generează PDF...', entries: '{{count}} înregistrări',
+    delegations: '{{count}} deplasări în această perioadă', exportPdf: 'Export raport PDF', generating: 'Se generează PDF...', exportCsv: 'Exportă CSV', generatingCsv: 'Se generează CSV...', exportCsvError: 'Eșec la generarea fișierului CSV.', chartTitle: 'GRAFIC ZILNIC', export: 'EXPORT', entries: '{{count}} înregistrări',
     empty: 'Nicio înregistrare în această perioadă', fromDate: 'De la (ZZ.LL.AAAA)', toDate: 'Până la (ZZ.LL.AAAA)',
     invalidDates: 'Introduceți date valide (ZZ.LL.AAAA).', noData: 'Fără date', noEntries: 'Nicio înregistrare în perioada selectată.', exportError: 'Generarea raportului PDF a eșuat.',
   },
@@ -33,6 +33,8 @@
     language_section: 'LIMBĂ', language: 'Limba aplicației', about: 'DESPRE', privacy: 'Politica de confidențialitate', privacyDesc: 'Cum vă protejăm datele',
     contact: 'Contact', version: 'WorkTime Tracker v1.0.0', locationWork: 'Muncă', radius: 'rază', rtlRestart: 'Trecerea la arabă necesită repornirea aplicației.', theme_section: 'ASPECT', theme: 'Temă', themeSystem: 'Sistem', themeLight: 'Deschis', themeDark: 'Întunecat',
   },
+  delegation: { basicData: 'DATE DE BAZĂ', destination: 'Destinație', destinationRequired: 'Introduceți o destinație.', purpose: 'Scop / sarcină', time: 'TIMP', date: 'Data (ZZ.LL.AAAA)', startTime: 'Ora de start', endTime: 'Ora de sfârșit', details: 'DETALII', location: 'Locație', locationPlaceholder: 'Adresă sau coordonate GPS', distance: 'Distanță (km)', note: 'Notă', notePlaceholder: 'Informații suplimentare...', save: 'SALVEAZĂ DEPLASAREA', saved: 'Deplasarea a fost salvată.', invalidDate: 'Format dată invalid (ZZ.LL.AAAA).', endBeforeStart: 'Ora de sfârșit trebuie să fie după ora de start.' },
+  notifications: { section: 'NOTIFICĂRI', enable: 'Notificări', enableDesc: 'Alerte de start și stop lucru', noPermission: 'Aplicația are nevoie de permisiunea pentru notificări.', reminderTime: 'Reminder zilnic (HH:MM)', reminderSaved: 'Reminder setat pentru {{time}}.', invalidTime: 'Introduceți ora în format HH:MM.', reminderTitle: 'Timp de lucru! ⏰', reminderBody: 'Nu uitați să porniți cronometrul.', startedTitle: 'Lucru început ✅', startedBody: 'Cronometru rulează. Mult succes!', stoppedTitle: 'Lucru terminat 🏁', stoppedBody: 'Ați lucrat {{duration}} astăzi. Bine făcut!' },
   login: { welcome: 'Bun venit! Introduceți datele pentru a începe.', namePlaceholder: 'ex. Ion Popescu', nameRequired: 'Numele complet este obligatoriu.', companyOptional: 'Companie (opțional)', companyPlaceholder: 'ex. Acme SRL', hint: 'Datele dvs. vor apărea în rapoartele PDF exportate. Pot fi modificate în Setări.', start: 'Începeți' },
   pdf: {
     title: 'Raport timp de muncă', employee: 'Angajat', company: 'Companie', period: 'Perioadă', generated: 'Generat la',

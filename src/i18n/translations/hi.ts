@@ -9,14 +9,14 @@
     hint: { delegation: 'यात्रा सक्रिय — कार्य सत्र स्वचालित रूप से जुड़े हैं।', commute: 'आवागमन बटन सक्रिय कार्य के दौरान दिखाई देता है।', default: 'सक्रिय करने के लिए बटन को 1 सेकंड दबाए रखें।' },
   },
   history: {
-    title: 'इतिहास', all: 'सभी', work: 'काम', delegations: 'यात्राएं', empty: 'कोई प्रविष्टि नहीं',
+    title: 'इतिहास', addDelegation: 'नई यात्रा', all: 'सभी', work: 'काम', delegations: 'यात्राएं', empty: 'कोई प्रविष्टि नहीं',
     inDelegation: 'यात्रा में', withCommute: 'आवागमन के साथ', delegation: 'यात्रा', workLabel: 'काम:',
     deleteTitle: 'प्रविष्टि हटाएं', deleteConfirm: 'क्या आप इस प्रविष्टि को हटाना चाहते हैं?', endingNow: '– अभी',
   },
   stats: {
     title: 'आँकड़े', timeRange: 'समय अवधि', thisWeek: 'इस सप्ताह', thisMonth: 'इस महीने', lastMonth: 'पिछला महीना', thisYear: 'इस साल', custom: 'कस्टम',
     summary: 'सारांश', total: 'कुल', workDays: 'कार्य दिवस', avgPerDay: 'औसत / दिन',
-    delegations: 'इस अवधि में {{count}} यात्राएं', exportPdf: 'PDF रिपोर्ट निर्यात करें', generating: 'PDF बन रही है...', entries: '{{count}} प्रविष्टियां',
+    delegations: 'इस अवधि में {{count}} यात्राएं', exportPdf: 'PDF रिपोर्ट निर्यात करें', generating: 'PDF बन रही है...', exportCsv: 'CSV निर्यात करें', generatingCsv: 'CSV बन रही है...', exportCsvError: 'CSV फ़ाइल बनाने में विफल।', chartTitle: 'दैनिक चार्ट', export: 'निर्यात', entries: '{{count}} प्रविष्टियां',
     empty: 'इस अवधि में कोई प्रविष्टि नहीं', fromDate: 'से (DD.MM.YYYY)', toDate: 'तक (DD.MM.YYYY)',
     invalidDates: 'मान्य तिथियां दर्ज करें।', noData: 'कोई डेटा नहीं', noEntries: 'चुनी गई अवधि में कोई प्रविष्टि नहीं।', exportError: 'PDF रिपोर्ट बनाने में विफल।',
   },
@@ -33,6 +33,8 @@
     language_section: 'भाषा', language: 'ऐप की भाषा', about: 'ऐप के बारे में', privacy: 'गोपनीयता नीति', privacyDesc: 'हम आपका डेटा कैसे सुरक्षित रखते हैं',
     contact: 'संपर्क', version: 'WorkTime Tracker v1.0.0', locationWork: 'काम', radius: 'दायरा', rtlRestart: 'अरबी में बदलने के लिए ऐप को पुनः आरंभ करना होगा।', theme_section: 'स्वरूप', theme: 'थीम', themeSystem: 'सिस्टम', themeLight: 'हल्का', themeDark: 'गहरा',
   },
+  delegation: { basicData: 'मूल डेटा', destination: 'गंतव्य', destinationRequired: 'कृपया गंतव्य दर्ज करें।', purpose: 'उद्देश्य / कार्य', time: 'समय', date: 'दिनांक (DD.MM.YYYY)', startTime: 'प्रारंभ समय', endTime: 'समाप्ति समय', details: 'विवरण', location: 'स्थान', locationPlaceholder: 'पता या GPS निर्देशांक', distance: 'दूरी (km)', note: 'नोट', notePlaceholder: 'अतिरिक्त जानकारी...', save: 'यात्रा सहेजें', saved: 'यात्रा सहेजी गई।', invalidDate: 'अमान्य दिनांक प्रारूप।', endBeforeStart: 'समाप्ति समय प्रारंभ समय के बाद होना चाहिए।' },
+  notifications: { section: 'सूचनाएं', enable: 'सूचनाएं', enableDesc: 'कार्य शुरू और बंद होने की अलर्ट', noPermission: 'ऐप को सूचना अनुमति चाहिए।', reminderTime: 'दैनिक अनुस्मारक (HH:MM)', reminderSaved: '{{time}} के लिए अनुस्मारक सेट किया।', invalidTime: 'HH:MM प्रारूप में समय दर्ज करें।', reminderTitle: 'काम का समय! ⏰', reminderBody: 'अपना टाइमर शुरू करना न भूलें।', startedTitle: 'काम शुरू ✅', startedBody: 'टाइमर चल रहा है। शुभकामनाएं!', stoppedTitle: 'काम खत्म 🏁', stoppedBody: 'आपने आज {{duration}} काम किया। बढ़िया!' },
   login: { welcome: 'स्वागत है! शुरू करने के लिए अपना विवरण दर्ज करें।', namePlaceholder: 'जैसे राजेश कुमार', nameRequired: 'पूरा नाम आवश्यक है।', companyOptional: 'कंपनी (वैकल्पिक)', companyPlaceholder: 'जैसे एक्मे प्राइवेट लिमिटेड', hint: 'आपका विवरण निर्यात की गई PDF रिपोर्ट में दिखाई देगा। सेटिंग्स में बाद में बदला जा सकता है।', start: 'शुरू करें' },
   pdf: {
     title: 'कार्य समय रिपोर्ट', employee: 'कर्मचारी', company: 'कंपनी', period: 'अवधि', generated: 'बनाई गई',

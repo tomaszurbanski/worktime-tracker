@@ -9,14 +9,14 @@
     hint: { delegation: 'Trasferta attiva — le sessioni vengono collegate automaticamente.', commute: 'Il pulsante Tragitto appare durante il lavoro attivo.', default: 'Tieni premuto il pulsante 1 secondo per attivare.' },
   },
   history: {
-    title: 'Cronologia', all: 'Tutto', work: 'Lavoro', delegations: 'Trasferte', empty: 'Nessuna voce',
+    title: 'Cronologia', addDelegation: 'Nuovo viaggio', all: 'Tutto', work: 'Lavoro', delegations: 'Trasferte', empty: 'Nessuna voce',
     inDelegation: 'in trasferta', withCommute: 'con tragitto', delegation: 'TRASFERTA', workLabel: 'Lavoro:',
     deleteTitle: 'Elimina voce', deleteConfirm: 'Vuoi davvero eliminare questa voce?', endingNow: '– adesso',
   },
   stats: {
     title: 'Statistiche', timeRange: 'PERIODO', thisWeek: 'Questa settimana', thisMonth: 'Questo mese', lastMonth: 'Mese scorso', thisYear: 'Quest\'anno', custom: 'Personalizzato',
     summary: 'RIEPILOGO', total: 'Totale', workDays: 'Giorni lavorativi', avgPerDay: 'Media / giorno',
-    delegations: '{{count}} trasferte in questo periodo', exportPdf: 'Esporta rapporto PDF', generating: 'Generazione PDF...', entries: '{{count}} voci',
+    delegations: '{{count}} trasferte in questo periodo', exportPdf: 'Esporta rapporto PDF', generating: 'Generazione PDF...', exportCsv: 'Esporta CSV', generatingCsv: 'Generazione CSV...', exportCsvError: 'Impossibile generare il file CSV.', chartTitle: 'GRAFICO GIORNALIERO', export: 'ESPORTA', entries: '{{count}} voci',
     empty: 'Nessuna voce in questo periodo', fromDate: 'Da (GG.MM.AAAA)', toDate: 'A (GG.MM.AAAA)',
     invalidDates: 'Inserisci date valide (GG.MM.AAAA).', noData: 'Nessun dato', noEntries: 'Nessuna voce nel periodo selezionato.', exportError: 'Impossibile generare il rapporto PDF.',
   },
@@ -33,6 +33,8 @@
     language_section: 'LINGUA', language: 'Lingua dell\'app', about: 'INFORMAZIONI', privacy: 'Informativa sulla privacy', privacyDesc: 'Come proteggiamo i tuoi dati',
     contact: 'Contatto', version: 'WorkTime Tracker v1.0.0', locationWork: 'Lavoro', radius: 'raggio', rtlRestart: 'Il passaggio all\'arabo richiede il riavvio dell\'app.', theme_section: 'ASPETTO', theme: 'Tema', themeSystem: 'Sistema', themeLight: 'Chiaro', themeDark: 'Scuro',
   },
+  delegation: { basicData: 'DATI DI BASE', destination: 'Destinazione', destinationRequired: 'Inserire una destinazione.', purpose: 'Scopo / attività', time: 'ORARIO', date: 'Data (GG.MM.AAAA)', startTime: 'Ora di inizio', endTime: 'Ora di fine', details: 'DETTAGLI', location: 'Luogo', locationPlaceholder: 'Indirizzo o coordinate GPS', distance: 'Distanza (km)', note: 'Note', notePlaceholder: 'Informazioni aggiuntive...', save: 'SALVA VIAGGIO', saved: 'Viaggio salvato.', invalidDate: 'Formato data non valido (GG.MM.AAAA).', endBeforeStart: "L'ora di fine deve essere dopo l'ora di inizio." },
+  notifications: { section: 'NOTIFICHE', enable: 'Notifiche', enableDesc: 'Avvisi di inizio e fine lavoro', noPermission: "L'app ha bisogno del permesso per le notifiche.", reminderTime: 'Promemoria giornaliero (HH:MM)', reminderSaved: 'Promemoria impostato per {{time}}.', invalidTime: "Inserisci l'ora in formato HH:MM.", reminderTitle: 'È ora di lavorare! ⏰', reminderBody: 'Ricordati di avviare il timer.', startedTitle: 'Lavoro iniziato ✅', startedBody: 'Timer attivo. Buon lavoro!', stoppedTitle: 'Lavoro terminato 🏁', stoppedBody: 'Hai lavorato {{duration}} oggi. Ottimo!' },
   login: { welcome: 'Benvenuto! Inserisci i tuoi dati per iniziare.', namePlaceholder: 'es. Mario Rossi', nameRequired: 'Il nome completo è obbligatorio.', companyOptional: 'Azienda (facoltativo)', companyPlaceholder: 'es. Acme S.r.l.', hint: 'I tuoi dati appariranno nei rapporti PDF esportati. Puoi modificarli nelle Impostazioni.', start: 'Inizia' },
   pdf: {
     title: 'Rapporto ore di lavoro', employee: 'Dipendente', company: 'Azienda', period: 'Periodo', generated: 'Generato il',

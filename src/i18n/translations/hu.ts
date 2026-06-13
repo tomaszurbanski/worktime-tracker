@@ -9,14 +9,14 @@
     hint: { delegation: 'Kiküldetés aktív — a munkamenetek automatikusan kapcsolódnak.', commute: 'Az Ingázás gomb aktív munka közben jelenik meg.', default: 'Tartsa nyomva a gombot 1 másodpercig az aktiváláshoz.' },
   },
   history: {
-    title: 'Előzmények', all: 'Összes', work: 'Munka', delegations: 'Kiküldetések', empty: 'Nincs bejegyzés',
+    title: 'Előzmények', addDelegation: 'Új kiküldetés', all: 'Összes', work: 'Munka', delegations: 'Kiküldetések', empty: 'Nincs bejegyzés',
     inDelegation: 'kiküldetésen', withCommute: 'ingázással', delegation: 'KIKÜLDETÉS', workLabel: 'Munka:',
     deleteTitle: 'Bejegyzés törlése', deleteConfirm: 'Biztosan törli ezt a bejegyzést?', endingNow: '– most',
   },
   stats: {
     title: 'Statisztika', timeRange: 'IDŐSZAK', thisWeek: 'Ezen a héten', thisMonth: 'Ebben a hónapban', lastMonth: 'Múlt hónapban', thisYear: 'Ebben az évben', custom: 'Egyéni',
     summary: 'ÖSSZEFOGLALÓ', total: 'Összesen', workDays: 'Munkanapok', avgPerDay: 'Átlag / nap',
-    delegations: '{{count}} kiküldetés ebben az időszakban', exportPdf: 'PDF-jelentés exportálása', generating: 'PDF generálása...', entries: '{{count}} bejegyzés',
+    delegations: '{{count}} kiküldetés ebben az időszakban', exportPdf: 'PDF-jelentés exportálása', generating: 'PDF generálása...', exportCsv: 'CSV exportálása', generatingCsv: 'CSV létrehozása...', exportCsvError: 'A CSV fájl létrehozása sikertelen.', chartTitle: 'NAPI DIAGRAM', export: 'EXPORTÁLÁS', entries: '{{count}} bejegyzés',
     empty: 'Nincs bejegyzés ebben az időszakban', fromDate: 'Tól (NN.HH.ÉÉÉÉ)', toDate: 'Ig (NN.HH.ÉÉÉÉ)',
     invalidDates: 'Adjon meg érvényes dátumokat (NN.HH.ÉÉÉÉ).', noData: 'Nincs adat', noEntries: 'Nincs bejegyzés a kiválasztott időszakban.', exportError: 'Nem sikerült létrehozni a PDF-jelentést.',
   },
@@ -33,6 +33,8 @@
     language_section: 'NYELV', language: 'Az app nyelve', about: 'AZ APPRÓL', privacy: 'Adatvédelmi irányelvek', privacyDesc: 'Hogyan védjük adatait',
     contact: 'Kapcsolat', version: 'WorkTime Tracker v1.0.0', locationWork: 'Munka', radius: 'sugár', rtlRestart: 'Az arabra váltáshoz az app újraindítása szükséges.', theme_section: 'MEGJELENÉS', theme: 'Téma', themeSystem: 'Rendszer', themeLight: 'Világos', themeDark: 'Sötét',
   },
+  delegation: { basicData: 'ALAPADATOK', destination: 'Úticél', destinationRequired: 'Adja meg az úticélt.', purpose: 'Cél / feladat', time: 'IDŐ', date: 'Dátum (NN.HH.ÉÉÉÉ)', startTime: 'Kezdési idő', endTime: 'Befejezési idő', details: 'RÉSZLETEK', location: 'Helyszín', locationPlaceholder: 'Cím vagy GPS koordináták', distance: 'Távolság (km)', note: 'Megjegyzés', notePlaceholder: 'További információk...', save: 'KIKÜLDETÉS MENTÉSE', saved: 'Kiküldetés mentve.', invalidDate: 'Érvénytelen dátumformátum (NN.HH.ÉÉÉÉ).', endBeforeStart: 'A befejezési időnek a kezdési idő után kell lennie.' },
+  notifications: { section: 'ÉRTESÍTÉSEK', enable: 'Értesítések', enableDesc: 'Munka kezdési és befejezési riasztások', noPermission: 'Az alkalmazásnak értesítési engedélyre van szüksége.', reminderTime: 'Napi emlékeztető (HH:MM)', reminderSaved: 'Emlékeztető beállítva: {{time}}.', invalidTime: 'Adja meg az időt HH:MM formátumban.', reminderTitle: 'Munkaidő! ⏰', reminderBody: 'Ne felejtse el elindítani az időzítőt.', startedTitle: 'Munka elindítva ✅', startedBody: 'Időzítő fut. Sok sikert!', stoppedTitle: 'Munka befejezve 🏁', stoppedBody: 'Ma {{duration}} dolgozott. Remek munka!' },
   login: { welcome: 'Üdvözöljük! Adja meg adatait a kezdéshez.', namePlaceholder: 'pl. Kovács János', nameRequired: 'A teljes név kötelező.', companyOptional: 'Cég (nem kötelező)', companyPlaceholder: 'pl. Acme Kft.', hint: 'Adatai megjelennek az exportált PDF-jelentésekben. A Beállításokban módosíthatók.', start: 'Kezdés' },
   pdf: {
     title: 'Munkaidő-jelentés', employee: 'Alkalmazott', company: 'Cég', period: 'Időszak', generated: 'Létrehozva',

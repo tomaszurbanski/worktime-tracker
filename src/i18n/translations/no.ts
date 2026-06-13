@@ -9,14 +9,14 @@
     hint: { delegation: 'Tjenestereise aktiv — arbeidsøkter kobles automatisk.', commute: 'Pendling-knappen vises under aktiv arbeidstid.', default: 'Hold knappen inne i 1 sekund for å aktivere.' },
   },
   history: {
-    title: 'Historikk', all: 'Alle', work: 'Arbeid', delegations: 'Tjenestereiser', empty: 'Ingen oppføringer',
+    title: 'Historikk', addDelegation: 'Ny arbeidsreise', all: 'Alle', work: 'Arbeid', delegations: 'Tjenestereiser', empty: 'Ingen oppføringer',
     inDelegation: 'på tjenestereise', withCommute: 'med pendling', delegation: 'TJENESTEREISE', workLabel: 'Arbeid:',
     deleteTitle: 'Slett oppføring', deleteConfirm: 'Er du sikker på at du vil slette denne oppføringen?', endingNow: '– nå',
   },
   stats: {
     title: 'Statistikk', timeRange: 'TIDSPERIODE', thisWeek: 'Denne uken', thisMonth: 'Denne måneden', lastMonth: 'Forrige måned', thisYear: 'Dette året', custom: 'Tilpasset',
     summary: 'SAMMENDRAG', total: 'Totalt', workDays: 'Arbeidsdager', avgPerDay: 'Snitt / dag',
-    delegations: '{{count}} tjenestereiser i perioden', exportPdf: 'Eksporter PDF-rapport', generating: 'Genererer PDF...', entries: '{{count}} oppføringer',
+    delegations: '{{count}} tjenestereiser i perioden', exportPdf: 'Eksporter PDF-rapport', generating: 'Genererer PDF...', exportCsv: 'Eksporter CSV', generatingCsv: 'Genererer CSV...', exportCsvError: 'Kunne ikke opprette CSV-fil.', chartTitle: 'DAGLIG DIAGRAM', export: 'EKSPORTER', entries: '{{count}} oppføringer',
     empty: 'Ingen oppføringer i denne perioden', fromDate: 'Fra (DD.MM.ÅÅÅÅ)', toDate: 'Til (DD.MM.ÅÅÅÅ)',
     invalidDates: 'Angi gyldige datoer (DD.MM.ÅÅÅÅ).', noData: 'Ingen data', noEntries: 'Ingen oppføringer for den valgte perioden.', exportError: 'Kunne ikke generere PDF-rapporten.',
   },
@@ -33,6 +33,8 @@
     language_section: 'SPRÅK', language: 'Appspråk', about: 'OM APPEN', privacy: 'Personvernerklæring', privacyDesc: 'Hvordan vi beskytter dataene dine',
     contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Arbeid', radius: 'radius', rtlRestart: 'Bytte til arabisk krever omstart av appen.', theme_section: 'UTSEENDE', theme: 'Apptema', themeSystem: 'System', themeLight: 'Lyst', themeDark: 'Mørkt',
   },
+  delegation: { basicData: 'GRUNNDATA', destination: 'Destinasjon', destinationRequired: 'Angi en destinasjon.', purpose: 'Formål / oppgave', time: 'TID', date: 'Dato (DD.MM.ÅÅÅÅ)', startTime: 'Starttid', endTime: 'Sluttid', details: 'DETALJER', location: 'Sted', locationPlaceholder: 'Adresse eller GPS-koordinater', distance: 'Avstand (km)', note: 'Merknad', notePlaceholder: 'Tilleggsinformasjon...', save: 'LAGRE ARBEIDSREISE', saved: 'Arbeidsreise lagret.', invalidDate: 'Ugyldig datoformat (DD.MM.ÅÅÅÅ).', endBeforeStart: 'Sluttiden må være etter starttiden.' },
+  notifications: { section: 'VARSLER', enable: 'Varsler', enableDesc: 'Varsler for start og stopp av arbeid', noPermission: 'Appen trenger varslings­tillatelse.', reminderTime: 'Daglig påminnelse (HH:MM)', reminderSaved: 'Påminnelse satt til {{time}}.', invalidTime: 'Angi tid i HH:MM-format.', reminderTitle: 'Tid for å jobbe! ⏰', reminderBody: 'Husk å starte timeren.', startedTitle: 'Arbeid startet ✅', startedBody: 'Timer kjører. Lykke til!', stoppedTitle: 'Arbeid avsluttet 🏁', stoppedBody: 'Du jobbet {{duration}} i dag. Godt jobbet!' },
   login: { welcome: 'Velkommen! Skriv inn opplysningene dine for å begynne.', namePlaceholder: 'f.eks. Ola Nordmann', nameRequired: 'Fullt navn er påkrevd.', companyOptional: 'Bedrift (valgfritt)', companyPlaceholder: 'f.eks. Acme AS', hint: 'Opplysningene dine vises i eksporterte PDF-rapporter. Kan endres i Innstillinger.', start: 'Kom i gang' },
   pdf: {
     title: 'Arbeidstidsrapport', employee: 'Ansatt', company: 'Bedrift', period: 'Periode', generated: 'Generert',

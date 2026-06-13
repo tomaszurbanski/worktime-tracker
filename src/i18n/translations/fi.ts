@@ -9,14 +9,14 @@
     hint: { delegation: 'Työmatkustus aktiivinen — istunnot yhdistetään automaattisesti.', commute: 'Pendelöinti-painike näkyy aktiivisen työn aikana.', default: 'Pidä painike alhaalla 1 sekunti aktivoidaksesi.' },
   },
   history: {
-    title: 'Historia', all: 'Kaikki', work: 'Työ', delegations: 'Työmatkustukset', empty: 'Ei merkintöjä',
+    title: 'Historia', addDelegation: 'Uusi työmatka', all: 'Kaikki', work: 'Työ', delegations: 'Työmatkustukset', empty: 'Ei merkintöjä',
     inDelegation: 'työmatkustuksessa', withCommute: 'pendelöinnillä', delegation: 'TYÖMATKUSTUS', workLabel: 'Työ:',
     deleteTitle: 'Poista merkintä', deleteConfirm: 'Haluatko varmasti poistaa tämän merkinnän?', endingNow: '– nyt',
   },
   stats: {
     title: 'Tilastot', timeRange: 'AIKAJAKSO', thisWeek: 'Tällä viikolla', thisMonth: 'Tässä kuussa', lastMonth: 'Viime kuussa', thisYear: 'Tänä vuonna', custom: 'Mukautettu',
     summary: 'YHTEENVETO', total: 'Yhteensä', workDays: 'Työpäivät', avgPerDay: 'Keskim. / päivä',
-    delegations: '{{count}} työmatkustusta tällä jaksolla', exportPdf: 'Vie PDF-raportti', generating: 'Luodaan PDF...', entries: '{{count}} merkintää',
+    delegations: '{{count}} työmatkustusta tällä jaksolla', exportPdf: 'Vie PDF-raportti', generating: 'Luodaan PDF...', exportCsv: 'Vie CSV', generatingCsv: 'Luodaan CSV...', exportCsvError: 'CSV-tiedoston luominen epäonnistui.', chartTitle: 'PÄIVITTÄINEN KAAVIO', export: 'VIE', entries: '{{count}} merkintää',
     empty: 'Ei merkintöjä tällä jaksolla', fromDate: 'Alkaen (PP.KK.VVVV)', toDate: 'Päättyen (PP.KK.VVVV)',
     invalidDates: 'Syötä kelvolliset päivämäärät (PP.KK.VVVV).', noData: 'Ei tietoja', noEntries: 'Ei merkintöjä valitulla jaksolla.', exportError: 'PDF-raportin luominen epäonnistui.',
   },
@@ -33,6 +33,8 @@
     language_section: 'KIELI', language: 'Sovelluksen kieli', about: 'TIETOJA', privacy: 'Tietosuojakäytäntö', privacyDesc: 'Kuinka suojaamme tietojasi',
     contact: 'Yhteystiedot', version: 'WorkTime Tracker v1.0.0', locationWork: 'Työ', radius: 'säde', rtlRestart: 'Arabiaksi vaihtaminen vaatii sovelluksen uudelleenkäynnistyksen.', theme_section: 'ULKOASU', theme: 'Teema', themeSystem: 'Järjestelmä', themeLight: 'Vaalea', themeDark: 'Tumma',
   },
+  delegation: { basicData: 'PERUSTIEDOT', destination: 'Kohde', destinationRequired: 'Anna kohde.', purpose: 'Tarkoitus / tehtävä', time: 'AIKA', date: 'Päivämäärä (PP.KK.VVVV)', startTime: 'Alkamisaika', endTime: 'Päättymisaika', details: 'TIEDOT', location: 'Sijainti', locationPlaceholder: 'Osoite tai GPS-koordinaatit', distance: 'Etäisyys (km)', note: 'Muistiinpano', notePlaceholder: 'Lisätiedot...', save: 'TALLENNA TYÖMATKA', saved: 'Työmatka tallennettu.', invalidDate: 'Virheellinen päivämäärämuoto (PP.KK.VVVV).', endBeforeStart: 'Päättymisajan on oltava alkamisajan jälkeen.' },
+  notifications: { section: 'ILMOITUKSET', enable: 'Ilmoitukset', enableDesc: 'Hälytykset työn aloituksesta ja lopetuksesta', noPermission: 'Sovellus tarvitsee ilmoitusoikeuden.', reminderTime: 'Päivittäinen muistutus (HH:MM)', reminderSaved: 'Muistutus asetettu ajaksi {{time}}.', invalidTime: 'Anna aika muodossa HH:MM.', reminderTitle: 'Töihin! ⏰', reminderBody: 'Muista käynnistää ajastin.', startedTitle: 'Työ aloitettu ✅', startedBody: 'Ajastin käy. Onnea!', stoppedTitle: 'Työ lopetettu 🏁', stoppedBody: 'Teit töitä {{duration}} tänään. Hienoa!' },
   login: { welcome: 'Tervetuloa! Syötä tietosi aloittaaksesi.', namePlaceholder: 'esim. Matti Virtanen', nameRequired: 'Koko nimi on pakollinen.', companyOptional: 'Yritys (valinnainen)', companyPlaceholder: 'esim. Acme Oy', hint: 'Tietosi näkyvät viedyissä PDF-raporteissa. Voit muuttaa niitä Asetuksista.', start: 'Aloita' },
   pdf: {
     title: 'Työaikaraportti', employee: 'Työntekijä', company: 'Yritys', period: 'Jakso', generated: 'Luotu',

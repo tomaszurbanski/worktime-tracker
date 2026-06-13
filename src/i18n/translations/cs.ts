@@ -9,14 +9,14 @@
     hint: { delegation: 'Pracovní cesta aktivní — sezení jsou automaticky propojena.', commute: 'Tlačítko Dojíždění se zobrazí při aktivní práci.', default: 'Podržte tlačítko 1 sekundu pro aktivaci.' },
   },
   history: {
-    title: 'Historie', all: 'Vše', work: 'Práce', delegations: 'Pracovní cesty', empty: 'Žádné záznamy',
+    title: 'Historie', addDelegation: 'Nová pracovní cesta', all: 'Vše', work: 'Práce', delegations: 'Pracovní cesty', empty: 'Žádné záznamy',
     inDelegation: 'na pracovní cestě', withCommute: 's dojížděním', delegation: 'PRACOVNÍ CESTA', workLabel: 'Práce:',
     deleteTitle: 'Smazat záznam', deleteConfirm: 'Opravdu chcete smazat tento záznam?', endingNow: '– nyní',
   },
   stats: {
     title: 'Statistiky', timeRange: 'ČASOVÉ ROZMEZÍ', thisWeek: 'Tento týden', thisMonth: 'Tento měsíc', lastMonth: 'Minulý měsíc', thisYear: 'Tento rok', custom: 'Vlastní',
     summary: 'SOUHRN', total: 'Celkem', workDays: 'Pracovní dny', avgPerDay: 'Prům. / den',
-    delegations: '{{count}} pracovní cesty v tomto období', exportPdf: 'Exportovat PDF přehled', generating: 'Generuji PDF...', entries: '{{count}} záznamů',
+    delegations: '{{count}} pracovní cesty v tomto období', exportPdf: 'Exportovat PDF přehled', generating: 'Generuji PDF...', exportCsv: 'Exportovat CSV', generatingCsv: 'Generování CSV...', exportCsvError: 'Nepodařilo se vytvořit soubor CSV.', chartTitle: 'DENNÍ GRAF', export: 'EXPORTOVAT', entries: '{{count}} záznamů',
     empty: 'V tomto období žádné záznamy', fromDate: 'Od (DD.MM.RRRR)', toDate: 'Do (DD.MM.RRRR)',
     invalidDates: 'Zadejte platná data (DD.MM.RRRR).', noData: 'Žádná data', noEntries: 'Ve zvoleném období nejsou žádné záznamy.', exportError: 'Nepodařilo se vygenerovat PDF přehled.',
   },
@@ -33,6 +33,8 @@
     language_section: 'JAZYK', language: 'Jazyk aplikace', about: 'O APLIKACI', privacy: 'Zásady ochrany osobních údajů', privacyDesc: 'Jak chráníme vaše data',
     contact: 'Kontakt', version: 'WorkTime Tracker v1.0.0', locationWork: 'Práce', radius: 'poloměr', rtlRestart: 'Přepnutí na arabštinu vyžaduje restart aplikace.', theme_section: 'VZHLED', theme: 'Téma', themeSystem: 'Systémové', themeLight: 'Světlé', themeDark: 'Tmavé',
   },
+  delegation: { basicData: 'ZÁKLADNÍ ÚDAJE', destination: 'Cíl', destinationRequired: 'Zadejte prosím cíl.', purpose: 'Účel / úkol', time: 'ČAS', date: 'Datum (DD.MM.RRRR)', startTime: 'Čas začátku', endTime: 'Čas konce', details: 'PODROBNOSTI', location: 'Místo', locationPlaceholder: 'Adresa nebo GPS souřadnice', distance: 'Vzdálenost (km)', note: 'Poznámka', notePlaceholder: 'Doplňující informace...', save: 'ULOŽIT CESTU', saved: 'Pracovní cesta uložena.', invalidDate: 'Neplatný formát data (DD.MM.RRRR).', endBeforeStart: 'Čas konce musí být po čase začátku.' },
+  notifications: { section: 'OZNÁMENÍ', enable: 'Oznámení', enableDesc: 'Upozornění na začátek a konec práce', noPermission: 'Aplikace potřebuje oprávnění k oznámením.', reminderTime: 'Denní připomínka (HH:MM)', reminderSaved: 'Připomínka nastavena na {{time}}.', invalidTime: 'Zadejte čas ve formátu HH:MM.', reminderTitle: 'Čas na práci! ⏰', reminderBody: 'Nezapomeňte spustit časovač.', startedTitle: 'Práce zahájena ✅', startedBody: 'Časovač běží. Hodně štěstí!', stoppedTitle: 'Práce dokončena 🏁', stoppedBody: 'Dnes jste pracovali {{duration}}. Skvělá práce!' },
   login: { welcome: 'Vítejte! Zadejte své údaje pro začátek.', namePlaceholder: 'např. Jan Novák', nameRequired: 'Celé jméno je povinné.', companyOptional: 'Firma (nepovinné)', companyPlaceholder: 'např. Acme s.r.o.', hint: 'Vaše údaje se zobrazí v exportovaných PDF přehledech. Lze změnit v Nastavení.', start: 'Začít' },
   pdf: {
     title: 'Přehled pracovní doby', employee: 'Zaměstnanec', company: 'Firma', period: 'Období', generated: 'Vygenerováno',

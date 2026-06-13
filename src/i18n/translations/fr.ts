@@ -9,14 +9,14 @@ export default {
     hint: { delegation: 'Déplacement actif — sessions liées automatiquement.', commute: 'Le bouton Trajet apparaît pendant le travail actif.', default: 'Maintenez le bouton 1 seconde pour activer.' },
   },
   history: {
-    title: 'Historique', all: 'Tout', work: 'Travail', delegations: 'Déplacements', empty: 'Aucune entrée',
+    title: 'Historique', addDelegation: 'Nouveau déplacement', all: 'Tout', work: 'Travail', delegations: 'Déplacements', empty: 'Aucune entrée',
     inDelegation: 'en déplacement', withCommute: 'avec trajet', delegation: 'DÉPLACEMENT', workLabel: 'Travail :',
     deleteTitle: 'Supprimer l\'entrée', deleteConfirm: 'Voulez-vous vraiment supprimer cette entrée ?', endingNow: '– maintenant',
   },
   stats: {
     title: 'Statistiques', timeRange: 'PÉRIODE', thisWeek: 'Cette semaine', thisMonth: 'Ce mois', lastMonth: 'Mois dernier', thisYear: 'Cette année', custom: 'Personnalisé',
     summary: 'RÉSUMÉ', total: 'Total', workDays: 'Jours travaillés', avgPerDay: 'Moy. / jour',
-    delegations: '{{count}} déplacements sur cette période', exportPdf: 'Exporter le rapport PDF', generating: 'Génération du PDF...', entries: '{{count}} entrées',
+    delegations: '{{count}} déplacements sur cette période', exportPdf: 'Exporter le rapport PDF', generating: 'Génération du PDF...', exportCsv: 'Exporter CSV', generatingCsv: 'Génération du CSV...', exportCsvError: 'Impossible de générer le fichier CSV.', chartTitle: 'GRAPHIQUE JOURNALIER', export: 'EXPORTER', entries: '{{count}} entrées',
     empty: 'Aucune entrée pour cette période', fromDate: 'Du (JJ.MM.AAAA)', toDate: 'Au (JJ.MM.AAAA)',
     invalidDates: 'Entrez des dates valides (JJ.MM.AAAA).', noData: 'Aucune donnée', noEntries: 'Aucune entrée pour la période sélectionnée.', exportError: 'Impossible de générer le rapport PDF.',
   },
@@ -34,6 +34,8 @@ export default {
     contact: 'Contact', version: 'WorkTime Tracker v1.0.0', locationWork: 'Travail', radius: 'rayon', rtlRestart: 'Le passage à l\'arabe nécessite un redémarrage de l\'application.',
     theme_section: 'APPARENCE', theme: 'Thème', themeSystem: 'Système', themeLight: 'Clair', themeDark: 'Sombre',
   },
+  delegation: { basicData: 'DONNÉES DE BASE', destination: 'Destination', destinationRequired: 'Veuillez entrer une destination.', purpose: 'Objet / mission', time: 'HORAIRES', date: 'Date (JJ.MM.AAAA)', startTime: 'Heure de départ', endTime: 'Heure de fin', details: 'DÉTAILS', location: 'Lieu', locationPlaceholder: 'Adresse ou coordonnées GPS', distance: 'Distance (km)', note: 'Note', notePlaceholder: 'Informations supplémentaires...', save: 'ENREGISTRER LE DÉPLACEMENT', saved: 'Déplacement enregistré.', invalidDate: 'Format de date invalide (JJ.MM.AAAA).', endBeforeStart: "L'heure de fin doit être après l'heure de départ." },
+  notifications: { section: 'NOTIFICATIONS', enable: 'Notifications', enableDesc: 'Alertes de début et fin de travail', noPermission: "L'app a besoin de la permission de notification.", reminderTime: 'Rappel quotidien (HH:MM)', reminderSaved: 'Rappel programmé pour {{time}}.', invalidTime: "Entrez l'heure au format HH:MM.", reminderTitle: "C'est l'heure de travailler ! ⏰", reminderBody: 'N\'oubliez pas de démarrer votre minuterie.', startedTitle: 'Travail commencé ✅', startedBody: 'Minuterie en cours. Bon courage !', stoppedTitle: 'Travail terminé 🏁', stoppedBody: "Vous avez travaillé {{duration}} aujourd'hui. Bravo !" },
   login: { welcome: 'Bienvenue ! Saisissez vos informations pour commencer.', namePlaceholder: 'ex. Jean Dupont', nameRequired: 'Le nom complet est obligatoire.', companyOptional: 'Entreprise (facultatif)', companyPlaceholder: 'ex. Acme SA', hint: 'Vos informations apparaîtront dans les rapports PDF exportés. Modifiables dans les Paramètres.', start: 'Commencer' },
   pdf: {
     title: 'Rapport de temps de travail', employee: 'Employé', company: 'Entreprise', period: 'Période', generated: 'Généré le',
