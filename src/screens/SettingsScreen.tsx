@@ -309,7 +309,7 @@ export default function SettingsScreen() {
       <View style={styles.card}>
         <Row icon="shield-checkmark" title={t('settings.privacy')} subtitle={t('settings.privacyDesc')} onPress={() => Linking.openURL(PRIVACY_URL)} right={<Ionicons name="open-outline" size={16} color={C.muted} />} />
         <View style={styles.divider} />
-        <Row icon="mail-outline" title={t('settings.contact')} subtitle="turbanski824@gmail.com" onPress={() => Linking.openURL('mailto:turbanski824@gmail.com')} right={<Ionicons name="chevron-forward" size={16} color={C.muted} />} />
+        <Row icon="mail-outline" title={t('settings.contact')} subtitle="info@tuautomaton.de" onPress={() => Linking.openURL('mailto:info@tuautomaton.de')} right={<Ionicons name="chevron-forward" size={16} color={C.muted} />} />
       </View>
 
       <Text style={styles.version}>{t('settings.version')}</Text>
