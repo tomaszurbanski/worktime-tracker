@@ -56,6 +56,12 @@
     ],
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "53e8d835-eaf0-4a81-b8f2-eb641c49a6f0"
+      }
+    },
+    "owner": "tomaszurbanski"
   }
 }
