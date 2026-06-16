@@ -30,9 +30,9 @@
   "submit": {
     "production": {
       "ios": {
-        "appleId": "info@tuautomaton.de",
-        "ascAppId": "WPISZ_APP_STORE_CONNECT_ID",
-        "appleTeamId": "WPISZ_APPLE_TEAM_ID"
+        "appleId": "info@tuautomation.de",
+        "ascAppId": "TODO_ASC_APP_ID",
+        "appleTeamId": "TODO_APPLE_TEAM_ID"
       },
       "android": {
         "serviceAccountKeyPath": "./google-service-account.json",
