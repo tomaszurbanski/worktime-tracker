@@ -18,7 +18,8 @@
       "bundleIdentifier": "com.turbanski.worktimetracker",
       "buildNumber": "1",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "WorkTime Tracker uses your location to detect when you arrive at or leave your workplace and to log work sessions."
+        "NSLocationWhenInUseUsageDescription": "WorkTime Tracker uses your location to detect when you arrive at or leave your workplace and to log work sessions.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
