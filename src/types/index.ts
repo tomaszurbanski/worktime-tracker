@@ -33,7 +33,6 @@ export interface AppSettings {
   mode: TrackingMode;
   workLocation?: WorkLocation;
   commuteTracking: boolean;
-  showAds: boolean;
   userFullName?: string;
   companyName?: string;
   notificationsEnabled: boolean;

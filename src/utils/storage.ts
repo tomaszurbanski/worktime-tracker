@@ -7,7 +7,6 @@ const SETTINGS_KEY = '@worktime_settings';
 const DEFAULT_SETTINGS: AppSettings = {
   mode: 'manual',
   commuteTracking: false,
-  showAds: true,
   notificationsEnabled: false,
 };
 

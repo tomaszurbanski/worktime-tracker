@@ -263,13 +263,6 @@ export default function SettingsScreen() {
           subtitle={t('settings.commuteTrackingDesc')}
           right={<Switch value={settings.commuteTracking} onValueChange={v => updateSettings({ commuteTracking: v })} trackColor={{ true: C.primary }} />}
         />
-        <View style={styles.divider} />
-        <Row
-          icon="megaphone"
-          title={t('settings.ads')}
-          subtitle={t('settings.adsDesc')}
-          right={<Switch value={settings.showAds} onValueChange={v => updateSettings({ showAds: v })} trackColor={{ true: C.primary }} />}
-        />
       </View>
 
       {/* Notifications */}

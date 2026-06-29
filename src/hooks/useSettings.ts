@@ -6,7 +6,6 @@ export const useSettings = () => {
   const [settings, setSettings] = useState<AppSettings>({
     mode: 'manual',
     commuteTracking: false,
-    showAds: true,
     notificationsEnabled: false,
   });
   const [loading, setLoading] = useState(true);

@@ -9,7 +9,6 @@ Aplikacja mobilna do śledzenia czasu pracy — iOS i Android.
 - **Śledzenie dojazdu** — opcjonalny pomiar czasu dojazdu do pracy
 - **Historia sesji** — przegląd wszystkich poprzednich sesji z podziałem na dni
 - **Statystyki** — sumaryczny czas pracy per dzień
-- **Wersja darmowa** (z reklamami) i **premium** (bez reklam)
 
 ## Stack technologiczny
 
@@ -115,11 +114,7 @@ eas submit --platform android
 
 ## Monetyzacja
 
-Aplikacja obsługuje dwa modele:
-- **Darmowa z reklamami** — AdMob (Google) — konfiguracja w [react-native-google-mobile-ads](https://docs.page/invertase/react-native-google-mobile-ads)
-- **Płatna bez reklam** — In-App Purchase przez RevenueCat lub Expo In-App Purchases
-
-Przełącznik reklam jest już w **Ustawieniach** (`settings.showAds`).
+Aplikacja to pojedyncza wersja płatna — **bez reklam i bez zakupów wewnątrz aplikacji** (brak AdMob/IAP).
 
 ## Uprawnienia
 
