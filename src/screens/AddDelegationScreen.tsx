@@ -162,10 +162,10 @@ export default function AddDelegationScreen() {
         <Text style={styles.sectionLabel}>{t('delegation.basicData')}</Text>
         <View style={styles.card}>
           <Field {...fieldProps} icon="location" label={`${t('delegation.destination')} *`}
-            value={destination} onChangeText={setDestination} placeholder="np. Warszawa, ul. Marszałkowska 1" />
+            value={destination} onChangeText={setDestination} placeholder={t('delegation.destinationPlaceholder')} />
           <View style={styles.divider} />
           <Field {...fieldProps} icon="briefcase" label={t('delegation.purpose')}
-            value={purpose} onChangeText={setPurpose} placeholder="np. Spotkanie z klientem" />
+            value={purpose} onChangeText={setPurpose} placeholder={t('delegation.purposePlaceholder')} />
         </View>
 
         <Text style={styles.sectionLabel}>{t('delegation.time')}</Text>
@@ -205,7 +205,7 @@ export default function AddDelegationScreen() {
           </View>
           <View style={styles.divider} />
           <Field {...fieldProps} icon="speedometer" label={t('delegation.distance')}
-            value={distance} onChangeText={setDistance} placeholder="np. 150" keyboardType="numeric" />
+            value={distance} onChangeText={setDistance} placeholder={t('delegation.distancePlaceholder')} keyboardType="numeric" />
           <View style={styles.divider} />
           <Field {...fieldProps} icon="create" label={t('delegation.note')}
             value={note} onChangeText={setNote} placeholder={t('delegation.notePlaceholder')} multiline />

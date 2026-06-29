@@ -173,12 +173,12 @@ export default function SettingsScreen() {
       <View style={styles.card}>
         <View style={styles.inputGroup}>
           <Text style={styles.inputLabel}>{t('settings.fullName')}</Text>
-          <TextInput style={styles.textInput} value={name} onChangeText={setName} placeholder="Jan Kowalski" placeholderTextColor={C.muted} autoCapitalize="words" />
+          <TextInput style={styles.textInput} value={name} onChangeText={setName} placeholder={t('settings.namePlaceholder')} placeholderTextColor={C.muted} autoCapitalize="words" />
         </View>
         <View style={styles.divider} />
         <View style={styles.inputGroup}>
           <Text style={styles.inputLabel}>{t('settings.company')}</Text>
-          <TextInput style={styles.textInput} value={company} onChangeText={setCompany} placeholder="Acme Sp. z o.o." placeholderTextColor={C.muted} autoCapitalize="words" />
+          <TextInput style={styles.textInput} value={company} onChangeText={setCompany} placeholder={t('settings.companyPlaceholder')} placeholderTextColor={C.muted} autoCapitalize="words" />
         </View>
         <View style={styles.divider} />
         <TouchableOpacity style={styles.saveBtn} onPress={saveProfile}>
